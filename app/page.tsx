@@ -2,25 +2,28 @@ import Link from 'next/link';
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-24 bg-blue-600">
-      <h1 className="text-4xl font-bold mb-8 text-center text-white">
+    <main style={{ 
+      display: 'flex', 
+      flexDirection: 'column', 
+      alignItems: 'center', 
+      justifyContent: 'center', 
+      minHeight: '100vh', 
+      fontFamily: 'sans-serif' 
+    }}>
+      <h1 style={{ fontSize: '2.5rem', marginBottom: '2rem' }}>
         Georgia Latino Real Estate Directory
       </h1>
-      <div className="flex gap-4">
-        <Link 
-          href="/legal-support" 
-          style={{
-            backgroundColor: 'white',
-            color: '#2563eb',
-            padding: '12px 24px',
-            borderRadius: '8px',
-            fontWeight: 'bold',
-            textDecoration: 'none'
-          }}
-        >
-          Legal Support
-        </Link>
-      </div>
+      <Link href="/legal-support" style={{
+        backgroundColor: '#2563eb',
+        color: 'white',
+        padding: '15px 30px',
+        borderRadius: '8px',
+        textDecoration: 'none',
+        fontWeight: 'bold',
+        fontSize: '1.2rem'
+      }}>
+        Legal Support
+      </Link>
     </main>
   );
 }
