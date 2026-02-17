@@ -146,7 +146,7 @@ export default function LegalSupportPage() {
                 {attorney.firm}
               </p>
               <p style={{ color: '#6b7280', fontSize: '0.85rem', marginBottom: '10px' }}>
-                \uD4 {attorney.location}
+                📍 {attorney.location}
               </p>
               <span style={{
                 display: 'inline-block',
