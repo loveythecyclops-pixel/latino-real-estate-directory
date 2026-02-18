@@ -1,5 +1,5 @@
 'use client';
-
+import { useState } from 'react';
 import Link from 'next/link';
 
 const resources = [
@@ -30,12 +30,31 @@ const resources = [
     cta: 'Find a Bilingual Agent',
     color: '#7c3aed',
   },
+  {
+    icon: '⚖️',
+    title: 'Legal Support',
+    subtitle: 'Soporte Legal',
+    description: 'Get specialized legal assistance for your real estate transactions. Our network includes bilingual attorneys expert in security deeds, ITIN purchases, and owner financing contracts in Georgia.',
+    href: '/legal-support',
+    cta: 'Legal Support',
+    color: '#dc2626',
+  },
+];
+
+const regions = [
+  { name: 'Atlanta Metro', search: 'Atlanta, GA' },
+  { name: 'North Georgia', search: 'Dalton, GA' },
+  { name: 'Gainesville / Hall', search: 'Gainesville, GA' },
+  { name: 'Savannah / Coastal', search: 'Savannah, GA' },
+  { name: 'Augusta / CSRA', search: 'Augusta, GA' },
+  { name: 'Columbus Metro', search: 'Columbus, GA' },
 ];
 
 export default function Home() {
+  const [showRegions, setShowRegions] = useState(false);
+
   return (
     <div style={{ fontFamily: 'sans-serif' }}>
-
       {/* Hero */}
       <div style={{
         backgroundColor: '#2563eb',
@@ -50,19 +69,67 @@ export default function Home() {
           Connecting the Latino community with ITIN mortgage experts, owner financing,
           and bilingual real estate support across all of Georgia.
         </p>
-        <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}>
-          <Link href="/legal-support" style={{
-            backgroundColor: 'white',
-            color: '#2563eb',
-            padding: '14px 32px',
-            borderRadius: '8px',
-            fontWeight: '700',
-            fontSize: '1rem',
-            textDecoration: 'none',
-            display: 'inline-block',
-          }}>
-            Legal Support
-          </Link>
+        
+        <div style={{ position: 'relative', display: 'inline-block' }}>
+          <button 
+            onClick={() => setShowRegions(!showRegions)}
+            style={{
+              backgroundColor: 'white',
+              color: '#2563eb',
+              padding: '14px 32px',
+              borderRadius: '8px',
+              fontWeight: '700',
+              fontSize: '1rem',
+              border: 'none',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px'
+            }}
+          >
+            Find a Home {showRegions ? '▲' : '▼'}
+          </button>
+          
+          {showRegions && (
+            <div style={{
+              position: 'absolute',
+              top: '110%',
+              left: '50%',
+              transform: 'translateX(-50%)',
+              backgroundColor: 'white',
+              borderRadius: '12px',
+              boxShadow: '0 10px 25px rgba(0,0,0,0.2)',
+              padding: '12px',
+              width: '280px',
+              zIndex: 100,
+              display: 'grid',
+              gridTemplateColumns: '1fr',
+              gap: '8px',
+              textAlign: 'left'
+            }}>
+              <p style={{ color: '#64748b', fontSize: '0.8rem', padding: '4px 8px', margin: 0 }}>Select a region to search on Zillow:</p>
+              {regions.map((region) => (
+                <a 
+                  key={region.name}
+                  href={`https://www.zillow.com/homes/${region.search}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    padding: '10px 12px',
+                    borderRadius: '6px',
+                    color: '#1e40af',
+                    textDecoration: 'none',
+                    fontSize: '0.95rem',
+                    fontWeight: '600',
+                    backgroundColor: '#f1f5f9',
+                    display: 'block'
+                  }}
+                >
+                  {region.name}
+                </a>
+              ))}
+            </div>
+          )}
         </div>
       </div>
 
@@ -74,43 +141,44 @@ export default function Home() {
         <p style={{ textAlign: 'center', color: '#6b7280', marginBottom: '50px', fontSize: '1rem' }}>
           Recursos para toda Georgia — no matter what city you are in
         </p>
-
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-          gap: '32px',
-          maxWidth: '1100px',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+          gap: '24px',
+          maxWidth: '1200px',
           margin: '0 auto',
         }}>
           {resources.map((r) => (
             <div key={r.title} style={{
               backgroundColor: 'white',
               borderRadius: '16px',
-              padding: '36px 28px',
-              boxShadow: '0 4px 16px rgba(0,0,0,0.08)',
+              padding: '32px 24px',
+              boxShadow: '0 4px 12px rgba(0,0,0,0.06)',
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'flex-start',
             }}>
-              <div style={{ fontSize: '3rem', marginBottom: '16px' }}>{r.icon}</div>
-              <h3 style={{ color: r.color, fontSize: '1.4rem', marginBottom: '4px', fontWeight: '700' }}>
+              <div style={{ fontSize: '2.5rem', marginBottom: '14px' }}>{r.icon}</div>
+              <h3 style={{ color: r.color, fontSize: '1.25rem', marginBottom: '4px', fontWeight: '700' }}>
                 {r.title}
               </h3>
-              <p style={{ color: '#9ca3af', fontSize: '0.85rem', marginBottom: '14px', fontStyle: 'italic' }}>
+              <p style={{ color: '#9ca3af', fontSize: '0.8rem', marginBottom: '12px', fontStyle: 'italic' }}>
                 {r.subtitle}
               </p>
-              <p style={{ color: '#374151', fontSize: '0.95rem', lineHeight: '1.7', marginBottom: '28px', flexGrow: 1 }}>
+              <p style={{ color: '#374151', fontSize: '0.88rem', lineHeight: '1.6', marginBottom: '24px', flexGrow: 1 }}>
                 {r.description}
               </p>
               <Link href={r.href} style={{
                 backgroundColor: r.color,
                 color: 'white',
-                padding: '12px 24px',
+                padding: '10px 20px',
                 borderRadius: '8px',
                 fontWeight: '600',
-                fontSize: '0.95rem',
+                fontSize: '0.9rem',
                 textDecoration: 'none',
                 display: 'inline-block',
+                width: '100%',
+                textAlign: 'center'
               }}>
                 {r.cta} →
               </Link>
@@ -157,7 +225,6 @@ export default function Home() {
           ))}
         </div>
       </div>
-
     </div>
   );
 }
