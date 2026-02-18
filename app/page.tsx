@@ -41,13 +41,55 @@ const resources = [
   },
 ];
 
-const regions = [
-  { name: 'Atlanta Metro', search: 'Atlanta, GA' },
-  { name: 'North Georgia', search: 'Dalton, GA' },
-  { name: 'Gainesville / Hall', search: 'Gainesville, GA' },
-  { name: 'Savannah / Coastal', search: 'Savannah, GA' },
-  { name: 'Augusta / CSRA', search: 'Augusta, GA' },
-  { name: 'Columbus Metro', search: 'Columbus, GA' },
+const hubs = [
+  { 
+    name: 'Gwinnett County', 
+    region: 'Metro Atlanta', 
+    pop: '220,000+', 
+    latinoPct: '23-25%', 
+    details: 'The largest Latino hub in Georgia. High density in Norcross (46% Hispanic), Lilburn, and Lawrenceville.',
+    search: 'Gwinnett County, GA'
+  },
+  { 
+    name: 'Cobb County', 
+    region: 'Metro Atlanta', 
+    pop: '111,000+', 
+    latinoPct: '13-15%', 
+    details: 'Concentrated in south-central areas like Smyrna, southern Marietta, and Austell.',
+    search: 'Cobb County, GA'
+  },
+  { 
+    name: 'Whitfield County', 
+    region: 'North Georgia', 
+    pop: 'Dalton Hub', 
+    latinoPct: '35-39%', 
+    details: 'Highest concentration in the state, driven by the flooring industry. A primary residential center.',
+    search: 'Dalton, GA'
+  },
+  { 
+    name: 'Hall County', 
+    region: 'North Georgia', 
+    pop: 'Gainesville Hub', 
+    latinoPct: '28-33%', 
+    details: 'Major residential center for Hispanic families outside of Metro Atlanta.',
+    search: 'Gainesville, GA'
+  },
+  { 
+    name: 'DeKalb County', 
+    region: 'Metro Atlanta', 
+    pop: 'Buford Hwy', 
+    latinoPct: 'Estab. Community', 
+    details: 'Doraville holds the highest share of Hispanic residents in the 11-county metro area at 56%.',
+    search: 'Doraville, GA'
+  },
+  { 
+    name: 'Clayton County', 
+    region: 'South Metro', 
+    pop: 'Growing Hub', 
+    latinoPct: '15%', 
+    details: 'Significant growth in northern cities like Forest Park and Morrow.',
+    search: 'Clayton County, GA'
+  },
 ];
 
 export default function Home() {
@@ -87,7 +129,7 @@ export default function Home() {
               gap: '8px'
             }}
           >
-            Find a Home {showRegions ? '▲' : '▼'}
+            Find a Home in Latino Hubs {showRegions ? '▲' : '▼'}
           </button>
           
           {showRegions && (
@@ -99,37 +141,92 @@ export default function Home() {
               backgroundColor: 'white',
               borderRadius: '12px',
               boxShadow: '0 10px 25px rgba(0,0,0,0.2)',
-              padding: '12px',
-              width: '280px',
+              padding: '20px',
+              width: '320px',
               zIndex: 100,
-              display: 'grid',
-              gridTemplateColumns: '1fr',
-              gap: '8px',
-              textAlign: 'left'
+              textAlign: 'left',
+              maxHeight: '400px',
+              overflowY: 'auto'
             }}>
-              <p style={{ color: '#64748b', fontSize: '0.8rem', padding: '4px 8px', margin: 0 }}>Select a region to search on Zillow:</p>
-              {regions.map((region) => (
+              <p style={{ color: '#1e40af', fontWeight: '700', fontSize: '0.9rem', marginBottom: '12px' }}>Search Homes by County/Region:</p>
+              {hubs.map((hub) => (
                 <a 
-                  key={region.name}
-                  href={`https://www.zillow.com/homes/${region.search}`}
+                  key={hub.name}
+                  href={`https://www.zillow.com/homes/${hub.search}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{
-                    padding: '10px 12px',
-                    borderRadius: '6px',
+                    padding: '12px',
+                    borderRadius: '8px',
                     color: '#1e40af',
                     textDecoration: 'none',
-                    fontSize: '0.95rem',
-                    fontWeight: '600',
+                    fontSize: '0.9rem',
                     backgroundColor: '#f1f5f9',
-                    display: 'block'
+                    display: 'block',
+                    marginBottom: '8px'
                   }}
                 >
-                  {region.name}
+                  <div style={{ fontWeight: '700', marginBottom: '2px' }}>{hub.name}</div>
+                  <div style={{ fontSize: '0.75rem', color: '#64748b' }}>{hub.details}</div>
                 </a>
               ))}
             </div>
           )}
+        </div>
+      </div>
+
+      {/* Latino Population Insights */}
+      <div style={{ padding: '60px 20px', maxWidth: '1100px', margin: '0 auto' }}>
+        <div style={{ backgroundColor: '#eff6ff', borderRadius: '16px', padding: '40px' }}>
+          <h2 style={{ color: '#1e40af', fontSize: '1.8rem', marginBottom: '16px' }}>Georgia Latino Population Insights (2026)</h2>
+          <p style={{ color: '#334155', lineHeight: '1.7', fontSize: '1rem', marginBottom: '30px' }}>
+            Georgia's Latino population has reached nearly <strong>1.16 million residents</strong> as of 2026, making up approximately <strong>11% of the state's total population</strong>. 
+            While communities are growing statewide, the majority remains concentrated in specific geographic hubs, primarily within Metro Atlanta and key industrial centers in North and South Georgia.
+          </p>
+
+          <div style={{ overflowX: 'auto' }}>
+            <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.9rem' }}>
+              <thead>
+                <tr style={{ borderBottom: '2px solid #cbd5e1' }}>
+                  <th style={{ padding: '12px', color: '#1e40af' }}>County / Region</th>
+                  <th style={{ padding: '12px', color: '#1e40af' }}>Primary Hub</th>
+                  <th style={{ padding: '12px', color: '#1e40af' }}>Latino % of Population</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style={{ borderBottom: '1px solid #e2e8f0' }}>
+                  <td style={{ padding: '12px' }}>Whitfield County</td>
+                  <td style={{ padding: '12px' }}>North Georgia (Dalton)</td>
+                  <td style={{ padding: '12px', fontWeight: '700' }}>~35% - 39%</td>
+                </tr>
+                <tr style={{ borderBottom: '1px solid #e2e8f0' }}>
+                  <td style={{ padding: '12px' }}>Hall County</td>
+                  <td style={{ padding: '12px' }}>North Georgia (Gainesville)</td>
+                  <td style={{ padding: '12px', fontWeight: '700' }}>~28% - 33%</td>
+                </tr>
+                <tr style={{ borderBottom: '1px solid #e2e8f0' }}>
+                  <td style={{ padding: '12px' }}>Atkinson County</td>
+                  <td style={{ padding: '12px' }}>South Georgia</td>
+                  <td style={{ padding: '12px', fontWeight: '700' }}>~25% - 30%</td>
+                </tr>
+                <tr style={{ borderBottom: '1px solid #e2e8f0' }}>
+                  <td style={{ padding: '12px' }}>Gwinnett County</td>
+                  <td style={{ padding: '12px' }}>Metro Atlanta</td>
+                  <td style={{ padding: '12px', fontWeight: '700' }}>~23% - 25%</td>
+                </tr>
+                <tr style={{ borderBottom: '1px solid #e2e8f0' }}>
+                  <td style={{ padding: '12px' }}>Colquitt County</td>
+                  <td style={{ padding: '12px' }}>South Georgia</td>
+                  <td style={{ padding: '12px', fontWeight: '700' }}>~23%</td>
+                </tr>
+                <tr style={{ borderBottom: '1px solid #e2e8f0' }}>
+                  <td style={{ padding: '12px' }}>Stewart County</td>
+                  <td style={{ padding: '12px' }}>West Georgia</td>
+                  <td style={{ padding: '12px', fontWeight: '700' }}>~21%</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
 
