@@ -3,14 +3,17 @@ import Link from 'next/link';
 
 export default function Page() {
   return (
-    <main style={{ padding: '40px', maxWidth: '800px', margin: '0 auto', fontFamily: 'sans-serif' }}>
-      <Link href="/rentals" style={{ color: '#1e3a8a', fontWeight: 'bold' }}>← Volver</Link>
-      <h1 style={{ color: '#1e3a8a', marginTop: '20px' }}>Central Georgia: Analytics 2026</h1>
-      <div style={{ padding: '20px', border: '1px solid #ddd', borderRadius: '10px', marginTop: '20px' }}>
-        <p><strong>Renta Promedio:</strong> ,172</p>
-        <p><strong>Carga de Asequibilidad:</strong> 45%</p>
-        <div style={{ height: '10px', width: '100%', background: '#eee', borderRadius: '5px', marginTop: '10px' }}>
-          <div style={{ height: '100%', width: '45%', background: '#f59e0b', borderRadius: '5px' }}></div>
+    <main style={{ padding: '40px', maxWidth: '800px', margin: '0 auto', fontFamily: 'sans-serif', backgroundColor: '#f9fafb', minHeight: '100vh' }}>
+      <Link href="/rentals" style={{ color: '#1e3a8a', fontWeight: 'bold', textDecoration: 'none' }}>← Back to Dashboard</Link>
+      <div style={{ backgroundColor: '#fff', padding: '30px', borderRadius: '15px', boxShadow: '0 4px 6px rgba(0,0,0,0.1)', marginTop: '20px' }}>
+        <h1 style={{ color: '#1e3a8a', margin: '0 0 20px 0' }}>Central Georgia: 2026 Analytics</h1>
+        <p style={{ fontSize: '1.2rem' }}><strong>Average Rent:</strong> <span style={{ color: '#059669' }}>,172</span></p>
+        <p style={{ fontSize: '1.2rem' }}><strong>Rent Burden:</strong> 45%</p>
+        <div style={{ marginTop: '30px' }}>
+          <p style={{ fontSize: '0.9rem', color: '#666' }}>Affordability Visualization:</p>
+          <div style={{ height: '12px', width: '100%', background: '#e5e7eb', borderRadius: '6px', overflow: 'hidden', marginTop: '8px' }}>
+            <div style={{ height: '100%', width: '45%', background: '#f59e0b' }}></div>
+          </div>
         </div>
       </div>
     </main>
