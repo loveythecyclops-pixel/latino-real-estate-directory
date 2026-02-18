@@ -1,25 +1,49 @@
 'use client';
-import { useState } from 'react';
-import Link from 'next/link';
 
-export default function MortgageCalculator() {
-  const [loanAmount, setLoanAmount] = useState(300000);
-  
+import { useState } from 'react';
+
+export default function CalculadoraPage() {
+  const [language, setLanguage] = useState<'en' | 'es'>('es');
+  const [number1, setNumber1] = useState('');
+  const [number2, setNumber2] = useState('');
+  const [result, setResult] = useState<number | null>(null);
+
+  const isEnglish = language === 'en';
+
+  const calculateSum = () => {
+    const n1 = parseFloat(number1);
+    const n2 = parseFloat(number2);
+    if (!isNaN(n1) && !isNaN(n2)) {
+      setResult(n1 + n2);
+    } else {
+      setResult(null);
+    }
+  };
+
   return (
-    <main style={{ padding: '40px', maxWidth: '800px', margin: '0 auto', fontFamily: 'sans-serif' }}>
-      <Link href="/" style={{ color: '#1e3a8a', fontWeight: 'bold' }}>← Back to Home</Link>
-      <h1 style={{ color: '#1e3a8a', marginTop: '20px' }}>Mortgage Calculator / Calculadora</h1>
-      <div style={{ padding: '20px', border: '1px solid #ddd', borderRadius: '12px', marginTop: '20px' }}>
-        <p>Loan Amount: ${loanAmount.toLocaleString()}</p>
-        <input 
-          type="range" min="100000" max="1000000" step="10000" 
-          value={loanAmount} onChange={(e) => setLoanAmount(Number(e.target.value))}
-          style={{ width: '100%' }}
-        />
-        <p style={{ marginTop: '20px', fontSize: '0.9rem', color: '#666' }}>
-          More features coming soon...
-        </p>
-      </div>
-    </main>
-  );
-}
+    <div style={{ padding: '40px', fontFamily: 'sans-serif', maxWidth: '600px', margin: '0 auto' }}>
+      {/* Language Toggle */}
+      <button
+        onClick={() => setLanguage(isEnglish ? 'es' : 'en')}
+        style={{
+          marginBottom: '20px',
+          padding: '8px 16px',
+          borderRadius: '20px',
+          border: '1px solid #1e3a8a',
+          background: 'white',
+          cursor: 'pointer'
+        }}
+      >
+        {isEnglish ? '🇲🇽 Ver en Español' : '🇺🇸 View in English'}
+      </button>
+
+      <h1 style={{ fontSize: '2rem', marginBottom: '20px', color: '#1e3a8a' }}>
+        {isEnglish ? 'Bilingual Calculator' : 'Calculadora Bilingüe'}
+      </h1>
+
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '20px' }}>
+        <input
+          type="number"
+          value={number1}
+          onChange={(e) => setNumber1(e.target.value)}
+          placeholder={isEnglish ? 'Enter first number' : 'Ingrese el pr
