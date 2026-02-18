@@ -10,7 +10,7 @@ const benefits = [
 ];
 
 const steps = [
-  { num: '1', title: 'Find a Willing Seller', desc: 'Look for listings that say \"owner financing available\" or \"seller financing.\" Work with a bilingual agent to identify opportunities.' },
+  { num: '1', title: 'Find a Willing Seller', desc: 'Look for listings that say "owner financing available" or "seller financing." Work with a bilingual agent to identify opportunities.' },
   { num: '2', title: 'Negotiate the Terms', desc: 'Agree on purchase price, down payment, interest rate (typically 6–10%), monthly payment, and loan term (usually 3–30 years).' },
   { num: '3', title: 'Get a Real Estate Attorney', desc: 'Georgia requires an attorney at closing. A bilingual closing attorney will draft and review the promissory note and deed of trust.' },
   { num: '4', title: 'Title Search & Insurance', desc: 'Your attorney will verify the seller owns the property free and clear, with no liens or judgments.' },
@@ -79,7 +79,7 @@ export default function OwnerFinancingPage() {
       {/* Specialized Listing Platforms */}
       <div style={{ padding: '60px 20px', maxWidth: '1000px', margin: '0 auto' }}>
         <h2 style={{ color: '#065f46', fontSize: '1.8rem', marginBottom: '24px' }}>Specialized Listing Platforms</h2>
-        <p style={{ color: '#4b5563', marginBottom: '24px' }}>Several websites focus specifically on properties that offer owner financing (also known as \"seller financing\") in Georgia:</p>
+        <p style={{ color: '#4b5563', marginBottom: '24px' }}>Several websites focus specifically on properties that offer owner financing (also known as "seller financing") in Georgia:</p>
         
         <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
           <div>
@@ -92,7 +92,7 @@ export default function OwnerFinancingPage() {
           <div>
             <h3 style={{ color: '#059669', fontSize: '1.1rem', marginBottom: '8px' }}>Zillow Keywords</h3>
             <p style={{ color: '#6b7280', fontSize: '0.95rem', lineHeight: '1.6' }}>
-              While not a dedicated owner financing site, you can find these opportunities by typing <strong>\"Owner Financing\"</strong> or <strong>\"Seller Finance\"</strong> into the \"Keywords\" search filter on the Zillow app or website.
+              While not a dedicated owner financing site, you can find these opportunities by typing <strong>"Owner Financing"</strong> or <strong>"Seller Finance"</strong> into the "Keywords" search filter on the Zillow app or website.
             </p>
           </div>
 
@@ -109,7 +109,7 @@ export default function OwnerFinancingPage() {
       <div style={{ backgroundColor: '#f8fafc', padding: '60px 20px' }}>
         <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
           <h2 style={{ color: '#065f46', fontSize: '1.8rem', marginBottom: '24px' }}>Professional & Cultural Resources</h2>
-          <p style={{ color: '#4b5563', marginBottom: '24px' }}>Leveraging professional networks in Georgia can help you find \"off-market\" owner-financed deals:</p>
+          <p style={{ color: '#4b5563', marginBottom: '24px' }}>Leveraging professional networks in Georgia can help you find "off-market" owner-financed deals:</p>
           
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px' }}>
             <div style={{ backgroundColor: 'white', padding: '24px', borderRadius: '12px', borderLeft: '4px solid #059669' }}>
@@ -122,7 +122,7 @@ export default function OwnerFinancingPage() {
             <div style={{ backgroundColor: 'white', padding: '24px', borderRadius: '12px', borderLeft: '4px solid #059669' }}>
               <h3 style={{ color: '#065f46', fontSize: '1rem', marginBottom: '10px' }}>Georgia Latino Law Foundation (GLLF)</h3>
               <p style={{ color: '#6b7280', fontSize: '0.88rem', lineHeight: '1.6' }}>
-                Their network often includes attorneys and real estate professionals who understand the legal structures (like \"Contract for Deed\") required for owner financing in Georgia.
+                Their network often includes attorneys and real estate professionals who understand the legal structures (like "Contract for Deed") required for owner financing in Georgia.
               </p>
             </div>
             
@@ -153,7 +153,7 @@ export default function OwnerFinancingPage() {
             <div style={{ backgroundColor: '#ecfdf5', color: '#059669', padding: '8px 12px', borderRadius: '8px', fontWeight: '700' }}>✓</div>
             <div>
               <h4 style={{ color: '#065f46', marginBottom: '4px' }}>Balloon Payments</h4>
-              <p style={{ color: '#6b7280', fontSize: '0.9rem', lineHeight: '1.6' }}>Many owner-financed deals in Georgia include a \"balloon payment\" where the full balance is due after 3 to 5 years, giving the buyer time to improve their credit and refinance.</p>
+              <p style={{ color: '#6b7280', fontSize: '0.9rem', lineHeight: '1.6' }}>Many owner-financed deals in Georgia include a "balloon payment" where the full balance is due after 3 to 5 years, giving the buyer time to improve their credit and refinance.</p>
             </div>
           </div>
           
@@ -232,15 +232,15 @@ export default function OwnerFinancingPage() {
           Connect with a bilingual agent or attorney to get started with owner financing in Georgia.
         </p>
         <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}>
-          <Link href=\"/bilingual-agents\" style={{
+          <Link href="/bilingual-agents" style={{
             backgroundColor: 'white', color: '#064e3b', padding: '12px 28px',
             borderRadius: '8px', fontWeight: '700', textDecoration: 'none', display: 'inline-block',
           }}>Find a Bilingual Agent</Link>
-          <Link href=\"/legal-support\" style={{
+          <Link href="/legal-support" style={{
             backgroundColor: '#059669', color: 'white', padding: '12px 28px',
             borderRadius: '8px', fontWeight: '700', textDecoration: 'none', display: 'inline-block',
           }}>Legal Support</Link>
-          <Link href=\"/\" style={{
+          <Link href="/" style={{
             backgroundColor: 'transparent', color: 'white', padding: '12px 28px',
             borderRadius: '8px', fontWeight: '600', textDecoration: 'none', display: 'inline-block',
             border: '2px solid rgba(255,255,255,0.4)',
