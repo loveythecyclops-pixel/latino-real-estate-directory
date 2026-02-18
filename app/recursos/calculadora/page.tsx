@@ -21,7 +21,14 @@ export default function CalculadoraPage() {
   };
 
   return (
-    <div style={{ padding: '40px', fontFamily: 'sans-serif', maxWidth: '600px', margin: '0 auto' }}>
+    <div
+      style={{
+        padding: '40px',
+        fontFamily: 'sans-serif',
+        maxWidth: '600px',
+        margin: '0 auto',
+      }}
+    >
       {/* Language Toggle */}
       <button
         onClick={() => setLanguage(isEnglish ? 'es' : 'en')}
@@ -31,19 +38,71 @@ export default function CalculadoraPage() {
           borderRadius: '20px',
           border: '1px solid #1e3a8a',
           background: 'white',
-          cursor: 'pointer'
+          cursor: 'pointer',
         }}
       >
         {isEnglish ? '🇲🇽 Ver en Español' : '🇺🇸 View in English'}
       </button>
 
-      <h1 style={{ fontSize: '2rem', marginBottom: '20px', color: '#1e3a8a' }}>
+      <h1
+        style={{
+          fontSize: '2rem',
+          marginBottom: '20px',
+          color: '#1e3a8a',
+        }}
+      >
         {isEnglish ? 'Bilingual Calculator' : 'Calculadora Bilingüe'}
       </h1>
 
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '20px' }}>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '12px',
+          marginBottom: '20px',
+        }}
+      >
         <input
           type="number"
           value={number1}
           onChange={(e) => setNumber1(e.target.value)}
-          placeholder={isEnglish ? 'Enter first number' : 'Ingrese el pr
+          placeholder={isEnglish ? 'Enter first number' : 'Ingrese el primer número'}
+          style={{ padding: '12px', borderRadius: '8px', border: '1px solid #ccc' }}
+        />
+        <input
+          type="number"
+          value={number2}
+          onChange={(e) => setNumber2(e.target.value)}
+          placeholder={isEnglish ? 'Enter second number' : 'Ingrese el segundo número'}
+          style={{ padding: '12px', borderRadius: '8px', border: '1px solid #ccc' }}
+        />
+        <button
+          onClick={calculateSum}
+          style={{
+            padding: '12px',
+            borderRadius: '8px',
+            border: 'none',
+            backgroundColor: '#1e3a8a',
+            color: '#fff',
+            fontWeight: 'bold',
+            cursor: 'pointer',
+          }}
+        >
+          {isEnglish ? 'Calculate Sum' : 'Calcular Suma'}
+        </button>
+      </div>
+
+      {result !== null && (
+        <div
+          style={{
+            fontSize: '1.5rem',
+            fontWeight: 'bold',
+            color: '#16a34a',
+          }}
+        >
+          {isEnglish ? 'Result:' : 'Resultado:'} {result}
+        </div>
+      )}
+    </div>
+  );
+}
