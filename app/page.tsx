@@ -39,7 +39,7 @@ export default function Home() {
           <Link href="/agents" style={{ background: '#fff', color: '#1e3a8a', padding: '15px 30px', borderRadius: '30px', fontWeight: 'bold', textDecoration: 'none' }}>
             {isEnglish ? 'Explore Homes' : 'Explorar Casas'}
           </Link>
-          <Link href="/calculator" style={{ background: 'transparent', color: '#fff', border: '2px solid #fff', padding: '15px 30px', borderRadius: '30px', fontWeight: 'bold', textDecoration: 'none' }}>
+          <Link href="/recursos/calculadora" style={{ background: 'transparent', color: '#fff', border: '2px solid #fff', padding: '15px 30px', borderRadius: '30px', fontWeight: 'bold', textDecoration: 'none' }}>
             {isEnglish ? 'Mortgage Calculator' : 'Calculadora de Hipoteca'}
           </Link>
         </div>
