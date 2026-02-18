@@ -5,59 +5,179 @@ import Link from 'next/link';
 
 export default function Home() {
   const [language, setLanguage] = useState<'en' | 'es'>('es');
+  const [hovered, setHovered] = useState<number | null>(null);
+
   const isEnglish = language === 'en';
 
   const services = [
-    { titleEn: 'Bilingual Agents', titleEs: 'Agentes Bilingües', icon: '🏠', link: '/agents' },
-    { titleEn: 'ITIN Mortgages', titleEs: 'Préstamos ITIN', icon: '💰', link: '/mortgages' },
-    { titleEn: 'Rentals', titleEs: 'Rentas', icon: '🔑', link: '/rentals' },
-    { titleEn: 'Owner Financing', titleEs: 'Financiamiento del Dueño', icon: '🤝', link: '/owner-financing' },
+    {
+      slug: 'agentes',
+      titleEn: 'Bilingual Agents',
+      titleEs: 'Agentes Bilingües',
+      descEn: 'Experts who speak your language.',
+      descEs: 'Expertos que hablan tu idioma.',
+    },
+    {
+      slug: 'itin',
+      titleEn: 'ITIN Mortgages',
+      titleEs: 'Hipotecas con ITIN',
+      descEn: 'Financing options using ITIN numbers.',
+      descEs: 'Opciones de financiamiento usando ITIN.',
+    },
+    {
+      slug: 'legal',
+      titleEn: 'Legal Support',
+      titleEs: 'Asesoría Legal',
+      descEn: 'Specialized real estate legal advice.',
+      descEs: 'Asesoría legal especializada en bienes raíces.',
+    },
+    {
+      slug: 'owner-financing',
+      titleEn: 'Owner Financing',
+      titleEs: 'Financiamiento Directo',
+      descEn: 'Properties with direct seller financing.',
+      descEs: 'Propiedades con financiamiento directo del vendedor.',
+    },
   ];
 
+  const containerStyle = {
+    minHeight: '100vh',
+    backgroundColor: '#ffffff',
+    fontFamily: 'sans-serif',
+    color: '#1a202c',
+  };
+
+  const heroStyle = {
+    backgroundColor: '#1e3a8a',
+    color: '#ffffff',
+    padding: '60px 24px',
+    textAlign: 'center' as const,
+    position: 'relative' as const,
+  };
+
+  const buttonStyle = {
+    backgroundColor: '#ffffff',
+    color: '#1e3a8a',
+    padding: '12px 24px',
+    borderRadius: '8px',
+    fontWeight: 'bold',
+    textDecoration: 'none',
+    margin: '8px',
+    display: 'inline-block',
+    cursor: 'pointer',
+  };
+
+  const cardBaseStyle = {
+    display: 'block',
+    backgroundColor: '#ffffff',
+    padding: '24px',
+    borderRadius: '12px',
+    boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+    textAlign: 'center' as const,
+    borderTop: '4px solid #1e3a8a',
+    cursor: 'pointer',
+    transition: 'all 0.2s ease',
+  };
+
   return (
-    <main style={{ fontFamily: 'sans-serif', minHeight: '100vh', backgroundColor: '#fff' }}>
-      <nav style={{ padding: '20px 40px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #eee' }}>
-        <h2 style={{ color: '#1e3a8a', margin: 0 }}>Latino Real Estate</h2>
-        <button 
+    <main style={containerStyle}>
+      {/* HERO */}
+      <div style={heroStyle}>
+        <button
           onClick={() => setLanguage(isEnglish ? 'es' : 'en')}
-          style={{ background: '#1e3a8a', color: '#fff', border: 'none', padding: '8px 16px', borderRadius: '20px', cursor: 'pointer', fontWeight: 'bold' }}
+          style={{
+            position: 'absolute',
+            top: '20px',
+            right: '20px',
+            background: 'transparent',
+            color: '#fff',
+            border: '1px solid #fff',
+            padding: '8px 16px',
+            borderRadius: '20px',
+            fontSize: '0.875rem',
+            cursor: 'pointer',
+          }}
         >
           {isEnglish ? '🇲🇽 Ver en Español' : '🇺🇸 View in English'}
         </button>
-      </nav>
 
-      <header style={{ padding: '80px 40px', textAlign: 'center', background: 'linear-gradient(to bottom, #1e3a8a, #3b82f6)', color: '#fff' }}>
-        <h1 style={{ fontSize: '3.5rem', marginBottom: '20px' }}>
-          {isEnglish ? 'Find Your Home in Georgia' : 'Encuentra tu Hogar en Georgia'}
+        <h1 style={{ fontSize: '2.5rem', fontWeight: 'bold', marginBottom: '1rem' }}>
+          {isEnglish
+            ? 'Latino Real Estate Directory'
+            : 'Directorio Latino de Bienes Raíces'}
         </h1>
-        <p style={{ fontSize: '1.2rem', marginBottom: '40px', opacity: 0.9 }}>
-          {isEnglish ? 'Bilingual support for buying, renting, and financing.' : 'Apoyo bilingüe para comprar, rentar y financiar.'}
+
+        <p style={{ fontSize: '1.25rem', marginBottom: '20px' }}>
+          {isEnglish
+            ? 'Connecting Georgia with bilingual experts.'
+            : 'Conectando Georgia con expertos bilingües.'}
         </p>
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '20px' }}>
-          <Link href="/agents" style={{ background: '#fff', color: '#1e3a8a', padding: '15px 30px', borderRadius: '30px', fontWeight: 'bold', textDecoration: 'none' }}>
+
+        <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }}>
+          <Link href="/hubs" style={buttonStyle}>
             {isEnglish ? 'Explore Homes' : 'Explorar Casas'}
           </Link>
-          <Link href="/recursos/calculadora" style={{ background: 'transparent', color: '#fff', border: '2px solid #fff', padding: '15px 30px', borderRadius: '30px', fontWeight: 'bold', textDecoration: 'none' }}>
-            {isEnglish ? 'Mortgage Calculator' : 'Calculadora de Hipoteca'}
+
+          <Link
+            href="/recursos/calculadora"
+            style={{ ...buttonStyle, backgroundColor: '#16a34a', color: '#fff' }}
+          >
+            {isEnglish ? 'Bilingual Calculator' : 'Calculadora Bilingüe'}
           </Link>
         </div>
-      </header>
+      </div>
 
-      <section style={{ padding: '60px 40px', maxWidth: '1200px', margin: '0 auto' }}>
-        <h2 style={{ textAlign: 'center', color: '#1e3a8a', marginBottom: '40px' }}>
-          {isEnglish ? 'Our Services' : 'Nuestros Servicios'}
-        </h2>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '30px' }}>
-          {services.map((service, index) => (
-            <Link key={index} href={service.link} style={{ textDecoration: 'none', color: 'inherit' }}>
-              <div style={{ padding: '30px', border: '1px solid #eee', borderRadius: '15px', textAlign: 'center', transition: 'box-shadow 0.3s' }}>
-                <div style={{ fontSize: '3rem', marginBottom: '15px' }}>{service.icon}</div>
-                <h3 style={{ color: '#1e3a8a' }}>{isEnglish ? service.titleEn : service.titleEs}</h3>
-              </div>
-            </Link>
-          ))}
-        </div>
+      {/* SERVICES */}
+      <section
+        style={{
+          padding: '64px 20px',
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+          gap: '24px',
+          maxWidth: '1200px',
+          margin: '0 auto',
+        }}
+      >
+        {services.map((service, index) => (
+          <Link
+            key={index}
+            href={`/services/${service.slug}`}
+            style={{ textDecoration: 'none' }}
+          >
+            <div
+              style={{
+                ...cardBaseStyle,
+                transform:
+                  hovered === index ? 'translateY(-6px)' : 'translateY(0)',
+                boxShadow:
+                  hovered === index
+                    ? '0 10px 20px rgba(0,0,0,0.15)'
+                    : '0 4px 6px rgba(0,0,0,0.1)',
+              }}
+              onMouseEnter={() => setHovered(index)}
+              onMouseLeave={() => setHovered(null)}
+            >
+              <h3>
+                {isEnglish ? service.titleEn : service.titleEs}
+              </h3>
+              <p style={{ color: '#6b7280' }}>
+                {isEnglish ? service.descEn : service.descEs}
+              </p>
+            </div>
+          </Link>
+        ))}
       </section>
+
+      {/* FOOTER */}
+      <footer
+        style={{
+          padding: '40px',
+          textAlign: 'center',
+          color: '#6b7280',
+        }}
+      >
+        © 2026 Latino Real Estate Directory - Georgia
+      </footer>
     </main>
   );
 }
