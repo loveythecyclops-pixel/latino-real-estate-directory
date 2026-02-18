@@ -2,6 +2,19 @@ import Link from 'next/link';
 
 const agents = [
   {
+    name: 'Maria Orantes',
+    title: 'Premium Bilingual REALTOR - English & Spanish',
+    location: 'Woodstock, GA',
+    experience: 'Licensed & Active',
+    specialty: 'Buyers, Sellers, ITIN & Owner Financing',
+    description: 'Bilingual (English/Spanish) REALTOR serving the greater Atlanta area including Woodstock, GA. Specializes in helping Latino families purchase homes using ITIN financing and owner financing programs. Responsive and dedicated to guiding first-time buyers through every step of the process.',
+    website: 'https://mariaorantes.maxoneexecutives.com',
+    email: 'mariaorantesre@gmail.com',
+    phone: '404-716-3892',
+    office: '770-835-4311 EXT: 292',
+    premium: true,
+  },
+  {
     name: 'Elsa Domenzain',
     title: 'Bilingual REALTOR - English & Spanish',
     location: 'Atlanta Metro, GA',
@@ -76,18 +89,32 @@ export default function BilingualAgentsPage() {
         <p style={{ textAlign: 'center', color: '#6b7280', marginBottom: '40px' }}>Verified agents and networks serving all of Georgia</p>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '28px' }}>
           {agents.map((agent) => (
-            <div key={agent.name} style={{ border: '1px solid #e9d5ff', borderRadius: '14px', padding: '28px', boxShadow: '0 2px 10px rgba(0,0,0,0.05)' }}>
-              <h3 style={{ color: '#7c3aed', fontSize: '1.1rem', fontWeight: '700', marginBottom: '4px' }}>{agent.name}</h3>
-              <p style={{ color: '#6b7280', fontSize: '0.8rem', marginBottom: '4px' }}>{agent.title}</p>
+            <div key={agent.name} style={{ border: agent.premium ? '2px solid #f59e0b' : '1px solid #e9d5ff', borderRadius: '14px', padding: '28px', boxShadow: agent.premium ? '0 4px 20px rgba(245,158,11,0.15)' : '0 2px 10px rgba(0,0,0,0.05)', position: 'relative', overflow: 'hidden' }}>
+              {agent.premium && (
+                <div style={{ position: 'absolute', top: 0, right: 0, backgroundColor: '#f59e0b', color: 'white', fontSize: '0.7rem', fontWeight: '800', padding: '4px 14px', borderBottomLeftRadius: '10px', letterSpacing: '0.05em' }}>
+                  ⭐ PREMIUM REALTOR
+                </div>
+              )}
+              <h3 style={{ color: '#7c3aed', fontSize: '1.1rem', fontWeight: '700', marginBottom: '4px', marginTop: agent.premium ? '16px' : '0' }}>{agent.name}</h3>
+              <p style={{ color: '#6b7280', fontSize: '0.85rem', marginBottom: '4px' }}>{agent.title}</p>
               <p style={{ color: '#9ca3af', fontSize: '0.8rem', marginBottom: '12px' }}>
                 📍 {agent.location} &nbsp;|&nbsp; {agent.experience}
               </p>
               <span style={{ backgroundColor: '#ede9fe', color: '#6d28d9', borderRadius: '20px', padding: '3px 12px', fontSize: '0.75rem', fontWeight: '700', display: 'inline-block', marginBottom: '12px' }}>
                 {agent.specialty}
               </span>
-              <p style={{ color: '#374151', fontSize: '0.9rem', lineHeight: '1.6', marginBottom: '18px' }}>{agent.description}</p>
-              <a href={agent.website} target="_blank" rel="noopener noreferrer" style={{ backgroundColor: '#7c3aed', color: 'white', padding: '9px 20px', borderRadius: '6px', textDecoration: 'none', fontSize: '0.88rem', fontWeight: '600', display: 'inline-block' }}>
-                Visit Website
+              <p style={{ color: '#374151', fontSize: '0.9rem', lineHeight: '1.6', marginBottom: '16px' }}>{agent.description}</p>
+              {agent.premium && (
+                <div style={{ backgroundColor: '#fffbeb', borderRadius: '10px', padding: '14px 16px', marginBottom: '16px', border: '1px solid #fde68a' }}>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', fontSize: '0.85rem', color: '#92400e' }}>
+                    {agent.phone && <span>📲 <a href={`tel:${agent.phone}`} style={{ color: '#92400e', textDecoration: 'none', fontWeight: '600' }}>{agent.phone}</a></span>}
+                    {agent.office && <span>☎️ <span style={{ fontWeight: '600' }}>{agent.office}</span></span>}
+                    {agent.email && <span>📧 <a href={`mailto:${agent.email}`} style={{ color: '#92400e', textDecoration: 'none', fontWeight: '600' }}>{agent.email}</a></span>}
+                  </div>
+                </div>
+              )}
+              <a href={agent.website} target="_blank" rel="noopener noreferrer" style={{ backgroundColor: agent.premium ? '#f59e0b' : '#7c3aed', color: 'white', padding: '9px 20px', borderRadius: '6px', textDecoration: 'none', fontWeight: '700', fontSize: '0.9rem', display: 'inline-block' }}>
+                {agent.premium ? 'Visit Website →' : 'Visit Website'}
               </a>
             </div>
           ))}
