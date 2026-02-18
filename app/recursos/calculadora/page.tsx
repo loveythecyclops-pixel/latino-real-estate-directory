@@ -2,21 +2,29 @@
 
 import { useState } from 'react';
 
-export default function CalculadoraPage() {
+export default function MortgageCalculator() {
   const [language, setLanguage] = useState<'en' | 'es'>('es');
-  const [number1, setNumber1] = useState('');
-  const [number2, setNumber2] = useState('');
-  const [result, setResult] = useState<number | null>(null);
+  const [loanAmount, setLoanAmount] = useState('');
+  const [interestRate, setInterestRate] = useState('');
+  const [termYears, setTermYears] = useState('');
+  const [monthlyPayment, setMonthlyPayment] = useState<number | null>(null);
 
   const isEnglish = language === 'en';
 
-  const calculateSum = () => {
-    const n1 = parseFloat(number1);
-    const n2 = parseFloat(number2);
-    if (!isNaN(n1) && !isNaN(n2)) {
-      setResult(n1 + n2);
+  // Mortgage calculation formula
+  const calculateMortgage = () => {
+    const principal = parseFloat(loanAmount);
+    const annualRate = parseFloat(interestRate) / 100;
+    const months = parseInt(termYears) * 12;
+
+    if (!isNaN(principal) && !isNaN(annualRate) && !isNaN(months) && months > 0) {
+      const monthlyRate = annualRate / 12;
+      const payment =
+        (principal * monthlyRate) /
+        (1 - Math.pow(1 + monthlyRate, -months));
+      setMonthlyPayment(payment);
     } else {
-      setResult(null);
+      setMonthlyPayment(null);
     }
   };
 
@@ -51,7 +59,7 @@ export default function CalculadoraPage() {
           color: '#1e3a8a',
         }}
       >
-        {isEnglish ? 'Bilingual Calculator' : 'Calculadora Bilingüe'}
+        {isEnglish ? 'Mortgage Calculator' : 'Calculadora Hipotecaria'}
       </h1>
 
       <div
@@ -64,20 +72,28 @@ export default function CalculadoraPage() {
       >
         <input
           type="number"
-          value={number1}
-          onChange={(e) => setNumber1(e.target.value)}
-          placeholder={isEnglish ? 'Enter first number' : 'Ingrese el primer número'}
+          value={loanAmount}
+          onChange={(e) => setLoanAmount(e.target.value)}
+          placeholder={isEnglish ? 'Loan Amount ($)' : 'Monto del préstamo ($)'}
           style={{ padding: '12px', borderRadius: '8px', border: '1px solid #ccc' }}
         />
         <input
           type="number"
-          value={number2}
-          onChange={(e) => setNumber2(e.target.value)}
-          placeholder={isEnglish ? 'Enter second number' : 'Ingrese el segundo número'}
+          step="0.01"
+          value={interestRate}
+          onChange={(e) => setInterestRate(e.target.value)}
+          placeholder={isEnglish ? 'Annual Interest Rate (%)' : 'Tasa de interés anual (%)'}
+          style={{ padding: '12px', borderRadius: '8px', border: '1px solid #ccc' }}
+        />
+        <input
+          type="number"
+          value={termYears}
+          onChange={(e) => setTermYears(e.target.value)}
+          placeholder={isEnglish ? 'Term (Years)' : 'Plazo (años)'}
           style={{ padding: '12px', borderRadius: '8px', border: '1px solid #ccc' }}
         />
         <button
-          onClick={calculateSum}
+          onClick={calculateMortgage}
           style={{
             padding: '12px',
             borderRadius: '8px',
@@ -88,11 +104,11 @@ export default function CalculadoraPage() {
             cursor: 'pointer',
           }}
         >
-          {isEnglish ? 'Calculate Sum' : 'Calcular Suma'}
+          {isEnglish ? 'Calculate Mortgage' : 'Calcular Hipoteca'}
         </button>
       </div>
 
-      {result !== null && (
+      {monthlyPayment !== null && (
         <div
           style={{
             fontSize: '1.5rem',
@@ -100,9 +116,11 @@ export default function CalculadoraPage() {
             color: '#16a34a',
           }}
         >
-          {isEnglish ? 'Result:' : 'Resultado:'} {result}
+          {isEnglish ? 'Estimated Monthly Payment:' : 'Pago mensual estimado:'}{' '}
+          ${monthlyPayment.toFixed(2)}
         </div>
       )}
     </div>
   );
 }
+
