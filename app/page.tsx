@@ -1,5 +1,4 @@
 'use client';
-
 import { useState } from 'react';
 import Link from 'next/link';
 
@@ -16,46 +15,28 @@ export default function Home() {
 
   return (
     <main style={{ fontFamily: 'sans-serif', minHeight: '100vh', backgroundColor: '#fff' }}>
-      {/* Navbar with Language Toggle */}
       <nav style={{ padding: '20px 40px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #eee' }}>
         <h2 style={{ color: '#1e3a8a', margin: 0 }}>Latino Real Estate</h2>
-        <button 
-          onClick={() => setLanguage(isEnglish ? 'es' : 'en')}
-          style={{ background: '#1e3a8a', color: '#fff', border: 'none', padding: '8px 16px', borderRadius: '20px', cursor: 'pointer', fontWeight: 'bold' }}
-        >
+        <button onClick={() => setLanguage(isEnglish ? 'es' : 'en')} style={{ background: '#1e3a8a', color: '#fff', border: 'none', padding: '8px 16px', borderRadius: '20px', cursor: 'pointer', fontWeight: 'bold' }}>
           {isEnglish ? '🇲🇽 Ver en Español' : '🇺🇸 View in English'}
         </button>
       </nav>
 
-      {/* Hero Section */}
       <header style={{ padding: '80px 40px', textAlign: 'center', background: 'linear-gradient(to bottom, #1e3a8a, #3b82f6)', color: '#fff' }}>
-        <h1 style={{ fontSize: '3.5rem', marginBottom: '20px' }}>
-          {isEnglish ? 'Find Your Home in Georgia' : 'Encuentra tu Hogar en Georgia'}
-        </h1>
-        <p style={{ fontSize: '1.2rem', marginBottom: '40px', opacity: 0.9 }}>
-          {isEnglish ? 'Bilingual support for buying, renting, and financing.' : 'Apoyo bilingüe para comprar, rentar y financiar.'}
-        </p>
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '20px' }}>
-          <Link href="/agents" style={{ background: '#fff', color: '#1e3a8a', padding: '15px 30px', borderRadius: '30px', fontWeight: 'bold', textDecoration: 'none' }}>
-            {isEnglish ? 'Explore Homes' : 'Explorar Casas'}
-          </Link>
-          <Link href="/recursos/calculadora" style={{ background: 'transparent', color: '#fff', border: '2px solid #fff', padding: '15px 30px', borderRadius: '30px', fontWeight: 'bold', textDecoration: 'none' }}>
-            {isEnglish ? 'Mortgage Calculator' : 'Calculadora de Hipoteca'}
-          </Link>
-        </div>
+        <h1 style={{ fontSize: '3.5rem', marginBottom: '20px' }}>{isEnglish ? 'Find Your Home' : 'Encuentra tu Hogar'}</h1>
+        <p style={{ fontSize: '1.2rem', marginBottom: '40px' }}>{isEnglish ? 'Bilingual support in Georgia.' : 'Apoyo bilingüe en Georgia.'}</p>
+        <Link href="/agents" style={{ background: '#fff', color: '#1e3a8a', padding: '15px 30px', borderRadius: '30px', fontWeight: 'bold', textDecoration: 'none' }}>
+          {isEnglish ? 'Explore Homes' : 'Explorar Casas'}
+        </Link>
       </header>
 
-      {/* Services Grid */}
       <section style={{ padding: '60px 40px', maxWidth: '1200px', margin: '0 auto' }}>
-        <h2 style={{ textAlign: 'center', color: '#1e3a8a', marginBottom: '40px' }}>
-          {isEnglish ? 'Our Services' : 'Nuestros Servicios'}
-        </h2>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '30px' }}>
-          {services.map((service, index) => (
-            <Link key={index} href={service.link} style={{ textDecoration: 'none', color: 'inherit' }}>
-              <div style={{ padding: '30px', border: '1px solid #eee', borderRadius: '15px', textAlign: 'center', transition: 'box-shadow 0.3s' }}>
-                <div style={{ fontSize: '3rem', marginBottom: '15px' }}>{service.icon}</div>
-                <h3 style={{ color: '#1e3a8a' }}>{isEnglish ? service.titleEn : service.titleEs}</h3>
+          {services.map((s, i) => (
+            <Link key={i} href={s.link} style={{ textDecoration: 'none', color: 'inherit' }}>
+              <div style={{ padding: '30px', border: '1px solid #eee', borderRadius: '15px', textAlign: 'center' }}>
+                <div style={{ fontSize: '3rem', marginBottom: '15px' }}>{s.icon}</div>
+                <h3 style={{ color: '#1e3a8a' }}>{isEnglish ? s.titleEn : s.titleEs}</h3>
               </div>
             </Link>
           ))}
