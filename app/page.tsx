@@ -23,7 +23,7 @@ const content = {
     footerHome: 'Back to Home',
   },
   es: {
-    heroTitle: 'Directorio de Bienes Raíces Latino de Georgia',
+    heroTitle: 'Bienvenido a Latino Real Estate',
     heroSub: 'Conectando a la comunidad latina con expertos en hipotecas ITIN, financiamiento del dueño y apoyo bilingüe en bienes raíces en toda Georgia.',
     hubCta: 'Buscar Casa en los Centros Latinos ▶',
     resourcesTitle: 'Recursos de Bienes Raíces en toda Georgia',
@@ -118,7 +118,7 @@ export default function Home() {
 
       {/* Hero */}
       <div style={{ background: 'linear-gradient(135deg, #1e40af 0%, #2563eb 100%)', color: 'white', padding: '80px 20px', textAlign: 'center' }}>
-        <h1 style={{ fontSize: '2.8rem', fontWeight: '800', marginBottom: '1rem' }}>{t.heroTitle}</h1>
+        <h1 className="text-blue-600" style={{ fontSize: '2.8rem', fontWeight: '800', marginBottom: '1rem' }}>{t.heroTitle}</h1>
         <p style={{ fontSize: '1.2rem', maxWidth: '700px', margin: '0 auto 2rem', opacity: 0.92 }}>{t.heroSub}</p>
         <Link href="/hubs" style={{ backgroundColor: 'white', color: '#2563eb', padding: '14px 32px', borderRadius: '12px', fontWeight: '700', textDecoration: 'none', display: 'inline-block', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
           {t.hubCta}
