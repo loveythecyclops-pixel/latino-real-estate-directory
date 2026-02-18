@@ -11,25 +11,25 @@ export default function Home() {
 
   const services = [
     {
-      slug: 'agentes',
+      slug: 'agents', // Changed to match common folder naming
       titleEn: 'Bilingual Agents',
       titleEs: 'Agentes Bilingües',
       descEn: 'Experts who speak your language.',
       descEs: 'Expertos que hablan tu idioma.',
     },
     {
-      slug: 'itin',
+      slug: 'mortgages', // Changed to match your ITIN section
       titleEn: 'ITIN Mortgages',
       titleEs: 'Hipotecas con ITIN',
       descEn: 'Financing options using ITIN numbers.',
       descEs: 'Opciones de financiamiento usando ITIN.',
     },
     {
-      slug: 'legal',
-      titleEn: 'Legal Support',
-      titleEs: 'Asesoría Legal',
-      descEn: 'Specialized real estate legal advice.',
-      descEs: 'Asesoría legal especializada en bienes raíces.',
+      slug: 'rentals', // Points to your newly created /rentals directory
+      titleEn: 'Rentals',
+      titleEs: 'Rentas',
+      descEn: 'Georgia regional rental market analytics.',
+      descEs: 'Análisis del mercado regional de rentas.',
     },
     {
       slug: 'owner-financing',
@@ -114,8 +114,8 @@ export default function Home() {
         </p>
 
         <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }}>
-          <Link href="/hubs" style={buttonStyle}>
-            {isEnglish ? 'Explore Homes' : 'Explorar Casas'}
+          <Link href="/rentals" style={buttonStyle}>
+            {isEnglish ? 'Explore Rentals' : 'Explorar Rentas'}
           </Link>
 
           <Link
@@ -127,7 +127,7 @@ export default function Home() {
         </div>
       </div>
 
-      {/* SERVICES */}
+      {/* SERVICES GRID */}
       <section
         style={{
           padding: '64px 20px',
@@ -141,7 +141,8 @@ export default function Home() {
         {services.map((service, index) => (
           <Link
             key={index}
-            href={`/services/${service.slug}`}
+            /* Logic: If it's rentals, go to /rentals. Others go to /services/slug */
+            href={service.slug === 'rentals' ? '/rentals' : `/${service.slug}`}
             style={{ textDecoration: 'none' }}
           >
             <div
@@ -157,10 +158,10 @@ export default function Home() {
               onMouseEnter={() => setHovered(index)}
               onMouseLeave={() => setHovered(null)}
             >
-              <h3>
+              <h3 style={{ color: '#1e3a8a', marginBottom: '12px' }}>
                 {isEnglish ? service.titleEn : service.titleEs}
               </h3>
-              <p style={{ color: '#6b7280' }}>
+              <p style={{ color: '#6b7280', fontSize: '0.95rem' }}>
                 {isEnglish ? service.descEn : service.descEs}
               </p>
             </div>
@@ -168,12 +169,12 @@ export default function Home() {
         ))}
       </section>
 
-      {/* FOOTER */}
       <footer
         style={{
           padding: '40px',
           textAlign: 'center',
           color: '#6b7280',
+          borderTop: '1px solid #eee'
         }}
       >
         © 2026 Latino Real Estate Directory - Georgia
