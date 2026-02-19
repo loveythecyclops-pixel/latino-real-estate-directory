@@ -1,6 +1,6 @@
 'use client';
 
-import { LanguageProvider, useLanguage } from './LanguageContext';
+const { isEnglish } = useLanguage();
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
