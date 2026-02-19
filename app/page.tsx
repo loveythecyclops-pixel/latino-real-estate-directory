@@ -83,6 +83,11 @@ export default function Home() {
             {isEnglish ? 'Explore Homes' : 'Explorar Casas'}
           </Link>
 
+          {/* ADDED RENTAL OPTION HERE */}
+          <Link href="/rentals" style={{ ...buttonStyle, backgroundColor: '#6366f1', color: '#fff' }}>
+            {isEnglish ? 'Find a Rental' : 'Buscar Renta'}
+          </Link>
+
           <Link
             href="/recursos/calculadora"
             style={{ ...buttonStyle, backgroundColor: '#16a34a', color: '#fff' }}
@@ -102,7 +107,7 @@ export default function Home() {
           margin: '0 auto'
         }}
       >
-        {/* Service 1: Regular Mortgages */}
+        {/* Keeping your original href for Mortgages */}
         <Link href="/Regular Mortgages" style={{...cardStyle, borderTopColor: '#2563eb'}}>
           <h3 style={{ color: '#1e3a8a' }}>{isEnglish ? 'Standard Mortgages' : 'Hipotecas Tradicionales'}</h3>
           <p style={{ color: '#6b7280' }}>
@@ -134,7 +139,7 @@ export default function Home() {
           </p>
         </Link>
 
-        {/* Service 5: Home Inspection (NEW) */}
+        {/* Keeping your original href for Inspection */}
         <Link href="/home-inspection" style={{...cardStyle, borderTopColor: '#0f172a'}}>
           <h3 style={{ color: '#1e3a8a' }}>{isEnglish ? 'Home Inspection' : 'Inspección de Casas'}</h3>
           <p style={{ color: '#6b7280' }}>
