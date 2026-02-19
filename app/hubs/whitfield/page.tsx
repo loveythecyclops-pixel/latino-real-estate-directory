@@ -3,42 +3,42 @@
 import { useState } from 'react';
 import Link from 'next/link';
 
-export default function WhitfieldPage() {
+export default function CobbPage() {
   const [language, setLanguage] = useState<'es' | 'en'>('es');
   const isEnglish = language === 'en';
-  const color = '#d97706'; // Whitfield Amber/Orange
+  const color = '#1e3a8a'; // Cobb Blue (Corporate/Professional)
 
   const neighborhoods = [
     { 
-      name: 'Dalton (City Center)', 
-      en: 'The "Carpet Capital of the World." High density of Latino-owned businesses, authentic Mexican cuisine, and walking distance to many employment centers.', 
-      es: 'La "Capital Mundial de Alfombras". Alta densidad de negocios latinos, auténtica comida mexicana y cercanía a centros de empleo.', 
-      highlight: { en: 'Most Latino', es: 'Más Latino' } 
+      name: 'Marietta (South Cobb Dr)', 
+      en: 'The cultural heart of Cobb. High density of Mexican and Central American businesses. Known for "Fair Oaks" and active commercial corridors.', 
+      es: 'El corazón cultural de Cobb. Alta densidad de negocios mexicanos y centroamericanos. Conocido por "Fair Oaks" y corredores comerciales.', 
+      highlight: { en: 'Latino Hub', es: 'Núcleo Latino' } 
     },
     { 
-      name: 'East Dalton', 
-      en: 'Primary residential hub for industrial workers. Features affordable starter homes and a very high concentration of Spanish-speaking households.', 
-      es: 'Núcleo residencial principal para trabajadores industriales. Casas económicas para principiantes y gran comunidad de habla hispana.', 
-      highlight: { en: 'Affordable', es: 'Económico' } 
+      name: 'Smyrna / Mableton', 
+      en: 'Diverse area popular for young professionals. Offers excellent access to the Silver Comet Trail and quick commutes to Midtown Atlanta.', 
+      es: 'Área diversa popular para jóvenes profesionales. Ofrece acceso al Silver Comet Trail y viajes cortos a Midtown Atlanta.', 
+      highlight: { en: 'Commuter Hub', es: 'Para Viajeros' } 
     },
     { 
-      name: 'Varnell / Tunnel Hill', 
-      en: 'Northwest of Dalton. Popular for families seeking larger yards and newer suburban feels while staying within a 15-minute drive of the city.', 
-      es: 'Noroeste de Dalton. Popular para familias que buscan patios más grandes y un ambiente suburbano nuevo a 15 minutos de la ciudad.', 
-      highlight: { en: 'Family Hub', es: 'Para Familias' } 
+      name: 'Austell / Powder Springs', 
+      en: 'More affordable entry point for families. Features suburban subdivisions with larger lots and growing Latino-focused services.', 
+      es: 'Punto de entrada más económico para familias. Ofrece subdivisiones suburbanas con terrenos grandes y servicios para latinos.', 
+      highlight: { en: 'Best Value', es: 'Mejor Valor' } 
     },
     { 
-      name: 'Cohutta / Rocky Face', 
-      en: 'Rural outskirts offering mountain views and land. Very popular for those looking to place mobile homes or build independent workshops.', 
-      es: 'Afueras rurales con vistas a la montaña y terreno. Muy popular para quienes buscan poner casas móviles o talleres independientes.', 
-      highlight: { en: 'Rural/Land', es: 'Campo/Tierra' } 
+      name: 'Kennesaw / Acworth', 
+      en: 'Northern Cobb area with a growing student population at KSU. Mix of modern subdivisions and established communities.', 
+      es: 'Zona norte de Cobb con creciente población estudiantil en KSU. Mezcla de subdivisiones modernas y comunidades establecidas.', 
+      highlight: { en: 'Growth Area', es: 'Zona de Crecimiento' } 
     }
   ];
 
   return (
     <div style={{ fontFamily: 'system-ui, sans-serif' }}>
       
-      {/* Language Toggle */}
+      {/* Language Toggle Button */}
       <button
         onClick={() => setLanguage(isEnglish ? 'es' : 'en')}
         style={{
@@ -51,26 +51,26 @@ export default function WhitfieldPage() {
         {isEnglish ? '🇲🇽 Ver en Español' : '🇺🇸 View in English'}
       </button>
 
-      {/* Hero */}
-      <div style={{ background: 'linear-gradient(135deg, #92400e 0%, #d97706 100%)', color: 'white', padding: '60px 20px', textAlign: 'center' }}>
+      {/* Hero Section */}
+      <div style={{ background: 'linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%)', color: 'white', padding: '60px 20px', textAlign: 'center' }}>
         <Link href="/hubs" style={{ color: 'rgba(255,255,255,0.75)', textDecoration: 'none', fontSize: '0.9rem' }}>
           {isEnglish ? '← All Latino Hubs' : '← Todos los Núcleos Latinos'}
         </Link>
-        <div style={{ fontSize: '3rem', margin: '16px 0 8px' }}>🏭</div>
-        <h1 style={{ fontSize: '2.5rem', fontWeight: '800', margin: '0 0 8px' }}>Whitfield County</h1>
+        <div style={{ fontSize: '3rem', margin: '16px 0 8px' }}>🍑</div>
+        <h1 style={{ fontSize: '2.5rem', fontWeight: '800', margin: '0 0 8px' }}>Cobb County</h1>
         <p style={{ opacity: 0.85, fontSize: '1.1rem', margin: '0 0 16px' }}>
-          {isEnglish ? 'North Georgia • The Dalton Hub' : 'Norte de Georgia • El Núcleo de Dalton'}
+          {isEnglish ? 'Metro Atlanta • The Westside Hub' : 'Metro de Atlanta • El Núcleo del Oeste'}
         </p>
         <div style={{ display: 'inline-flex', gap: '20px', backgroundColor: 'rgba(255,255,255,0.15)', borderRadius: '12px', padding: '12px 24px' }}>
-          <div><div style={{ fontSize: '1.4rem', fontWeight: '800' }}>38.4%</div><div style={{ fontSize: '0.8rem', opacity: 0.8 }}>{isEnglish ? 'Latino Population' : 'Población Latina'}</div></div>
+          <div><div style={{ fontSize: '1.4rem', fontWeight: '800' }}>15.8%</div><div style={{ fontSize: '0.8rem', opacity: 0.8 }}>{isEnglish ? 'Latino Population' : 'Población Latina'}</div></div>
           <div style={{ borderLeft: '1px solid rgba(255,255,255,0.3)', margin: '0 4px' }} />
-          <div><div style={{ fontSize: '1.4rem', fontWeight: '800' }}>Dalton</div><div style={{ fontSize: '0.8rem', opacity: 0.8 }}>{isEnglish ? 'Primary City' : 'Ciudad Principal'}</div></div>
+          <div><div style={{ fontSize: '1.4rem', fontWeight: '800' }}>Marietta</div><div style={{ fontSize: '0.8rem', opacity: 0.8 }}>{isEnglish ? 'County Seat' : 'Sede del Condado'}</div></div>
         </div>
       </div>
 
       <div style={{ maxWidth: '1000px', margin: '0 auto', padding: '50px 20px' }}>
 
-        {/* Neighborhoods */}
+        {/* Neighborhoods Section */}
         <section style={{ marginBottom: '48px' }}>
           <h2 style={{ fontSize: '1.6rem', fontWeight: '700', color, marginBottom: '20px', borderBottom: `3px solid ${color}`, paddingBottom: '8px' }}>
             {isEnglish ? '🏡 Key Neighborhoods' : '🏡 Vecindarios Clave'}
@@ -92,39 +92,17 @@ export default function WhitfieldPage() {
           </div>
         </section>
 
-        {/* Education & Dual Language */}
+        {/* Market Stats Feb 2026 */}
         <section style={{ marginBottom: '48px' }}>
           <h2 style={{ fontSize: '1.6rem', fontWeight: '700', color, marginBottom: '20px', borderBottom: `3px solid ${color}`, paddingBottom: '8px' }}>
-            {isEnglish ? '🎓 Education & Dual Language' : '🎓 Educación y Lenguaje Dual'}
-          </h2>
-          <div style={{ backgroundColor: '#fffbeb', borderRadius: '12px', padding: '24px' }}>
-            <p style={{ color: '#92400e', fontWeight: '600', marginBottom: '16px' }}>
-              {isEnglish ? 'Dalton is a leader in bilingual education in North Georgia:' : 'Dalton es líder en educación bilingüe en el norte de Georgia:'}
-            </p>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '12px' }}>
-              <div style={{ backgroundColor: 'white', borderRadius: '8px', padding: '12px', border: '1px solid #fde68a' }}>
-                <div style={{ fontWeight: '700', fontSize: '0.9rem' }}>Westwood Elementary</div>
-                <div style={{ fontSize: '0.8rem', color: '#b45309' }}>{isEnglish ? 'Spanish Dual Immersion' : 'Inmersión Dual en Español'}</div>
-              </div>
-              <div style={{ backgroundColor: 'white', borderRadius: '8px', padding: '12px', border: '1px solid #fde68a' }}>
-                <div style={{ fontWeight: '700', fontSize: '0.9rem' }}>Dalton High School</div>
-                <div style={{ fontSize: '0.8rem', color: '#b45309' }}>{isEnglish ? 'Strong ESOL Support' : 'Gran Apoyo ESOL'}</div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Real Estate Stats Feb 2026 */}
-        <section style={{ marginBottom: '48px' }}>
-          <h2 style={{ fontSize: '1.6rem', fontWeight: '700', color, marginBottom: '20px', borderBottom: `3px solid ${color}`, paddingBottom: '8px' }}>
-            {isEnglish ? '🏠 2026 Market Stats' : '🏠 Estadísticas de Mercado 2026'}
+            {isEnglish ? '🏠 February 2026 Market' : '🏠 Mercado de Febrero 2026'}
           </h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '16px' }}>
             {[
-              { label: isEnglish ? 'Median Home Price' : 'Precio Medio', value: '$274,000', note: isEnglish ? 'Best value in GA' : 'Mejor valor en GA' },
-              { label: isEnglish ? 'Active ITIN Lenders' : 'Prestamistas ITIN', value: 'High', note: isEnglish ? 'Established local roots' : 'Raíces locales sólidas' },
-              { label: isEnglish ? 'Days on Market' : 'Días en Mercado', value: '64', note: isEnglish ? 'Less competitive' : 'Menos competencia' },
-              { label: isEnglish ? 'Mobile Homes' : 'Casas Móviles', value: 'Abundant', note: isEnglish ? 'Ideal starter option' : 'Opción ideal inicial' },
+              { label: isEnglish ? 'Median Home Price' : 'Precio Medio', value: '$410,000', note: isEnglish ? 'Stable demand' : 'Demanda estable' },
+              { label: isEnglish ? 'ITIN Lending' : 'Préstamos ITIN', value: 'Moderate', note: isEnglish ? 'Established local banks' : 'Bancos locales establecidos' },
+              { label: isEnglish ? 'Days on Market' : 'Días en Mercado', value: '77', note: isEnglish ? 'Negotiation power' : 'Poder de negociación' },
+              { label: isEnglish ? 'Avg Rent' : 'Renta Promedio', value: '$1,750', note: isEnglish ? 'Strong rental pool' : 'Fuerte mercado de renta' },
             ].map((f) => (
               <div key={f.label} style={{ backgroundColor: '#f8fafc', borderRadius: '12px', padding: '20px', textAlign: 'center', border: '1px solid #e2e8f0' }}>
                 <div style={{ fontSize: '1.4rem', fontWeight: '800', color }}>{f.value}</div>
@@ -135,20 +113,20 @@ export default function WhitfieldPage() {
           </div>
         </section>
 
-        {/* CTA */}
+        {/* CTA Section */}
         <div style={{ backgroundColor: color, borderRadius: '16px', padding: '40px', textAlign: 'center', color: 'white' }}>
           <h3 style={{ fontSize: '1.5rem', fontWeight: '800', marginBottom: '12px' }}>
-            {isEnglish ? 'Start Your Journey in Dalton' : 'Inicie su Camino en Dalton'}
+            {isEnglish ? 'Connect with Cobb Experts' : 'Contacte Expertos en Cobb'}
           </h3>
           <p style={{ opacity: 0.9, marginBottom: '24px' }}>
-            {isEnglish ? 'Connect with ITIN experts in the heart of Whitfield County.' : 'Conéctese con expertos en ITIN en el corazón de Whitfield.'}
+            {isEnglish ? 'Find the right neighborhood and ITIN mortgage program today.' : 'Encuentre el vecindario ideal y programas ITIN hoy mismo.'}
           </p>
           <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
             <Link href="/itin-mortgages" style={{ backgroundColor: 'white', color, padding: '12px 24px', borderRadius: '8px', fontWeight: '700', textDecoration: 'none' }}>
-              {isEnglish ? 'ITIN Mortgage Info' : 'Info sobre ITIN'}
+              {isEnglish ? 'ITIN Guide' : 'Guía de ITIN'}
             </Link>
             <Link href="/bilingual-agents" style={{ backgroundColor: 'rgba(255,255,255,0.2)', color: 'white', padding: '12px 24px', borderRadius: '8px', fontWeight: '700', textDecoration: 'none', border: '2px solid rgba(255,255,255,0.5)' }}>
-              {isEnglish ? 'Find Local Agent' : 'Buscar Agente Local'}
+              {isEnglish ? 'Find Agent' : 'Buscar Agente'}
             </Link>
           </div>
         </div>
