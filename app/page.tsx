@@ -102,8 +102,8 @@ export default function Home() {
           margin: '0 auto'
         }}
       >
-        {/* Service 1: Regular Mortgages (NEW) */}
-        <Link href="/Regular Mortgages" style={{...cardStyle, borderTopColor: '#2563eb'}}>
+        {/* Service 1: Regular Mortgages */}
+        <Link href="/regular-mortgages" style={{...cardStyle, borderTopColor: '#2563eb'}}>
           <h3 style={{ color: '#1e3a8a' }}>{isEnglish ? 'Standard Mortgages' : 'Hipotecas Tradicionales'}</h3>
           <p style={{ color: '#6b7280' }}>
             {isEnglish ? 'FHA, Conventional, and VA loan options.' : 'Opciones de préstamos FHA, Convencionales y VA.'}
@@ -134,7 +134,15 @@ export default function Home() {
           </p>
         </Link>
 
-        {/* Service 5: Legal Support */}
+        {/* Service 5: Home Inspection (NEW) */}
+        <Link href="/home-inspections" style={{...cardStyle, borderTopColor: '#0f172a'}}>
+          <h3 style={{ color: '#1e3a8a' }}>{isEnglish ? 'Home Inspections' : 'Inspección de Casas'}</h3>
+          <p style={{ color: '#6b7280' }}>
+            {isEnglish ? 'Certified inspectors for your future home.' : 'Inspectores certificados para su futura casa.'}
+          </p>
+        </Link>
+
+        {/* Service 6: Legal Support */}
         <Link href="/legal-support" style={cardStyle}>
           <h3 style={{ color: '#1e3a8a' }}>{isEnglish ? 'Legal Support' : 'Asesoría Legal'}</h3>
           <p style={{ color: '#6b7280' }}>
