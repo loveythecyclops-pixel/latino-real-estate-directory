@@ -107,7 +107,7 @@ export default function Home() {
         }}
       >
         {/* NEW: Credit Building (Added as Service 1) */}
-        <Link href="/recursos" style={{...cardStyle, borderTopColor: '#f59e0b'}}>
+        <Link href="/credit-building" style={{...cardStyle, borderTopColor: '#f59e0b'}}>
           <h3 style={{ color: '#1e3a8a' }}>{isEnglish ? 'Credit Building' : 'Construir Crédito'}</h3>
           <p style={{ color: '#6b7280' }}>
             {isEnglish ? 'ITIN friendly tools to boost your score.' : 'Herramientas con ITIN para subir su puntaje.'}
