@@ -1,10 +1,10 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link'; // Import Link for better performance
 
 export default function Home() {
   const [language, setLanguage] = useState<'en' | 'es'>('es');
-
   const isEnglish = language === 'en';
 
   const containerStyle = {
@@ -34,6 +34,7 @@ export default function Home() {
     cursor: 'pointer'
   };
 
+  // Base style for the clickable cards
   const cardStyle = {
     display: 'block',
     backgroundColor: '#ffffff',
@@ -41,13 +42,16 @@ export default function Home() {
     borderRadius: '12px',
     boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
     textAlign: 'center' as const,
-    borderTop: '4px solid #1e3a8a'
+    borderTop: '4px solid #1e3a8a',
+    textDecoration: 'none', // Removes underline from links
+    color: 'inherit', // Keeps text color standard
+    transition: 'transform 0.2s, box-shadow 0.2s', // Smooth hover effect
+    cursor: 'pointer'
   };
 
   return (
     <main style={containerStyle}>
       <div style={heroStyle}>
-        
         {/* Language Toggle */}
         <button
           onClick={() => setLanguage(isEnglish ? 'es' : 'en')}
@@ -68,28 +72,24 @@ export default function Home() {
         </button>
 
         <h1 style={{ fontSize: '2.5rem', fontWeight: 'bold', marginBottom: '1rem' }}>
-          {isEnglish
-            ? 'Latino Real Estate Directory'
-            : 'Directorio Latino de Bienes Raíces'}
+          {isEnglish ? 'Latino Real Estate Directory' : 'Directorio Latino de Bienes Raíces'}
         </h1>
 
         <p style={{ fontSize: '1.25rem', marginBottom: '20px' }}>
-          {isEnglish
-            ? 'Connecting Georgia with bilingual experts.'
-            : 'Conectando Georgia con expertos bilingües.'}
+          {isEnglish ? 'Connecting Georgia with bilingual experts.' : 'Conectando Georgia con expertos bilingües.'}
         </p>
 
         <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }}>
-          <a href="/hubs" style={buttonStyle}>
+          <Link href="/hubs" style={buttonStyle}>
             {isEnglish ? 'Explore Homes' : 'Explorar Casas'}
-          </a>
+          </Link>
 
-          <a
+          <Link
             href="/recursos/calculadora"
             style={{ ...buttonStyle, backgroundColor: '#16a34a', color: '#fff' }}
           >
             {isEnglish ? 'Bilingual Calculator' : 'Calculadora Bilingüe'}
-          </a>
+          </Link>
         </div>
       </div>
 
@@ -103,41 +103,37 @@ export default function Home() {
           margin: '0 auto'
         }}
       >
-        <div style={cardStyle}>
-          <h3>{isEnglish ? 'Bilingual Agents' : 'Agentes Bilingües'}</h3>
+        {/* Service 1: Agents */}
+        <Link href="/servicios/agentes" style={cardStyle}>
+          <h3 style={{ color: '#1e3a8a' }}>{isEnglish ? 'Bilingual Agents' : 'Agentes Bilingües'}</h3>
           <p style={{ color: '#6b7280' }}>
-            {isEnglish
-              ? 'Experts who speak your language.'
-              : 'Expertos que hablan tu idioma.'}
+            {isEnglish ? 'Experts who speak your language.' : 'Expertos que hablan tu idioma.'}
           </p>
-        </div>
+        </Link>
 
-        <div style={cardStyle}>
-          <h3>{isEnglish ? 'ITIN Mortgages' : 'Hipotecas con ITIN'}</h3>
+        {/* Service 2: ITIN */}
+        <Link href="/servicios/itin" style={cardStyle}>
+          <h3 style={{ color: '#1e3a8a' }}>{isEnglish ? 'ITIN Mortgages' : 'Hipotecas con ITIN'}</h3>
           <p style={{ color: '#6b7280' }}>
-            {isEnglish
-              ? 'Financing options using ITIN numbers.'
-              : 'Opciones de financiamiento usando ITIN.'}
+            {isEnglish ? 'Financing options using ITIN numbers.' : 'Opciones de financiamiento usando ITIN.'}
           </p>
-        </div>
+        </Link>
 
-        <div style={cardStyle}>
-          <h3>{isEnglish ? 'Legal Support' : 'Asesoría Legal'}</h3>
+        {/* Service 3: Legal */}
+        <Link href="/servicios/legal" style={cardStyle}>
+          <h3 style={{ color: '#1e3a8a' }}>{isEnglish ? 'Legal Support' : 'Asesoría Legal'}</h3>
           <p style={{ color: '#6b7280' }}>
-            {isEnglish
-              ? 'Specialized real estate legal advice.'
-              : 'Asesoría legal especializada en bienes raíces.'}
+            {isEnglish ? 'Specialized real estate legal advice.' : 'Asesoría legal especializada en bienes raíces.'}
           </p>
-        </div>
+        </Link>
 
-        <div style={cardStyle}>
-          <h3>{isEnglish ? 'Owner Financing' : 'Financiamiento Directo'}</h3>
+        {/* Service 4: Owner Financing */}
+        <Link href="/servicios/financiamiento-dueno" style={cardStyle}>
+          <h3 style={{ color: '#1e3a8a' }}>{isEnglish ? 'Owner Financing' : 'Financiamiento Directo'}</h3>
           <p style={{ color: '#6b7280' }}>
-            {isEnglish
-              ? 'Properties with direct seller financing.'
-              : 'Propiedades con financiamiento directo del vendedor.'}
+            {isEnglish ? 'Properties with direct seller financing.' : 'Propiedades con financiamiento directo del vendedor.'}
           </p>
-        </div>
+        </Link>
       </section>
 
       <footer style={{ padding: '40px', textAlign: 'center', color: '#6b7280' }}>
