@@ -90,9 +90,12 @@ export default function OwnerFinancingPage() {
 
       {/* Benefits */}
       <div style={{ backgroundColor: '#f0fdf4', padding: '50px 20px' }}>
-        <h2 style={{ textAlign: 'center', color: '#065f46', fontSize: '1.7rem', marginBottom: '40px' }}>
+        <h2 style={{ textAlign: 'center', color: '#065f46', fontSize: '1.7rem', marginBottom: '8px' }}>
           {isEnglish ? 'Why Owner Financing Works' : 'Por qué funciona el Financiamiento del Dueño'}
         </h2>
+        <p style={{ textAlign: 'center', color: '#6b7280', marginBottom: '40px', fontSize: '0.95rem' }}>
+          {isEnglish ? 'Benefits for the Latino community' : 'Beneficios para nuestra comunidad Latina'}
+        </p>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '20px', maxWidth: '1000px', margin: '0 auto' }}>
           {benefits.map((b, idx) => (
             <div key={idx} style={{ backgroundColor: 'white', borderRadius: '12px', padding: '24px', boxShadow: '0 1px 6px rgba(0,0,0,0.06)' }}>
@@ -104,34 +107,61 @@ export default function OwnerFinancingPage() {
         </div>
       </div>
 
+      {/* Platforms Section */}
+      <div style={{ padding: '60px 20px', maxWidth: '1000px', margin: '0 auto' }}>
+        <h2 style={{ color: '#065f46', fontSize: '1.8rem', marginBottom: '24px' }}>
+          {isEnglish ? 'Where to Find Homes' : 'Dónde encontrar casas'}
+        </h2>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+          <div>
+            <h3 style={{ color: '#059669', fontSize: '1.1rem', marginBottom: '8px' }}>OwnerWillFinance.com</h3>
+            <p style={{ color: '#6b7280', fontSize: '0.95rem' }}>
+              {isEnglish 
+                ? 'Search specifically for homes in Georgia where the owner carries the note.' 
+                : 'Busque específicamente casas en Georgia donde el dueño financia la propiedad.'}
+            </p>
+          </div>
+          <div>
+            <h3 style={{ color: '#059669', fontSize: '1.1rem', marginBottom: '8px' }}>{isEnglish ? 'Zillow Keywords' : 'Palabras clave en Zillow'}</h3>
+            <p style={{ color: '#6b7280', fontSize: '0.95rem' }}>
+              {isEnglish 
+                ? 'Use filters like "Owner Financing" or "Seller Finance" in the keyword search.' 
+                : 'Use filtros como "Financiamiento del Dueño" en la búsqueda por palabra clave.'}
+            </p>
+          </div>
+        </div>
+      </div>
+
       
 
       {/* Steps */}
-      <div style={{ padding: '60px 20px', maxWidth: '1000px', margin: '0 auto' }}>
-        <h2 style={{ textAlign: 'center', fontSize: '1.8rem', color: '#065f46', marginBottom: '40px' }}>
-          {isEnglish ? 'How It Works' : 'Cómo Funciona'}
-        </h2>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px' }}>
-          {steps.map((step) => (
-            <div key={step.num} style={{ backgroundColor: '#f8fafc', borderRadius: '12px', padding: '24px', display: 'flex', gap: '16px' }}>
-              <div style={{ backgroundColor: '#059669', color: 'white', borderRadius: '50%', width: '36px', height: '36px', minWidth: '36px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: '700' }}>{step.num}</div>
-              <div>
-                <h4 style={{ color: '#065f46', margin: '0 0 6px' }}>{isEnglish ? step.title.en : step.title.es}</h4>
-                <p style={{ color: '#6b7280', fontSize: '0.88rem' }}>{isEnglish ? step.desc.en : step.desc.es}</p>
+      <div style={{ backgroundColor: '#f0fdf4', padding: '60px 20px' }}>
+        <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
+          <h2 style={{ textAlign: 'center', fontSize: '1.8rem', color: '#065f46', marginBottom: '40px' }}>
+            {isEnglish ? 'How It Works Step-by-Step' : 'Paso a Paso de Cómo Funciona'}
+          </h2>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px' }}>
+            {steps.map((step) => (
+              <div key={step.num} style={{ backgroundColor: 'white', borderRadius: '12px', padding: '24px', display: 'flex', gap: '16px', boxShadow: '0 1px 4px rgba(0,0,0,0.05)' }}>
+                <div style={{ backgroundColor: '#059669', color: 'white', borderRadius: '50%', width: '36px', height: '36px', minWidth: '36px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: '700' }}>{step.num}</div>
+                <div>
+                  <h4 style={{ color: '#065f46', margin: '0 0 6px' }}>{isEnglish ? step.title.en : step.title.es}</h4>
+                  <p style={{ color: '#6b7280', fontSize: '0.88rem' }}>{isEnglish ? step.desc.en : step.desc.es}</p>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
 
       {/* FAQs */}
-      <div style={{ backgroundColor: '#f0fdf4', padding: '60px 20px' }}>
+      <div style={{ padding: '60px 20px' }}>
         <h2 style={{ textAlign: 'center', fontSize: '1.8rem', color: '#065f46', marginBottom: '40px' }}>
           {isEnglish ? 'Common Questions' : 'Preguntas Comunes'}
         </h2>
         <div style={{ maxWidth: '800px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '16px' }}>
           {faqs.map((faq, idx) => (
-            <div key={idx} style={{ backgroundColor: 'white', borderRadius: '10px', padding: '20px 24px' }}>
+            <div key={idx} style={{ backgroundColor: '#f8fafc', borderRadius: '10px', padding: '20px 24px' }}>
               <h4 style={{ color: '#065f46', marginBottom: '8px' }}>{isEnglish ? faq.q.en : faq.q.es}</h4>
               <p style={{ color: '#6b7280', fontSize: '0.9rem', margin: 0 }}>{isEnglish ? faq.a.en : faq.a.es}</p>
             </div>
@@ -141,12 +171,18 @@ export default function OwnerFinancingPage() {
 
       {/* CTA */}
       <div style={{ backgroundColor: '#064e3b', color: 'white', textAlign: 'center', padding: '50px 20px' }}>
+        <h2 style={{ fontSize: '1.6rem', marginBottom: '28px' }}>
+          {isEnglish ? 'Ready to Find Your Home?' : '¿Listo para encontrar su casa?'}
+        </h2>
         <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}>
           <Link href="/bilingual-agents" style={{ backgroundColor: 'white', color: '#064e3b', padding: '12px 28px', borderRadius: '8px', fontWeight: '700', textDecoration: 'none' }}>
             {isEnglish ? 'Find an Agent' : 'Buscar un Agente'}
           </Link>
-          <Link href="/" style={{ border: '2px solid white', color: 'white', padding: '12px 28px', borderRadius: '8px', fontWeight: '700', textDecoration: 'none' }}>
-            {isEnglish ? 'Home' : 'Inicio'}
+          <Link href="/legal-support" style={{ backgroundColor: '#059669', color: 'white', padding: '12px 28px', borderRadius: '8px', fontWeight: '700', textDecoration: 'none' }}>
+            {isEnglish ? 'Legal Support' : 'Soporte Legal'}
+          </Link>
+          <Link href="/" style={{ border: '2px solid rgba(255,255,255,0.4)', color: 'white', padding: '12px 28px', borderRadius: '8px', fontWeight: '700', textDecoration: 'none' }}>
+            {isEnglish ? 'Back to Home' : 'Volver al Inicio'}
           </Link>
         </div>
       </div>
