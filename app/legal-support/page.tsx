@@ -1,3 +1,6 @@
+'use client';
+
+import { useState } from 'react';
 import Link from 'next/link';
 
 const attorneys = [
@@ -6,8 +9,11 @@ const attorneys = [
     firm: "O'Kelley & Sorohan, Attorneys at Law",
     location: 'Metro Atlanta, GA',
     languages: 'English & Spanish',
-    specialty: 'Real Estate Closings',
-    description: 'Native Spanish speaker and real estate closing attorney with over 20 years of experience. Active member of NAHREP and the Georgia Hispanic Chamber of Commerce.',
+    specialty: { en: 'Real Estate Closings', es: 'Cierres de Bienes Raíces' },
+    description: {
+      en: 'Native Spanish speaker and real estate closing attorney with over 20 years of experience. Active member of NAHREP.',
+      es: 'Hablante nativa de español y abogada de cierres con más de 20 años de experiencia. Miembro activo de NAHREP.'
+    },
     website: 'https://www.okelleyandsorohan.com/attorney/josefina-c-knapp/',
   },
   {
@@ -15,8 +21,11 @@ const attorneys = [
     firm: 'Weissman PC',
     location: 'Buford, GA',
     languages: 'English & Spanish',
-    specialty: 'Residential Real Estate Closings',
-    description: 'Bilingual real estate closing attorney specializing in residential closings and refinances. Member of NAHREP, guiding clients from contract to closing.',
+    specialty: { en: 'Residential Real Estate Closings', es: 'Cierres Residenciales' },
+    description: {
+      en: 'Bilingual real estate closing attorney specializing in residential closings and refinances.',
+      es: 'Abogado bilingüe especializado en cierres residenciales y refinanciamientos.'
+    },
     website: 'https://www.weissman.law/attorneys/miguel-barboza/',
   },
   {
@@ -24,96 +33,83 @@ const attorneys = [
     firm: 'Lueder, Larkin & Hunter',
     location: 'Metro Atlanta, GA',
     languages: 'English & Spanish',
-    specialty: 'Real Estate Closings',
-    description: 'Born in Santo Domingo, DR, Pilar is bilingual in English and Spanish. Member of the Georgia Real Estate Closing Attorneys Association (GRECAA).',
+    specialty: { en: 'Real Estate Closings', es: 'Cierres de Bienes Raíces' },
+    description: {
+      en: 'Born in Santo Domingo, DR, Pilar is bilingual in English and Spanish. Member of GRECAA.',
+      es: 'Nacida en Santo Domingo, RD, Pilar es bilingüe en inglés y español. Miembro de GRECAA.'
+    },
     website: 'https://www.luederlaw.com/attorneys/pilar-gigante/',
   },
   {
     name: 'Nogales & Associates',
     firm: 'Nogales Law, LLC',
-    location: 'Lawrenceville, GA (Gwinnett County)',
+    location: 'Lawrenceville, GA',
     languages: 'English & Spanish',
-    specialty: 'Real Estate, Bankruptcy & Immigration',
-    description: 'A leading bilingual law firm in Gwinnett County with over a decade of experience. Serves Duluth, Norcross, Gainesville, and surrounding areas. Real estate title, closings, and disputes.',
+    specialty: { en: 'Real Estate & Immigration', es: 'Bienes Raíces e Inmigración' },
+    description: {
+      en: 'Leading bilingual law firm in Gwinnett County. Real estate title, closings, and disputes.',
+      es: 'Firma legal bilingüe líder en el condado de Gwinnett. Títulos, cierres y disputas.'
+    },
     website: 'https://nogalesfirm.com',
-  },
-  {
-    name: 'Atlanta Signature Law',
-    firm: 'Atlanta Signature',
-    location: 'Sandy Springs, GA',
-    languages: 'English & Spanish',
-    specialty: 'Real Estate Closings (Residential & Commercial)',
-    description: 'Bilingual real estate legal services across all of Georgia. Mobile closing attorneys available — they come to you. Specializes in serving Spanish-speaking buyers and sellers.',
-    website: 'https://atlantasignature.com',
-  },
-  {
-    name: 'Fabiola Sepulveda',
-    firm: 'Sepulveda Immigration Group / Hines Law',
-    location: 'Atlanta, Marietta, Dalton, Gainesville, GA',
-    languages: 'English & Spanish',
-    specialty: 'Immigration & Real Estate Legal Support',
-    description: 'Respected bilingual immigration attorney with offices across Georgia. Helps Latino families with legal status, documentation, and pathways to homeownership.',
-    website: 'https://hineslaw.org/services/immigration-lawyers/',
-  },
+  }
 ];
 
 export default function LegalSupportPage() {
+  const [language, setLanguage] = useState<'es' | 'en'>('es');
+  const isEnglish = language === 'en';
+
+  const whyItems = [
+    { en: 'ITIN-Based Purchases', es: 'Compras con ITIN' },
+    { en: 'Owner Financing Contracts', es: 'Contratos de Dueño a Dueño' },
+    { en: 'Title Review & Closing', es: 'Revisión de Título y Cierre' },
+    { en: 'Deed Preparation', es: 'Preparación de Escrituras' },
+    { en: 'Real Estate Disputes', es: 'Disputas de Bienes Raíces' },
+    { en: 'Immigration Support', es: 'Soporte de Inmigración' },
+  ];
+
   return (
-    <div style={{ fontFamily: 'sans-serif' }}>
+    <div style={{ fontFamily: 'sans-serif', position: 'relative' }}>
+      
+      {/* Floating Toggle Button */}
+      <button
+        onClick={() => setLanguage(isEnglish ? 'es' : 'en')}
+        style={{
+          position: 'fixed', top: '20px', right: '20px', zIndex: 9999,
+          padding: '10px 20px', borderRadius: '30px', backgroundColor: '#2563eb',
+          color: 'white', border: 'none', fontWeight: 'bold', cursor: 'pointer',
+          boxShadow: '0 4px 12px rgba(0,0,0,0.2)'
+        }}
+      >
+        {isEnglish ? '🇲🇽 Ver en Español' : '🇺🇸 View in English'}
+      </button>
+
       {/* Hero */}
-      <div style={{
-        backgroundColor: '#2563eb',
-        color: 'white',
-        textAlign: 'center',
-        padding: '60px 20px',
-      }}>
-        <h1 style={{ fontSize: '2.4rem', marginBottom: '16px' }}>
-          Bilingual Legal Support
+      <div style={{ backgroundColor: '#2563eb', color: 'white', textAlign: 'center', padding: '60px 20px' }}>
+        <h1 style={{ fontSize: '2.4rem', marginBottom: '16px', fontWeight: '800' }}>
+          {isEnglish ? 'Bilingual Legal Support' : 'Apoyo Legal Bilingüe'}
         </h1>
-        <p style={{ fontSize: '1.15rem', maxWidth: '680px', margin: '0 auto 24px' }}>
-          Connecting the Georgia Latino community with experienced, Spanish-speaking attorneys
-          for real estate closings, ITIN transactions, owner financing, and immigration support.
-        </p>
-        <p style={{ fontSize: '1rem', opacity: 0.85 }}>
-          Apoyo legal bilingue para la comunidad Latina en Georgia.
+        <p style={{ fontSize: '1.15rem', maxWidth: '680px', margin: '0 auto 24px', opacity: 0.9 }}>
+          {isEnglish 
+            ? 'Connecting the Georgia Latino community with experienced, Spanish-speaking attorneys.'
+            : 'Conectando a la comunidad latina de Georgia con abogados experimentados que hablan español.'}
         </p>
       </div>
 
       {/* Why You Need a Bilingual Attorney */}
-      <div style={{ backgroundColor: '#f0f4ff', padding: '40px 20px', textAlign: 'center' }}>
-        <h2 style={{ fontSize: '1.6rem', color: '#1e40af', marginBottom: '12px' }}>
-          Why a Bilingual Attorney Matters
+      <div style={{ backgroundColor: '#f0f4ff', padding: '50px 20px', textAlign: 'center' }}>
+        <h2 style={{ fontSize: '1.7rem', color: '#1e40af', marginBottom: '16px' }}>
+          {isEnglish ? 'Why a Bilingual Attorney Matters' : 'Por qué importa un Abogado Bilingüe'}
         </h2>
-        <p style={{ maxWidth: '700px', margin: '0 auto', color: '#374151', fontSize: '1rem', lineHeight: '1.7' }}>
-          In Georgia, an attorney must be present at every real estate closing. Having a bilingual
-          attorney ensures you fully understand every document you sign — from the deed and title
-          to the loan terms and closing disclosures. No interpreter needed. No surprises.
+        <p style={{ maxWidth: '750px', margin: '0 auto 32px', color: '#374151', lineHeight: '1.7' }}>
+          {isEnglish 
+            ? 'In Georgia, an attorney must be present at closing. A bilingual attorney ensures you understand every document—from the deed to the loan terms. No surprises.'
+            : 'En Georgia, un abogado debe estar presente en el cierre. Un abogado bilingüe garantiza que comprenda cada documento, desde la escritura hasta los términos del préstamo.'}
         </p>
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-          gap: '20px',
-          maxWidth: '900px',
-          margin: '32px auto 0',
-        }}>
-          {[
-            { icon: '\u2705', text: 'ITIN-Based Purchases' },
-            { icon: '\u2705', text: 'Owner Financing Contracts' },
-            { icon: '\u2705', text: 'Title Review & Closing' },
-            { icon: '\u2705', text: 'Deed Preparation' },
-            { icon: '\u2705', text: 'Real Estate Disputes' },
-            { icon: '\u2705', text: 'Immigration & Status Help' },
-          ].map((item) => (
-            <div key={item.text} style={{
-              backgroundColor: 'white',
-              borderRadius: '10px',
-              padding: '16px',
-              boxShadow: '0 1px 4px rgba(0,0,0,0.08)',
-              fontSize: '0.95rem',
-              color: '#1e3a8a',
-              fontWeight: '500',
-            }}>
-              {item.icon} {item.text}
+        
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '16px', maxWidth: '1000px', margin: '0 auto' }}>
+          {whyItems.map((item, idx) => (
+            <div key={idx} style={{ backgroundColor: 'white', padding: '16px', borderRadius: '10px', boxShadow: '0 1px 4px rgba(0,0,0,0.08)', color: '#1e3a8a', fontWeight: '600' }}>
+              ✅ {isEnglish ? item.en : item.es}
             </div>
           ))}
         </div>
@@ -121,67 +117,25 @@ export default function LegalSupportPage() {
 
       {/* Attorney Directory */}
       <div style={{ padding: '60px 20px', maxWidth: '1100px', margin: '0 auto' }}>
-        <h2 style={{ textAlign: 'center', fontSize: '1.8rem', color: '#1e40af', marginBottom: '8px' }}>
-          Georgia Bilingual Attorneys
+        <h2 style={{ textAlign: 'center', fontSize: '1.8rem', color: '#1e40af', marginBottom: '40px' }}>
+          {isEnglish ? 'Georgia Bilingual Attorneys' : 'Directorio de Abogados Bilingües'}
         </h2>
-        <p style={{ textAlign: 'center', color: '#6b7280', marginBottom: '40px', fontSize: '0.95rem' }}>
-          Abogados bilingues en Georgia — English & Spanish
-        </p>
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-          gap: '28px',
-        }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '28px' }}>
           {attorneys.map((attorney) => (
-            <div key={attorney.name} style={{
-              border: '1px solid #e5e7eb',
-              borderRadius: '12px',
-              padding: '28px',
-              boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
-            }}>
-              <h3 style={{ color: '#2563eb', fontSize: '1.2rem', marginBottom: '4px' }}>
-                {attorney.name}
-              </h3>
-              <p style={{ fontWeight: '600', color: '#374151', marginBottom: '4px', fontSize: '0.95rem' }}>
-                {attorney.firm}
-              </p>
-              <p style={{ color: '#6b7280', fontSize: '0.85rem', marginBottom: '10px' }}>
-                📍 {attorney.location}
-              </p>
-              <span style={{
-                display: 'inline-block',
-                backgroundColor: '#dbeafe',
-                color: '#1e40af',
-                borderRadius: '20px',
-                padding: '3px 12px',
-                fontSize: '0.8rem',
-                fontWeight: '600',
-                marginBottom: '10px',
-              }}>
-                {attorney.specialty}
+            <div key={attorney.name} style={{ border: '1px solid #e5e7eb', borderRadius: '12px', padding: '28px', boxShadow: '0 2px 8px rgba(0,0,0,0.06)' }}>
+              <h3 style={{ color: '#2563eb', fontSize: '1.2rem', marginBottom: '4px' }}>{attorney.name}</h3>
+              <p style={{ fontWeight: '600', color: '#374151', marginBottom: '4px', fontSize: '0.95rem' }}>{attorney.firm}</p>
+              <p style={{ color: '#6b7280', fontSize: '0.85rem', marginBottom: '10px' }}>📍 {attorney.location}</p>
+              <span style={{ display: 'inline-block', backgroundColor: '#dbeafe', color: '#1e40af', borderRadius: '20px', padding: '3px 12px', fontSize: '0.8rem', fontWeight: '600', marginBottom: '10px' }}>
+                {isEnglish ? attorney.specialty.en : attorney.specialty.es}
               </span>
-              <p style={{ color: '#4b5563', fontSize: '0.9rem', lineHeight: '1.6', marginBottom: '16px' }}>
-                {attorney.description}
+              <p style={{ color: '#4b5563', fontSize: '0.9rem', lineHeight: '1.6', marginBottom: '20px' }}>
+                {isEnglish ? attorney.description.en : attorney.description.es}
               </p>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <span style={{ fontSize: '0.85rem', color: '#059669', fontWeight: '600' }}>
-                  \uD83D\uDDE3 {attorney.languages}
-                </span>
-                <a
-                  href={attorney.website}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{
-                    backgroundColor: '#2563eb',
-                    color: 'white',
-                    padding: '8px 18px',
-                    borderRadius: '6px',
-                    fontSize: '0.85rem',
-                    textDecoration: 'none',
-                    fontWeight: '600',
-                  }}
-                >
-                  Visit Website
+                <span style={{ fontSize: '0.85rem', color: '#059669', fontWeight: '600' }}>🗣️ {attorney.languages}</span>
+                <a href={attorney.website} target="_blank" rel="noopener noreferrer" style={{ backgroundColor: '#2563eb', color: 'white', padding: '8px 18px', borderRadius: '6px', fontSize: '0.85rem', textDecoration: 'none', fontWeight: '600' }}>
+                  {isEnglish ? 'Website' : 'Sitio Web'}
                 </a>
               </div>
             </div>
@@ -190,29 +144,12 @@ export default function LegalSupportPage() {
       </div>
 
       {/* CTA */}
-      <div style={{
-        backgroundColor: '#1e3a8a',
-        color: 'white',
-        textAlign: 'center',
-        padding: '50px 20px',
-      }}>
-        <h2 style={{ fontSize: '1.6rem', marginBottom: '12px' }}>
-          Ready to Find Your Home?
+      <div style={{ backgroundColor: '#1e3a8a', color: 'white', textAlign: 'center', padding: '50px 20px' }}>
+        <h2 style={{ fontSize: '1.6rem', marginBottom: '28px' }}>
+          {isEnglish ? 'Ready to Find Your Home?' : '¿Listo para comprar su casa?'}
         </h2>
-        <p style={{ fontSize: '1rem', opacity: 0.85, marginBottom: '28px' }}>
-          Browse Georgia real estate deals by city and connect with bilingual ITIN mortgage experts.
-        </p>
-        <Link href="/" style={{
-          backgroundColor: 'white',
-          color: '#1e3a8a',
-          padding: '14px 36px',
-          borderRadius: '8px',
-          fontWeight: '700',
-          fontSize: '1rem',
-          textDecoration: 'none',
-          display: 'inline-block',
-        }}>
-          \u2190 Back to Home
+        <Link href="/" style={{ backgroundColor: 'white', color: '#1e3a8a', padding: '14px 36px', borderRadius: '8px', fontWeight: '700', textDecoration: 'none', display: 'inline-block' }}>
+          {isEnglish ? '← Back to Home' : '← Volver al Inicio'}
         </Link>
       </div>
     </div>
