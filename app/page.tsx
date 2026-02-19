@@ -51,6 +51,7 @@ export default function Home() {
   return (
     <main style={containerStyle}>
       <div style={heroStyle}>
+        {/* Language Toggle */}
         <button
           onClick={() => setLanguage(isEnglish ? 'es' : 'en')}
           style={{
@@ -95,13 +96,21 @@ export default function Home() {
         style={{
           padding: '64px 20px',
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
           gap: '24px',
           maxWidth: '1200px',
           margin: '0 auto'
         }}
       >
-        {/* Service 1: Agents - FIXED PATH */}
+        {/* Service 1: Regular Mortgages (NEW) */}
+        <Link href="/regular-mortgages" style={{...cardStyle, borderTopColor: '#2563eb'}}>
+          <h3 style={{ color: '#1e3a8a' }}>{isEnglish ? 'Standard Mortgages' : 'Hipotecas Tradicionales'}</h3>
+          <p style={{ color: '#6b7280' }}>
+            {isEnglish ? 'FHA, Conventional, and VA loan options.' : 'Opciones de préstamos FHA, Convencionales y VA.'}
+          </p>
+        </Link>
+
+        {/* Service 2: Agents */}
         <Link href="/bilingual-agents" style={cardStyle}>
           <h3 style={{ color: '#1e3a8a' }}>{isEnglish ? 'Bilingual Agents' : 'Agentes Bilingües'}</h3>
           <p style={{ color: '#6b7280' }}>
@@ -109,7 +118,7 @@ export default function Home() {
           </p>
         </Link>
 
-        {/* Service 2: ITIN - FIXED PATH */}
+        {/* Service 3: ITIN */}
         <Link href="/itin-mortgages" style={cardStyle}>
           <h3 style={{ color: '#1e3a8a' }}>{isEnglish ? 'ITIN Mortgages' : 'Hipotecas con ITIN'}</h3>
           <p style={{ color: '#6b7280' }}>
@@ -117,19 +126,19 @@ export default function Home() {
           </p>
         </Link>
 
-        {/* Service 3: Legal - FIXED PATH */}
+        {/* Service 4: Owner Financing */}
+        <Link href="/owner-financing" style={{...cardStyle, borderTopColor: '#059669'}}>
+          <h3 style={{ color: '#1e3a8a' }}>{isEnglish ? 'Owner Financing' : 'Financiamiento Directo'}</h3>
+          <p style={{ color: '#6b7280' }}>
+            {isEnglish ? 'Properties with direct seller financing.' : 'Propiedades con financiamiento directo del vendedor.'}
+          </p>
+        </Link>
+
+        {/* Service 5: Legal Support */}
         <Link href="/legal-support" style={cardStyle}>
           <h3 style={{ color: '#1e3a8a' }}>{isEnglish ? 'Legal Support' : 'Asesoría Legal'}</h3>
           <p style={{ color: '#6b7280' }}>
             {isEnglish ? 'Specialized real estate legal advice.' : 'Asesoría legal especializada en bienes raíces.'}
-          </p>
-        </Link>
-
-        {/* Service 4: Owner Financing - FIXED PATH */}
-        <Link href="/owner-financing" style={cardStyle}>
-          <h3 style={{ color: '#1e3a8a' }}>{isEnglish ? 'Owner Financing' : 'Financiamiento Directo'}</h3>
-          <p style={{ color: '#6b7280' }}>
-            {isEnglish ? 'Properties with direct seller financing.' : 'Propiedades con financiamiento directo del vendedor.'}
           </p>
         </Link>
       </section>
