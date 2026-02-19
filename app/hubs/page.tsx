@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useLanguage } from '../LanguageContext'; // Importing global state
+import { useLanguage } from '../LanguageContext';
 
 const hubs = [
   {
