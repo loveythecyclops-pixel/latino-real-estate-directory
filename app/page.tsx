@@ -1,6 +1,8 @@
 import { prisma } from '@/lib/prisma';
 import Link from 'next/link';
 
+export const dynamic = 'force-dynamic';
+
 // 1. Convert to an 'async' function so we can fetch data
 export default async function Home({ searchParams }: { searchParams: any }) {
   // 2. Get language from URL (default to Spanish 'es')
