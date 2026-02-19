@@ -103,7 +103,7 @@ export default function Home() {
         }}
       >
         {/* Service 1: Regular Mortgages */}
-        <Link href="/regular-mortgages" style={{...cardStyle, borderTopColor: '#2563eb'}}>
+        <Link href="/Regular Mortgages" style={{...cardStyle, borderTopColor: '#2563eb'}}>
           <h3 style={{ color: '#1e3a8a' }}>{isEnglish ? 'Standard Mortgages' : 'Hipotecas Tradicionales'}</h3>
           <p style={{ color: '#6b7280' }}>
             {isEnglish ? 'FHA, Conventional, and VA loan options.' : 'Opciones de préstamos FHA, Convencionales y VA.'}
@@ -135,8 +135,8 @@ export default function Home() {
         </Link>
 
         {/* Service 5: Home Inspection (NEW) */}
-        <Link href="/Home-Inspection" style={{...cardStyle, borderTopColor: '#0f172a'}}>
-          <h3 style={{ color: '#1e3a8a' }}>{isEnglish ? 'Home Inspections' : 'Inspección de Casas'}</h3>
+        <Link href="/Home Inspection" style={{...cardStyle, borderTopColor: '#0f172a'}}>
+          <h3 style={{ color: '#1e3a8a' }}>{isEnglish ? 'Home Inspection' : 'Inspección de Casas'}</h3>
           <p style={{ color: '#6b7280' }}>
             {isEnglish ? 'Certified inspectors for your future home.' : 'Inspectores certificados para su futura casa.'}
           </p>
