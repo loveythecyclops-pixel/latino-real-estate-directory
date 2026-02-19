@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import Link from 'next/link'; // Import Link for better performance
+import Link from 'next/link'; 
 
 export default function Home() {
   const [language, setLanguage] = useState<'en' | 'es'>('es');
@@ -34,7 +34,6 @@ export default function Home() {
     cursor: 'pointer'
   };
 
-  // Base style for the clickable cards
   const cardStyle = {
     display: 'block',
     backgroundColor: '#ffffff',
@@ -43,16 +42,15 @@ export default function Home() {
     boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
     textAlign: 'center' as const,
     borderTop: '4px solid #1e3a8a',
-    textDecoration: 'none', // Removes underline from links
-    color: 'inherit', // Keeps text color standard
-    transition: 'transform 0.2s, box-shadow 0.2s', // Smooth hover effect
+    textDecoration: 'none',
+    color: 'inherit',
+    transition: 'transform 0.2s, box-shadow 0.2s',
     cursor: 'pointer'
   };
 
   return (
     <main style={containerStyle}>
       <div style={heroStyle}>
-        {/* Language Toggle */}
         <button
           onClick={() => setLanguage(isEnglish ? 'es' : 'en')}
           style={{
@@ -103,32 +101,32 @@ export default function Home() {
           margin: '0 auto'
         }}
       >
-        {/* Service 1: Agents */}
-        <Link href="/servicios/agentes" style={cardStyle}>
+        {/* Service 1: Agents - FIXED PATH */}
+        <Link href="/bilingual-agents" style={cardStyle}>
           <h3 style={{ color: '#1e3a8a' }}>{isEnglish ? 'Bilingual Agents' : 'Agentes Bilingües'}</h3>
           <p style={{ color: '#6b7280' }}>
             {isEnglish ? 'Experts who speak your language.' : 'Expertos que hablan tu idioma.'}
           </p>
         </Link>
 
-        {/* Service 2: ITIN */}
-        <Link href="/servicios/itin" style={cardStyle}>
+        {/* Service 2: ITIN - FIXED PATH */}
+        <Link href="/itin-mortgages" style={cardStyle}>
           <h3 style={{ color: '#1e3a8a' }}>{isEnglish ? 'ITIN Mortgages' : 'Hipotecas con ITIN'}</h3>
           <p style={{ color: '#6b7280' }}>
             {isEnglish ? 'Financing options using ITIN numbers.' : 'Opciones de financiamiento usando ITIN.'}
           </p>
         </Link>
 
-        {/* Service 3: Legal */}
-        <Link href="/servicios/legal" style={cardStyle}>
+        {/* Service 3: Legal - FIXED PATH */}
+        <Link href="/legal-support" style={cardStyle}>
           <h3 style={{ color: '#1e3a8a' }}>{isEnglish ? 'Legal Support' : 'Asesoría Legal'}</h3>
           <p style={{ color: '#6b7280' }}>
             {isEnglish ? 'Specialized real estate legal advice.' : 'Asesoría legal especializada en bienes raíces.'}
           </p>
         </Link>
 
-        {/* Service 4: Owner Financing */}
-        <Link href="/servicios/financiamiento-dueno" style={cardStyle}>
+        {/* Service 4: Owner Financing - FIXED PATH */}
+        <Link href="/owner-financing" style={cardStyle}>
           <h3 style={{ color: '#1e3a8a' }}>{isEnglish ? 'Owner Financing' : 'Financiamiento Directo'}</h3>
           <p style={{ color: '#6b7280' }}>
             {isEnglish ? 'Properties with direct seller financing.' : 'Propiedades con financiamiento directo del vendedor.'}
