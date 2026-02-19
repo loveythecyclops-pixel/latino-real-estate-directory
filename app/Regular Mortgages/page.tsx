@@ -6,26 +6,34 @@ const loans = [
   {
     title: 'FHA Loans',
     icon: '🏠',
-    bestFor: 'First-time buyers & lower credit scores',
+    bestFor: 'First-time buyers & scores above 580',
+    limit2026: '$541,287 - $718,750+',
     downPayment: '3.5%',
-    creditScore: '580+',
-    desc: 'Government-backed loans that are easier to qualify for. Great if you have a smaller down payment or a credit score that isn\'t perfect yet.'
+    desc: 'The most popular choice for GA families. In 2026, many Metro Atlanta counties allow up to $718k, while rural counties start at $541k.'
   },
   {
     title: 'Conventional Loans',
     icon: '📈',
-    bestFor: 'Buyers with strong credit',
-    downPayment: '3% - 20%',
-    creditScore: '620+',
-    desc: 'Standard loans not insured by the government. If you put 20% down, you can skip the monthly mortgage insurance (PMI) cost.'
+    bestFor: 'Credit 620+ & long-term savings',
+    limit2026: '$832,750 (Baseline)',
+    downPayment: '3% - 5%',
+    desc: 'Standard loans for those with strong credit. No upfront mortgage insurance fees, and you can remove PMI once you reach 20% equity.'
   },
   {
     title: 'VA Loans',
     icon: '🎖️',
-    bestFor: 'Veterans & Active Duty Military',
+    bestFor: 'Veterans & Active Duty (GA is Military Friendly!)',
+    limit2026: 'No Limit (Full Entitlement)',
     downPayment: '0%',
-    creditScore: 'Varies',
-    desc: 'An incredible benefit for those who served. No down payment required and often has the lowest interest rates on the market.'
+    desc: 'Special benefits for our Georgia veterans. No down payment and no monthly mortgage insurance (PMI) required.'
+  },
+  {
+    title: 'USDA Rural Loans',
+    icon: '🌳',
+    bestFor: 'Rural areas (outside Atlanta/Savannah)',
+    limit2026: 'Varies by County',
+    downPayment: '0%',
+    desc: 'Perfect for homes in areas like North GA or South GA. 100% financing for low-to-moderate income households in eligible rural zones.'
   }
 ];
 
@@ -33,51 +41,80 @@ export default function RegularMortgagesPage() {
   const [isEnglish, setIsEnglish] = useState(false);
 
   return (
-    <div style={{ fontFamily: 'sans-serif', color: '#1f2937' }}>
+    <div style={{ fontFamily: 'sans-serif', color: '#1f2937', backgroundColor: '#fdfdfd' }}>
       {/* Hero */}
-      <div style={{ backgroundColor: '#2563eb', color: 'white', textAlign: 'center', padding: '60px 20px' }}>
+      <div style={{ backgroundColor: '#1e3a8a', color: 'white', textAlign: 'center', padding: '60px 20px' }}>
         <button 
           onClick={() => setIsEnglish(!isEnglish)}
-          style={{ float: 'right', background: 'white', color: '#2563eb', border: 'none', padding: '8px 16px', borderRadius: '20px', cursor: 'pointer', fontWeight: 'bold' }}
+          style={{ float: 'right', background: 'white', color: '#1e3a8a', border: 'none', padding: '8px 16px', borderRadius: '20px', cursor: 'pointer', fontWeight: 'bold' }}
         >
           {isEnglish ? 'Español' : 'English'}
         </button>
         <h1 style={{ fontSize: '2.5rem', marginBottom: '10px' }}>
-          {isEnglish ? 'Standard Mortgage Loans' : 'Préstamos Hipotecarios Tradicionales'}
+          {isEnglish ? '2026 Georgia Mortgage Guide' : 'Guía de Hipotecas en Georgia 2026'}
         </h1>
         <p style={{ fontSize: '1.2rem', opacity: 0.9 }}>
-          {isEnglish ? 'The most common ways to buy a home in Georgia.' : 'Las formas más comunes de comprar una casa en Georgia.'}
+          {isEnglish ? 'Latest loan limits and requirements for GA residents.' : 'Últimos límites y requisitos para residentes de Georgia.'}
         </p>
       </div>
 
-      {/* Loan Cards */}
-      <div style={{ padding: '50px 20px', maxWidth: '1100px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '30px' }}>
+      {/* Loan Grid */}
+      <div style={{ padding: '40px 20px', maxWidth: '1200px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '25px' }}>
         {loans.map((loan) => (
-          <div key={loan.title} style={{ border: '1px solid #e5e7eb', borderRadius: '15px', padding: '30px', boxShadow: '0 4px 6px rgba(0,0,0,0.05)' }}>
-            <div style={{ fontSize: '3rem', marginBottom: '15px' }}>{loan.icon}</div>
-            <h2 style={{ color: '#2563eb', marginTop: 0 }}>{loan.title}</h2>
-            <p><strong>{isEnglish ? 'Down Payment' : 'Enganche'}:</strong> {loan.downPayment}</p>
-            <p><strong>{isEnglish ? 'Min. Credit' : 'Crédito Mín.'}:</strong> {loan.creditScore}</p>
-            <hr style={{ border: '0.5px solid #eee', margin: '20px 0' }} />
-            <p style={{ lineHeight: '1.6', color: '#4b5563' }}>{loan.desc}</p>
+          <div key={loan.title} style={{ backgroundColor: 'white', border: '1px solid #e5e7eb', borderRadius: '12px', padding: '25px', boxShadow: '0 4px 10px rgba(0,0,0,0.05)' }}>
+            <div style={{ fontSize: '2.5rem' }}>{loan.icon}</div>
+            <h2 style={{ color: '#1e3a8a', fontSize: '1.4rem' }}>{loan.title}</h2>
+            <div style={{ marginBottom: '15px', fontSize: '0.9rem' }}>
+              <div style={{ color: '#16a34a', fontWeight: 'bold' }}>💰 {isEnglish ? 'Down' : 'Enganche'}: {loan.downPayment}</div>
+              <div style={{ color: '#6b7280' }}>📊 {isEnglish ? '2026 Limit' : 'Límite 2026'}: {loan.limit2026}</div>
+            </div>
+            <p style={{ fontSize: '0.95rem', lineHeight: '1.5', color: '#4b5563' }}>{loan.desc}</p>
           </div>
         ))}
       </div>
 
-      {/* Georgia Requirements Section */}
-      <div style={{ backgroundColor: '#f9fafb', padding: '60px 20px', textAlign: 'center' }}>
-        <h2 style={{ color: '#1e3a8a' }}>{isEnglish ? 'General Requirements' : 'Requisitos Generales'}</h2>
-        <div style={{ maxWidth: '600px', margin: '20px auto', textAlign: 'left', display: 'inline-block' }}>
-          <p>✅ <strong>{isEnglish ? 'Proof of Income' : 'Prueba de Ingresos'}:</strong> {isEnglish ? '2 years of W2s or Tax Returns.' : '2 años de declaraciones de impuestos.'}</p>
-          <p>✅ <strong>{isEnglish ? 'Identification' : 'Identificación'}:</strong> {isEnglish ? 'Valid Social Security Number.' : 'Número de Seguro Social válido.'}</p>
-          <p>✅ <strong>{isEnglish ? 'Employment' : 'Empleo'}:</strong> {isEnglish ? 'Steady job history for the last 2 years.' : 'Historial de trabajo estable por los últimos 2 años.'}</p>
+      {/* GA Special Program Section */}
+      <div style={{ backgroundColor: '#eff6ff', padding: '50px 20px', textAlign: 'center' }}>
+        <h2 style={{ color: '#1e3a8a' }}>{isEnglish ? 'Georgia Dream Program' : 'Programa Georgia Dream'}</h2>
+        <p style={{ maxWidth: '700px', margin: '10px auto', lineHeight: '1.6' }}>
+          {isEnglish 
+            ? 'First-time buyers in Georgia may qualify for up to $10,000 - $12,500 in down payment assistance. Requires a 640+ credit score.' 
+            : 'Compradores por primera vez en Georgia pueden calificar para $10,000 - $12,500 en asistencia para el enganche. Requiere crédito de 640+.'}
+        </p>
+      </div>
+
+      {/* Detailed Requirements Table */}
+      <div style={{ padding: '60px 20px', maxWidth: '900px', margin: '0 auto' }}>
+        <h3 style={{ textAlign: 'center', marginBottom: '30px' }}>{isEnglish ? 'Documentation Checklist' : 'Lista de Documentos'}</h3>
+        <div style={{ border: '1px solid #eee', borderRadius: '10px', overflow: 'hidden' }}>
+          <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
+            <thead style={{ backgroundColor: '#f8fafc' }}>
+              <tr>
+                <th style={{ padding: '15px' }}>{isEnglish ? 'Document' : 'Documento'}</th>
+                <th style={{ padding: '15px' }}>{isEnglish ? 'Why it is needed' : 'Por qué se necesita'}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style={{ borderTop: '1px solid #eee' }}>
+                <td style={{ padding: '15px' }}>Tax Returns (2 yrs)</td>
+                <td style={{ padding: '15px' }}>To verify income stability over time.</td>
+              </tr>
+              <tr style={{ borderTop: '1px solid #eee' }}>
+                <td style={{ padding: '15px' }}>Bank Statements (60 days)</td>
+                <td style={{ padding: '15px' }}>To prove you have the funds for the down payment.</td>
+              </tr>
+              <tr style={{ borderTop: '1px solid #eee' }}>
+                <td style={{ padding: '15px' }}>Pay Stubs (30 days)</td>
+                <td style={{ padding: '15px' }}>To prove current employment status.</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
 
-      {/* Back Button */}
-      <div style={{ textAlign: 'center', padding: '40px' }}>
-        <Link href="/" style={{ color: '#2563eb', fontWeight: 'bold', textDecoration: 'none' }}>
-          ← {isEnglish ? 'Back to Home' : 'Volver al Inicio'}
+      <div style={{ textAlign: 'center', paddingBottom: '60px' }}>
+        <Link href="/" style={{ color: '#1e3a8a', fontWeight: 'bold', textDecoration: 'none', border: '2px solid #1e3a8a', padding: '10px 25px', borderRadius: '8px' }}>
+          {isEnglish ? 'Back to Directory' : 'Volver al Directorio'}
         </Link>
       </div>
     </div>
