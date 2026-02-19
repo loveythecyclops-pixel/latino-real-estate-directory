@@ -1,11 +1,9 @@
 'use client';
 
-import { useState } from 'react'; // Use standard React state instead
+import { useState } from 'react'; 
 import Link from 'next/link';
 
-export default function HubsPage() {
-  const [isEnglish, setIsEnglish] = useState(false);
-  const hubs = [
+const hubs = [
   {
     slug: 'gwinnett',
     name: 'Gwinnett County',
@@ -75,7 +73,9 @@ export default function HubsPage() {
 ];
 
 export default function HubsPage() {
-  const { isEnglish, setLanguage } = useLanguage();
+  // Use local state so we don't need the missing LanguageContext file
+  const [language, setLanguage] = useState<'en' | 'es'>('es');
+  const isEnglish = language === 'en';
 
   return (
     <div style={{ minHeight: '100vh', backgroundColor: '#f8fafc', fontFamily: 'system-ui, sans-serif' }}>
