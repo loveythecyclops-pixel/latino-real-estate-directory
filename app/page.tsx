@@ -1,13 +1,12 @@
 'use client';
 
 import { useState } from 'react';
-import Link from 'next/link'; 
+import Link from 'next/link';
 
 export default function Home() {
   const [language, setLanguage] = useState<'en' | 'es'>('es');
   const isEnglish = language === 'en';
-
-  const containerStyle = {
+    const containerStyle = {
     minHeight: '100vh',
     backgroundColor: '#ffffff',
     fontFamily: 'sans-serif',
