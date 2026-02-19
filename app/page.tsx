@@ -83,7 +83,6 @@ export default function Home() {
             {isEnglish ? 'Explore Homes' : 'Explorar Casas'}
           </Link>
 
-          {/* ADDED RENTAL OPTION HERE */}
           <Link href="/rentals" style={{ ...buttonStyle, backgroundColor: '#6366f1', color: '#fff' }}>
             {isEnglish ? 'Find a Rental' : 'Buscar Renta'}
           </Link>
@@ -107,7 +106,15 @@ export default function Home() {
           margin: '0 auto'
         }}
       >
-        {/* Keeping your original href for Mortgages */}
+        {/* NEW: Credit Building (Added as Service 1) */}
+        <Link href="/recursos" style={{...cardStyle, borderTopColor: '#f59e0b'}}>
+          <h3 style={{ color: '#1e3a8a' }}>{isEnglish ? 'Credit Building' : 'Construir Crédito'}</h3>
+          <p style={{ color: '#6b7280' }}>
+            {isEnglish ? 'ITIN friendly tools to boost your score.' : 'Herramientas con ITIN para subir su puntaje.'}
+          </p>
+        </Link>
+
+        {/* Mortgages */}
         <Link href="/Regular Mortgages" style={{...cardStyle, borderTopColor: '#2563eb'}}>
           <h3 style={{ color: '#1e3a8a' }}>{isEnglish ? 'Standard Mortgages' : 'Hipotecas Tradicionales'}</h3>
           <p style={{ color: '#6b7280' }}>
@@ -115,7 +122,7 @@ export default function Home() {
           </p>
         </Link>
 
-        {/* Service 2: Agents */}
+        {/* Agents */}
         <Link href="/bilingual-agents" style={cardStyle}>
           <h3 style={{ color: '#1e3a8a' }}>{isEnglish ? 'Bilingual Agents' : 'Agentes Bilingües'}</h3>
           <p style={{ color: '#6b7280' }}>
@@ -123,7 +130,7 @@ export default function Home() {
           </p>
         </Link>
 
-        {/* Service 3: ITIN */}
+        {/* ITIN */}
         <Link href="/itin-mortgages" style={cardStyle}>
           <h3 style={{ color: '#1e3a8a' }}>{isEnglish ? 'ITIN Mortgages' : 'Hipotecas con ITIN'}</h3>
           <p style={{ color: '#6b7280' }}>
@@ -131,7 +138,7 @@ export default function Home() {
           </p>
         </Link>
 
-        {/* Service 4: Owner Financing */}
+        {/* Owner Financing */}
         <Link href="/owner-financing" style={{...cardStyle, borderTopColor: '#059669'}}>
           <h3 style={{ color: '#1e3a8a' }}>{isEnglish ? 'Owner Financing' : 'Financiamiento Directo'}</h3>
           <p style={{ color: '#6b7280' }}>
@@ -139,7 +146,7 @@ export default function Home() {
           </p>
         </Link>
 
-        {/* Keeping your original href for Inspection */}
+        {/* Inspection */}
         <Link href="/home-inspection" style={{...cardStyle, borderTopColor: '#0f172a'}}>
           <h3 style={{ color: '#1e3a8a' }}>{isEnglish ? 'Home Inspection' : 'Inspección de Casas'}</h3>
           <p style={{ color: '#6b7280' }}>
@@ -147,7 +154,7 @@ export default function Home() {
           </p>
         </Link>
 
-        {/* Service 6: Legal Support */}
+        {/* Legal Support */}
         <Link href="/legal-support" style={cardStyle}>
           <h3 style={{ color: '#1e3a8a' }}>{isEnglish ? 'Legal Support' : 'Asesoría Legal'}</h3>
           <p style={{ color: '#6b7280' }}>
