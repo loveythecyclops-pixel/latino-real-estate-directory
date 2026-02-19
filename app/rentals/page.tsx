@@ -51,12 +51,13 @@ export default function RentalPage() {
   const isEnglish = language === 'en';
   const [city, setCity] = useState<keyof typeof rentalFacts | null>(null);
 
-  return (
+return (
     <div style={{ minHeight: '100vh', backgroundColor: '#f8fafc', fontFamily: 'system-ui, sans-serif' }}>
       
+      {toggleButton} {/* <--- Just add this one line here */}
+
       {/* Hero / Header */}
       <div style={{ backgroundColor: '#1e3a8a', color: 'white', padding: '40px 20px', position: 'relative' }}>
-        <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
           
           {/* THE TOGGLE BUTTON */}
           <button
