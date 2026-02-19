@@ -1,102 +1,86 @@
 'use client';
-
 import { useState } from 'react';
 import Link from 'next/link';
 
-// 1. DATA: All your 2026 rental facts in one place
-const rentalData = {
-  atlanta: {
-    name: 'Atlanta',
-    avgRent: '$1,613',
-    oneBed: '$1,775',
-    threeBed: '$2,200+',
-    latinos: '6%',
-    fact: 'Highest inventory in Georgia with 8,000+ units available.'
-  },
+const rentalFacts = {
   gwinnett: {
     name: 'Gwinnett County',
-    avgRent: '$1,950',
-    oneBed: '$1,678',
-    threeBed: '$2,542',
+    rent: '$1,950',
     latinos: '23%',
-    fact: 'Best for families; Sugar Hill and Norcross are top Latino hubs.'
+    pros: 'Family-sized homes; high bilingual support in Norcross/Lilburn.',
+    tips: 'Look for MAA Prescott or Terra at Norcross for large rental communities.'
   },
-  gainesville: {
-    name: 'Gainesville',
-    avgRent: '$1,316',
-    oneBed: '$1,316',
-    threeBed: '$1,941',
+  hall: {
+    name: 'Gainesville / Hall',
+    rent: '$1,316',
     latinos: '29%',
-    fact: 'Renter-heavy market (59% of residents) with high demand.'
+    pros: 'High inventory for workforce families.',
+    tips: 'Over 50% of residents here are renters—high competition, apply early.'
   },
   dalton: {
-    name: 'Dalton',
-    avgRent: '$1,300',
-    oneBed: '$1,455',
-    threeBed: '$1,655',
+    name: 'Dalton / Whitfield',
+    rent: '$1,300',
     latinos: '35%',
-    fact: 'Most affordable industrial hub; rents dropped $300 this year.'
+    pros: 'Most affordable; very high Latino community presence.',
+    tips: 'Prices dropped $300 YoY—great time to lock in a 2-year lease.'
   }
 };
 
-export default function RentalsPage() {
-  // 2. STATE: Track which city the user is looking at
-  const [selectedCity, setSelectedCity] = useState<keyof typeof rentalData | null>(null);
-
-  const cardStyle = {
-    padding: '20px',
-    borderRadius: '12px',
-    backgroundColor: '#ffffff',
-    boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
-    cursor: 'pointer',
-    border: '1px solid #e2e8f0',
-    textAlign: 'center' as const
-  };
+export default function RentalPage() {
+  const [city, setCity] = useState<keyof typeof rentalFacts | null>(null);
 
   return (
-    <main style={{ padding: '40px', maxWidth: '1200px', margin: '0 auto', fontFamily: 'sans-serif' }}>
-      <Link href="/" style={{ color: '#1e3a8a', textDecoration: 'none', fontWeight: 'bold' }}>← Back to Home</Link>
+    <div style={{ padding: '40px', maxWidth: '1000px', margin: '0 auto', fontFamily: 'sans-serif' }}>
+      <Link href="/">← Volver al Inicio</Link>
       
-      <h1 style={{ textAlign: 'center', color: '#1e3a8a', margin: '20px 0' }}>
-        {selectedCity ? `${rentalData[selectedCity].name} Market` : 'Select a City for Rental Facts'}
-      </h1>
+      <h1 style={{ color: '#1e3a8a', textAlign: 'center' }}>Directorio de Rentas Georgia 2026</h1>
 
-      {/* 3. CITY SELECTION GRID (Shows only if no city is selected) */}
-      {!selectedCity ? (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '20px' }}>
-          {(Object.keys(rentalData) as Array<keyof typeof rentalData>).map((key) => (
-            <div key={key} onClick={() => setSelectedCity(key)} style={cardStyle}>
-              <h3 style={{ color: '#1e3a8a' }}>{rentalData[key].name}</h3>
-              <p>Avg: {rentalData[key].avgRent}</p>
-              <button style={{ backgroundColor: '#1e3a8a', color: '#fff', border: 'none', padding: '8px 16px', borderRadius: '5px', marginTop: '10px', cursor: 'pointer' }}>
-                View Facts
-              </button>
-            </div>
-          ))}
-        </div>
-      ) : (
-        /* 4. DYNAMIC DETAILS VIEW (Shows when a city is clicked) */
-        <div style={{ backgroundColor: '#f8fafc', padding: '30px', borderRadius: '15px', border: '2px solid #1e3a8a' }}>
-          <button onClick={() => setSelectedCity(null)} style={{ marginBottom: '20px', cursor: 'pointer' }}>View All Cities</button>
-          
+      {/* RENTER RIGHTS BANNER */}
+      <div style={{ backgroundColor: '#fff4ed', padding: '20px', borderRadius: '10px', border: '1px solid #fdba74', marginBottom: '30px' }}>
+        <h3 style={{ color: '#9a3412', marginTop: 0 }}>⚠️ Sus Derechos en 2026</h3>
+        <p><strong>Regla de 5 Días:</strong> Si el dueño no arregla algo urgente, usted puede repararlo y deducir el costo de su renta.</p>
+        <p><strong>Depósitos:</strong> No pueden cobrarle más de 2 meses de renta como depósito inicial.</p>
+      </div>
+
+      {/* REGION PICKER */}
+      <div style={{ display: 'flex', gap: '15px', marginBottom: '40px', flexWrap: 'wrap' }}>
+        {Object.keys(rentalFacts).map((key) => (
+          <button 
+            key={key} 
+            onClick={() => setCity(key as any)}
+            style={{ padding: '10px 20px', borderRadius: '20px', border: '2px solid #1e3a8a', backgroundColor: city === key ? '#1e3a8a' : '#fff', color: city === key ? '#fff' : '#1e3a8a', cursor: 'pointer' }}
+          >
+            {rentalFacts[key as keyof typeof rentalFacts].name}
+          </button>
+        ))}
+      </div>
+
+      {/* DYNAMIC CONTENT */}
+      {city && (
+        <div style={{ backgroundColor: '#f3f4f6', padding: '30px', borderRadius: '12px' }}>
+          <h2>{rentalFacts[city].name} Market Snapshot</h2>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
             <div>
-              <p><strong>Average Rent:</strong> {rentalData[selectedCity].avgRent}</p>
-              <p><strong>1-Bedroom:</strong> {rentalData[selectedCity].oneBed}</p>
-              <p><strong>3-Bedroom:</strong> {rentalData[selectedCity].threeBed}</p>
+              <p><strong>Renta Promedio:</strong> {rentalFacts[city].rent}</p>
+              <p><strong>Población Latina:</strong> {rentalFacts[city].latinos}</p>
             </div>
             <div>
-              <p><strong>Latino Population:</strong> {rentalData[selectedCity].latinos}</p>
-              <p><strong>Market Insight:</strong> {rentalData[selectedCity].fact}</p>
+              <p><strong>Beneficios:</strong> {rentalFacts[city].pros}</p>
+              <p><strong>Consejo:</strong> {rentalFacts[city].tips}</p>
             </div>
-          </div>
-          
-          <div style={{ marginTop: '30px', padding: '20px', backgroundColor: '#e0f2fe', borderRadius: '8px' }}>
-            <p style={{ margin: 0, fontWeight: 'bold' }}>Pro-Tip for {rentalData[selectedCity].name}:</p>
-            <p style={{ margin: 0 }}>Look for "ITIN friendly" labels in our directory for easier approval in this area.</p>
           </div>
         </div>
       )}
-    </main>
+
+      {/* CHECKLIST SECTION */}
+      <section style={{ marginTop: '50px' }}>
+        <h3>Requisitos para Rentar con ITIN</h3>
+        <ul style={{ lineHeight: '1.8' }}>
+          <li><strong>Prueba de Ingresos:</strong> Normalmente 3 veces el valor de la renta.</li>
+          <li><strong>Documentación:</strong> Pasaporte vigente y carta de verificación de empleo.</li>
+          <li><strong>Depósito:</strong> Si no tiene crédito, prepárese para pagar 1 mes adicional de depósito.</li>
+        </ul>
+      </section>
+    </div>
   );
 }
