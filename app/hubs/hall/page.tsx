@@ -10,28 +10,28 @@ export default function HallPage() {
 
   const neighborhoods = [
     { 
-      name: 'Gainesville (Central)', 
-      en: 'The heart of Georgia’s poultry capital. High density of Latino-owned businesses. Mix of established homes and apartments near the industrial corridor.', 
-      es: 'El corazón de la capital avícola de Georgia. Alta densidad de negocios latinos. Mezcla de casas y apartamentos cerca del corredor industrial.', 
+      name: 'Gainesville (City Center)', 
+      en: 'The heart of the "Poultry Capital." High density of Latino-owned businesses, authentic markets, and walking distance to the historic square and local industries.', 
+      es: 'El corazón de la "Capital Avícola". Alta densidad de negocios latinos, mercados auténticos y cercanía a la plaza histórica e industrias locales.', 
       highlight: { en: 'Most Latino', es: 'Más Latino' } 
     },
     { 
       name: 'Oakwood', 
-      en: 'Southern Hall suburb popular for its affordability. Rapidly growing community with new small-business hubs and easy access to UNG Gainesville.', 
-      es: 'Suburbio del sur de Hall popular por su asequibilidad. Comunidad en rápido crecimiento con nuevos centros de pequeños negocios.', 
+      en: 'A rapidly growing suburb focused on affordability. Home to UNG Gainesville and popular for families looking for starter homes and bilingual school options.', 
+      es: 'Suburbio en rápido crecimiento enfocado en la asequibilidad. Hogar de UNG Gainesville y popular para familias que buscan casas iniciales.', 
       highlight: { en: 'Top Choice', es: 'Gran Opción' } 
     },
     { 
       name: 'Flowery Branch', 
-      en: 'Southeastern Hall. Higher price point but very safe. Popular for middle-income families looking for newer construction and Lake Lanier access.', 
-      es: 'Sureste de Hall. Precios más altos pero muy seguro. Popular para familias que buscan construcciones nuevas y acceso al Lago Lanier.', 
-      highlight: { en: 'Growing', es: 'Creciendo' } 
+      en: 'Southeastern Hall. Offers safe, established subdivisions near Lake Lanier. A higher price point but popular for its excellent dual-immersion elementary schools.', 
+      es: 'Sureste de Hall. Ofrece subdivisiones seguras cerca del Lago Lanier. Precios más altos pero popular por sus escuelas de inmersión dual.', 
+      highlight: { en: 'Family Hub', es: 'Para Familias' } 
     },
     { 
       name: 'Murrayville / Clermont', 
-      en: 'North Hall rural areas. Offers more land and "country" feel. Tight-knit community often tied to agriculture and independent landscaping.', 
-      es: 'Áreas rurales del norte de Hall. Ofrece más terreno y ambiente de campo. Comunidad unida vinculada a la agricultura y paisajismo.', 
-      highlight: { en: 'Rural/Land', es: 'Rural/Tierra' } 
+      en: 'North Hall rural areas. Offers mountain views and larger lots of land. Ideal for those seeking a country feel or space for independent workshops.', 
+      es: 'Áreas rurales del norte de Hall. Ofrece vistas a la montaña y terrenos grandes. Ideal para un ambiente de campo o espacio para talleres.', 
+      highlight: { en: 'Rural/Land', es: 'Campo/Tierra' } 
     }
   ];
 
@@ -59,7 +59,7 @@ export default function HallPage() {
         <div style={{ fontSize: '3rem', margin: '16px 0 8px' }}>🌄</div>
         <h1 style={{ fontSize: '2.5rem', fontWeight: '800', margin: '0 0 8px' }}>Hall County</h1>
         <p style={{ opacity: 0.85, fontSize: '1.1rem', margin: '0 0 16px' }}>
-          {isEnglish ? 'Northeast Georgia • The Gainesville Latino Hub' : 'Noreste de Georgia • El Núcleo Latino de Gainesville'}
+          {isEnglish ? 'North Georgia • The Gainesville Hub' : 'Norte de Georgia • El Núcleo de Gainesville'}
         </p>
         <div style={{ display: 'inline-flex', gap: '20px', backgroundColor: 'rgba(255,255,255,0.15)', borderRadius: '12px', padding: '12px 24px' }}>
           <div><div style={{ fontSize: '1.4rem', fontWeight: '800' }}>29.8%</div><div style={{ fontSize: '0.8rem', opacity: 0.8 }}>{isEnglish ? 'Latino Population' : 'Población Latina'}</div></div>
@@ -70,7 +70,7 @@ export default function HallPage() {
 
       <div style={{ maxWidth: '1000px', margin: '0 auto', padding: '50px 20px' }}>
 
-        {/* Neighborhood Grid */}
+        {/* Neighborhoods */}
         <section style={{ marginBottom: '48px' }}>
           <h2 style={{ fontSize: '1.6rem', fontWeight: '700', color, marginBottom: '20px', borderBottom: `3px solid ${color}`, paddingBottom: '8px' }}>
             {isEnglish ? '🏡 Key Neighborhoods' : '🏡 Vecindarios Clave'}
@@ -92,14 +92,14 @@ export default function HallPage() {
           </div>
         </section>
 
-        {/* Education Highlight */}
+        {/* Education & Dual Language */}
         <section style={{ marginBottom: '48px' }}>
           <h2 style={{ fontSize: '1.6rem', fontWeight: '700', color, marginBottom: '20px', borderBottom: `3px solid ${color}`, paddingBottom: '8px' }}>
-            {isEnglish ? '🎓 Bilingual Education' : '🎓 Educación Bilingüe'}
+            {isEnglish ? '🎓 Education & Dual Language' : '🎓 Educación y Lenguaje Dual'}
           </h2>
           <div style={{ backgroundColor: '#fef2f2', borderRadius: '12px', padding: '24px' }}>
             <p style={{ color: '#991b1b', fontWeight: '600', marginBottom: '16px' }}>
-              {isEnglish ? 'Hall County is a state leader in Dual Language Immersion (DLI):' : 'Hall County es líder estatal en Inmersión Dual (DLI):'}
+              {isEnglish ? 'Hall County is a state leader in bilingual education pathways:' : 'Hall County es líder estatal en trayectorias de educación bilingüe:'}
             </p>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '12px' }}>
               <div style={{ backgroundColor: 'white', borderRadius: '8px', padding: '12px', border: '1px solid #fecaca' }}>
@@ -107,27 +107,24 @@ export default function HallPage() {
                 <div style={{ fontSize: '0.8rem', color: '#dc2626' }}>{isEnglish ? 'Dual Immersion K-8' : 'Inmersión Dual K-8'}</div>
               </div>
               <div style={{ backgroundColor: 'white', borderRadius: '8px', padding: '12px', border: '1px solid #fecaca' }}>
-                <div style={{ fontWeight: '700', fontSize: '0.9rem' }}>DLI Pre-K Center South</div>
-                <div style={{ fontSize: '0.8rem', color: '#dc2626' }}>{isEnglish ? 'Centralized Bilingual Start' : 'Inicio Bilingüe Centralizado'}</div>
+                <div style={{ fontWeight: '700', fontSize: '0.9rem' }}>Gainesville High</div>
+                <div style={{ fontSize: '0.8rem', color: '#dc2626' }}>{isEnglish ? 'Extensive Bilingual Support' : 'Amplio Apoyo Bilingüe'}</div>
               </div>
             </div>
-            <p style={{ marginTop: '16px', fontSize: '0.85rem', color: '#991b1b' }}>
-              {isEnglish ? '• Hall offers DLI programs at Sardis, Sugar Hill, Tadmore, and Chicopee Woods.' : '• Hall ofrece programas DLI en Sardis, Sugar Hill, Tadmore y Chicopee Woods.'}
-            </p>
           </div>
         </section>
 
-        {/* Market Stats Feb 2026 */}
+        {/* Real Estate Stats Feb 2026 */}
         <section style={{ marginBottom: '48px' }}>
           <h2 style={{ fontSize: '1.6rem', fontWeight: '700', color, marginBottom: '20px', borderBottom: `3px solid ${color}`, paddingBottom: '8px' }}>
-            {isEnglish ? '🏠 February 2026 Market' : '🏠 Mercado de Febrero 2026'}
+            {isEnglish ? '🏠 2026 Market Stats' : '🏠 Estadísticas de Mercado 2026'}
           </h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '16px' }}>
             {[
-              { label: isEnglish ? 'Median Home Price' : 'Precio Medio', value: '$417,000', note: isEnglish ? 'Stable market' : 'Mercado estable' },
-              { label: isEnglish ? 'ITIN Lending' : 'Préstamos ITIN', value: 'High', note: isEnglish ? 'Aggressive local lenders' : 'Prestamistas locales activos' },
-              { label: isEnglish ? 'Days on Market' : 'Días en Mercado', value: '69', note: isEnglish ? 'Balanced for buyers' : 'Equilibrado para compradores' },
-              { label: isEnglish ? 'Rental Demand' : 'Demanda de Renta', value: 'Steady', note: isEnglish ? 'Gainesville core remains strong' : 'El centro sigue fuerte' },
+              { label: isEnglish ? 'Median Home Price' : 'Precio Medio', value: '$417,000', note: isEnglish ? 'Up 4.1% from 2025' : '4.1% más que en 2025' },
+              { label: isEnglish ? 'Active ITIN Lenders' : 'Prestamistas ITIN', value: 'High', note: isEnglish ? 'Active in Gainesville' : 'Activos en Gainesville' },
+              { label: isEnglish ? 'Days on Market' : 'Días en Mercado', value: '69', note: isEnglish ? 'Balanced market' : 'Mercado equilibrado' },
+              { label: isEnglish ? 'Mobile Homes' : 'Casas Móviles', value: 'Active', note: isEnglish ? 'Popular ITIN entry' : 'Entrada ITIN popular' },
             ].map((f) => (
               <div key={f.label} style={{ backgroundColor: '#f8fafc', borderRadius: '12px', padding: '20px', textAlign: 'center', border: '1px solid #e2e8f0' }}>
                 <div style={{ fontSize: '1.4rem', fontWeight: '800', color }}>{f.value}</div>
@@ -141,17 +138,17 @@ export default function HallPage() {
         {/* CTA */}
         <div style={{ backgroundColor: color, borderRadius: '16px', padding: '40px', textAlign: 'center', color: 'white' }}>
           <h3 style={{ fontSize: '1.5rem', fontWeight: '800', marginBottom: '12px' }}>
-            {isEnglish ? 'Start Your Search in Hall' : 'Inicie su Búsqueda en Hall'}
+            {isEnglish ? 'Start Your Journey in Hall' : 'Inicie su Camino en Hall'}
           </h3>
           <p style={{ opacity: 0.9, marginBottom: '24px' }}>
-            {isEnglish ? 'Gainesville and Hall County offer unique ITIN homebuying paths.' : 'Gainesville y el Condado de Hall ofrecen rutas únicas para comprar con ITIN.'}
+            {isEnglish ? 'Connect with ITIN experts in the heart of Gainesville.' : 'Conéctese con expertos en ITIN en el corazón de Gainesville.'}
           </p>
           <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
             <Link href="/itin-mortgages" style={{ backgroundColor: 'white', color, padding: '12px 24px', borderRadius: '8px', fontWeight: '700', textDecoration: 'none' }}>
-              {isEnglish ? 'ITIN Programs' : 'Programas ITIN'}
+              {isEnglish ? 'ITIN Mortgage Info' : 'Info sobre ITIN'}
             </Link>
             <Link href="/bilingual-agents" style={{ backgroundColor: 'rgba(255,255,255,0.2)', color: 'white', padding: '12px 24px', borderRadius: '8px', fontWeight: '700', textDecoration: 'none', border: '2px solid rgba(255,255,255,0.5)' }}>
-              {isEnglish ? 'Local Agents' : 'Agentes Locales'}
+              {isEnglish ? 'Find Local Agent' : 'Buscar Agente Local'}
             </Link>
           </div>
         </div>
