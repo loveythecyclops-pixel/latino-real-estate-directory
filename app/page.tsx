@@ -103,8 +103,8 @@ export default function Home() {
         }}
       >
         {/* Service 1: Regular Mortgages (NEW) */}
-        <Link href="/Regular-Mortgages" style={{...cardStyle, borderTopColor: '#2563eb'}}>
-          <h3 style={{ color: '#1e3a8a' }}>{isEnglish ? 'Regular-Mortgages' : 'Hipotecas Tradicionales'}</h3>
+        <Link href="/Regular Mortgages" style={{...cardStyle, borderTopColor: '#2563eb'}}>
+          <h3 style={{ color: '#1e3a8a' }}>{isEnglish ? 'Standard Mortgages' : 'Hipotecas Tradicionales'}</h3>
           <p style={{ color: '#6b7280' }}>
             {isEnglish ? 'FHA, Conventional, and VA loan options.' : 'Opciones de préstamos FHA, Convencionales y VA.'}
           </p>
