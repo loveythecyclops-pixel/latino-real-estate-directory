@@ -1,17 +1,11 @@
 'use client';
 
-import Link from 'next/link';
-'use client';
-
 import { useState } from 'react'; // Use standard React state instead
 import Link from 'next/link';
 
 export default function HubsPage() {
   const [isEnglish, setIsEnglish] = useState(false);
-  
-  // rest of your code...
-
-const hubs = [
+  const hubs = [
   {
     slug: 'gwinnett',
     name: 'Gwinnett County',
