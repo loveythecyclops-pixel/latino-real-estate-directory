@@ -1,122 +1,136 @@
 'use client';
+
 import { useState } from 'react';
 import Link from 'next/link';
 
-const loans = [
+const lenders = [
   {
-    title: 'FHA Loans',
-    icon: '🏠',
-    bestFor: 'First-time buyers & scores above 580',
-    limit2026: '$541,287 - $718,750+',
-    downPayment: '3.5%',
-    desc: 'The most popular choice for GA families. In 2026, many Metro Atlanta counties allow up to $718k, while rural counties start at $541k.'
+    name: 'Ivan Ramirez',
+    company: 'Certainty Home Lending',
+    location: 'Lawrenceville, GA',
+    specialty: 'FHA, VA, USDA, Foreign National',
+    phone: '(404) 436-2605',
+    nmls: '2059278'
   },
   {
-    title: 'Conventional Loans',
-    icon: '📈',
-    bestFor: 'Credit 620+ & long-term savings',
-    limit2026: '$832,750 (Baseline)',
-    downPayment: '3% - 5%',
-    desc: 'Standard loans for those with strong credit. No upfront mortgage insurance fees, and you can remove PMI once you reach 20% equity.'
+    name: 'Jesse Esqueda',
+    company: 'Ameris Bank',
+    location: 'Lawrenceville, GA',
+    specialty: 'Top Latino Originator, DPA Specialist',
+    phone: '(678) 698-0633',
+    nmls: '485695'
   },
   {
-    title: 'VA Loans',
-    icon: '🎖️',
-    bestFor: 'Veterans & Active Duty (GA is Military Friendly!)',
-    limit2026: 'No Limit (Full Entitlement)',
-    downPayment: '0%',
-    desc: 'Special benefits for our Georgia veterans. No down payment and no monthly mortgage insurance (PMI) required.'
+    name: 'Irma Betancourt',
+    company: 'Guaranteed Rate',
+    location: 'Duluth, GA',
+    specialty: 'First-time Buyers, FHA/Conventional',
+    phone: '(678) 820-3481',
+    nmls: '286977'
   },
   {
-    title: 'USDA Rural Loans',
-    icon: '🌳',
-    bestFor: 'Rural areas (outside Atlanta/Savannah)',
-    limit2026: 'Varies by County',
-    downPayment: '0%',
-    desc: 'Perfect for homes in areas like North GA or South GA. 100% financing for low-to-moderate income households in eligible rural zones.'
+    name: 'Natalya Chacon',
+    company: 'US Mortgage Corp',
+    location: 'Atlanta / Kennesaw',
+    specialty: 'High-volume Bilingual Specialist',
+    phone: '(Contact Office)',
+    nmls: 'N/A'
+  },
+  {
+    name: 'Leonardo Roberto',
+    company: 'PrimeLending',
+    location: 'Sandy Springs, GA',
+    specialty: 'Conventional & Government Loans',
+    phone: '(770) 615-4600',
+    nmls: 'N/A'
+  },
+  {
+    name: 'Becky Brown',
+    company: 'New American Funding',
+    location: 'Stockbridge / Metro ATL',
+    specialty: 'Bilingual Loan Processing',
+    phone: '(678) 478-1612',
+    nmls: '211483'
   }
 ];
 
 export default function RegularMortgagesPage() {
-  const [isEnglish, setIsEnglish] = useState(false);
+  const [language, setLanguage] = useState<'en' | 'es'>('es');
+  const isEnglish = language === 'en';
 
   return (
-    <div style={{ fontFamily: 'sans-serif', color: '#1f2937', backgroundColor: '#fdfdfd' }}>
+    <div style={{ fontFamily: 'sans-serif', backgroundColor: '#ffffff', minHeight: '100vh' }}>
+      
+      {/* Header/Nav */}
+      <nav style={{ padding: '20px', borderBottom: '1px solid #eee', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <Link href="/" style={{ textDecoration: 'none', fontWeight: 'bold', color: '#1e3a8a' }}>
+          🏠 {isEnglish ? 'Home' : 'Inicio'}
+        </Link>
+        <button 
+          onClick={() => setLanguage(isEnglish ? 'es' : 'en')}
+          style={{ cursor: 'pointer', border: '1px solid #1e3a8a', background: 'none', padding: '6px 15px', borderRadius: '20px' }}
+        >
+          {isEnglish ? '🇲🇽 Español' : '🇺🇸 English'}
+        </button>
+      </nav>
+
       {/* Hero */}
       <div style={{ backgroundColor: '#1e3a8a', color: 'white', textAlign: 'center', padding: '60px 20px' }}>
-        <button 
-          onClick={() => setIsEnglish(!isEnglish)}
-          style={{ float: 'right', background: 'white', color: '#1e3a8a', border: 'none', padding: '8px 16px', borderRadius: '20px', cursor: 'pointer', fontWeight: 'bold' }}
-        >
-          {isEnglish ? 'Español' : 'English'}
-        </button>
-        <h1 style={{ fontSize: '2.5rem', marginBottom: '10px' }}>
-          {isEnglish ? '2026 Georgia Mortgage Guide' : 'Guía de Hipotecas en Georgia 2026'}
+        <h1 style={{ fontSize: '2.5rem', marginBottom: '15px' }}>
+          {isEnglish ? 'Standard Mortgage Lenders' : 'Prestamistas Hipotecarios Tradicionales'}
         </h1>
-        <p style={{ fontSize: '1.2rem', opacity: 0.9 }}>
-          {isEnglish ? 'Latest loan limits and requirements for GA residents.' : 'Últimos límites y requisitos para residentes de Georgia.'}
+        <p style={{ opacity: 0.9, fontSize: '1.2rem' }}>
+          {isEnglish ? 'Top bilingual experts in Georgia for FHA, VA, and Conventional loans.' : 'Los mejores expertos bilingües en Georgia para préstamos FHA, VA y Convencionales.'}
         </p>
       </div>
 
-      {/* Loan Grid */}
-      <div style={{ padding: '40px 20px', maxWidth: '1200px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '25px' }}>
-        {loans.map((loan) => (
-          <div key={loan.title} style={{ backgroundColor: 'white', border: '1px solid #e5e7eb', borderRadius: '12px', padding: '25px', boxShadow: '0 4px 10px rgba(0,0,0,0.05)' }}>
-            <div style={{ fontSize: '2.5rem' }}>{loan.icon}</div>
-            <h2 style={{ color: '#1e3a8a', fontSize: '1.4rem' }}>{loan.title}</h2>
-            <div style={{ marginBottom: '15px', fontSize: '0.9rem' }}>
-              <div style={{ color: '#16a34a', fontWeight: 'bold' }}>💰 {isEnglish ? 'Down' : 'Enganche'}: {loan.downPayment}</div>
-              <div style={{ color: '#6b7280' }}>📊 {isEnglish ? '2026 Limit' : 'Límite 2026'}: {loan.limit2026}</div>
+      {/* Directory Grid */}
+      <div style={{ padding: '50px 20px', maxWidth: '1200px', margin: '0 auto' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '25px' }}>
+          {lenders.map((lender) => (
+            <div key={lender.name} style={{ border: '1px solid #e2e8f0', borderRadius: '12px', padding: '25px', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.1)' }}>
+              <h3 style={{ margin: '0 0 5px 0', color: '#1e3a8a' }}>{lender.name}</h3>
+              <p style={{ margin: '0 0 15px 0', fontWeight: 'bold', color: '#4b5563' }}>{lender.company}</p>
+              
+              <div style={{ fontSize: '0.9rem', color: '#6b7280', lineHeight: '1.6' }}>
+                <div>📍 <strong>{isEnglish ? 'Location' : 'Ubicación'}:</strong> {lender.location}</div>
+                <div>🔑 <strong>{isEnglish ? 'Specialty' : 'Especialidad'}:</strong> {lender.specialty}</div>
+                {lender.nmls !== 'N/A' && <div>🆔 <strong>NMLS:</strong> {lender.nmls}</div>}
+              </div>
+
+              <div style={{ marginTop: '20px' }}>
+                <a 
+                  href={`tel:${lender.phone.replace(/\D/g,'')}`} 
+                  style={{ 
+                    display: 'inline-block', 
+                    width: '100%', 
+                    textAlign: 'center', 
+                    backgroundColor: '#16a34a', 
+                    color: 'white', 
+                    padding: '10px 0', 
+                    borderRadius: '8px', 
+                    textDecoration: 'none', 
+                    fontWeight: 'bold' 
+                  }}
+                >
+                  {isEnglish ? 'Call Now' : 'Llamar Ahora'}
+                </a>
+              </div>
             </div>
-            <p style={{ fontSize: '0.95rem', lineHeight: '1.5', color: '#4b5563' }}>{loan.desc}</p>
-          </div>
-        ))}
-      </div>
-
-      {/* GA Special Program Section */}
-      <div style={{ backgroundColor: '#eff6ff', padding: '50px 20px', textAlign: 'center' }}>
-        <h2 style={{ color: '#1e3a8a' }}>{isEnglish ? 'Georgia Dream Program' : 'Programa Georgia Dream'}</h2>
-        <p style={{ maxWidth: '700px', margin: '10px auto', lineHeight: '1.6' }}>
-          {isEnglish 
-            ? 'First-time buyers in Georgia may qualify for up to $10,000 - $12,500 in down payment assistance. Requires a 640+ credit score.' 
-            : 'Compradores por primera vez en Georgia pueden calificar para $10,000 - $12,500 en asistencia para el enganche. Requiere crédito de 640+.'}
-        </p>
-      </div>
-
-      {/* Detailed Requirements Table */}
-      <div style={{ padding: '60px 20px', maxWidth: '900px', margin: '0 auto' }}>
-        <h3 style={{ textAlign: 'center', marginBottom: '30px' }}>{isEnglish ? 'Documentation Checklist' : 'Lista de Documentos'}</h3>
-        <div style={{ border: '1px solid #eee', borderRadius: '10px', overflow: 'hidden' }}>
-          <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
-            <thead style={{ backgroundColor: '#f8fafc' }}>
-              <tr>
-                <th style={{ padding: '15px' }}>{isEnglish ? 'Document' : 'Documento'}</th>
-                <th style={{ padding: '15px' }}>{isEnglish ? 'Why it is needed' : 'Por qué se necesita'}</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr style={{ borderTop: '1px solid #eee' }}>
-                <td style={{ padding: '15px' }}>Tax Returns (2 yrs)</td>
-                <td style={{ padding: '15px' }}>To verify income stability over time.</td>
-              </tr>
-              <tr style={{ borderTop: '1px solid #eee' }}>
-                <td style={{ padding: '15px' }}>Bank Statements (60 days)</td>
-                <td style={{ padding: '15px' }}>To prove you have the funds for the down payment.</td>
-              </tr>
-              <tr style={{ borderTop: '1px solid #eee' }}>
-                <td style={{ padding: '15px' }}>Pay Stubs (30 days)</td>
-                <td style={{ padding: '15px' }}>To prove current employment status.</td>
-              </tr>
-            </tbody>
-          </table>
+          ))}
         </div>
       </div>
 
-      <div style={{ textAlign: 'center', paddingBottom: '60px' }}>
-        <Link href="/" style={{ color: '#1e3a8a', fontWeight: 'bold', textDecoration: 'none', border: '2px solid #1e3a8a', padding: '10px 25px', borderRadius: '8px' }}>
-          {isEnglish ? 'Back to Directory' : 'Volver al Directorio'}
-        </Link>
+      {/* Educational Footer */}
+      <div style={{ backgroundColor: '#f8fafc', padding: '60px 20px', textAlign: 'center' }}>
+        <h3 style={{ color: '#1e3a8a' }}>{isEnglish ? 'Why work with these lenders?' : '¿Por qué trabajar con estos prestamistas?'}</h3>
+        <p style={{ maxWidth: '800px', margin: '0 auto', color: '#4b5563', lineHeight: '1.6' }}>
+          {isEnglish 
+            ? 'These professionals specialize in helping the Latino community navigate the home buying process. They understand both the technical requirements of the loans and the cultural nuances of the Hispanic market in Georgia.' 
+            : 'Estos profesionales se especializan en ayudar a la comunidad latina a navegar el proceso de compra de vivienda. Entienden tanto los requisitos técnicos como los matices culturales del mercado hispano en Georgia.'}
+        </p>
       </div>
+
     </div>
   );
 }
