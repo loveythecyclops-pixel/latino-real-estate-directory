@@ -1,11 +1,11 @@
-'use client'; // We make the layout a client component to handle the toggle
+'use client';
 
 import { LanguageProvider, useLanguage } from './LanguageContext';
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body style={{ margin: 0, padding: 0, paddingTop: '60px' }}> {/* Padding added so content doesn't hide under header */}
+      <body style={{ margin: 0, padding: 0, paddingTop: '60px' }}>
         <LanguageProvider>
           <GlobalHeader />
           {children}
@@ -15,7 +15,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   );
 }
 
-// This component will now appear on EVERY page automatically
 function GlobalHeader() {
   const { isEnglish, setLanguage } = useLanguage();
 
