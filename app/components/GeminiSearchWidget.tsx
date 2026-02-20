@@ -1,438 +1,185 @@
-'use client';
+import { NextRequest, NextResponse } from 'next/server';
 
-import { useState, FormEvent } from 'react';
+const APIFY_ACTOR_ID = 'maxcopell/zillow-scraper'; // or your chosen Zillow actor
+const APIFY_API_TOKEN = process.env.APIFY_API_TOKEN!;
+const GEMINI_API_KEY = process.env.GEMINI_API_KEY!;
 
-interface HomeResult {
-  id: string;
-  address: string;
-  city?: string;
-  state?: string;
-  zip?: string;
-  price?: number;
-  beds?: number;
-  baths?: number;
-  homeType?: string;
-  url?: string;
-  short_reason?: string;
-}
+export const dynamic = 'force-dynamic';
 
-interface Props {
-  lang?: string;
-}
+export async function POST(req: NextRequest) {
+  try {
+    const body = await req.json();
 
-export default function GeminiSearchWidget({ lang = 'es' }: Props) {
-  const isEnglish = lang === 'en';
-  const [county, setCounty] = useState('Gwinnett');
-  const [city, setCity] = useState('');
-  const [priceMin, setPriceMin] = useState('');
-  const [priceMax, setPriceMax] = useState('');
-  const [bedsMin, setBedsMin] = useState('3');
-  const [bathsMin, setBathsMin] = useState('2');
-  const [loading, setLoading] = useState(false);
-  const [homes, setHomes] = useState<HomeResult[]>([]);
-  const [error, setError] = useState('');
+    const {
+      county,
+      city,
+      priceMin,
+      priceMax,
+      bedsMin,
+      bathsMin,
+      language = 'en',
+    } = body;
 
-  const counties = [
-    'Gwinnett',
-    'Cobb',
-    'Whitfield',
-    'Hall',
-    'DeKalb',
-    'Clayton',
-  ];
+    if (!county && !city) {
+      return NextResponse.json(
+        { error: 'Please provide a county or a city.' },
+        { status: 400 }
+      );
+    }
 
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-    setError('');
-    setHomes([]);
+    const location =
+      city && String(city).trim().length > 0
+        ? `${city}, GA`
+        : `${county} County, GA`;
 
-    try {
-      const res = await fetch('/api/home-search', {
+    const apifyRunRes = await fetch(
+      `https://api.apify.com/v2/acts/${encodeURIComponent(
+        APIFY_ACTOR_ID
+      )}/runs?token=${APIFY_API_TOKEN}`,
+      {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          county,
-          city,
-          priceMin: priceMin ? Number(priceMin) : undefined,
-          priceMax: priceMax ? Number(priceMax) : undefined,
-          bedsMin: bedsMin ? Number(bedsMin) : undefined,
-          bathsMin: bathsMin ? Number(bathsMin) : undefined,
-          language: isEnglish ? 'en' : 'es',
+          search: location,
+          maxItems: 40,
+          priceFrom: priceMin || undefined,
+          priceTo: priceMax || undefined,
+          bedsMin: bedsMin || undefined,
+          bathsMin: bathsMin || undefined,
         }),
-      });
-
-      const data = await res.json();
-      if (!res.ok) {
-        setError(
-          data.error ||
-            (isEnglish
-              ? 'Search failed. Please try again.'
-              : 'Búsqueda fallida. Inténtalo de nuevo.')
-        );
-      } else {
-        setHomes(data.homes || []);
       }
-    } catch {
-      setError(
-        isEnglish
-          ? 'Network error. Please try again.'
-          : 'Error de red. Inténtalo de nuevo.'
+    );
+
+    if (!apifyRunRes.ok) {
+      const txt = await apifyRunRes.text();
+      console.error('Apify run error:', txt);
+      return NextResponse.json(
+        { error: 'Failed to start property search.' },
+        { status: 500 }
       );
-    } finally {
-      setLoading(false);
     }
-  };
 
-  const containerStyle: React.CSSProperties = {
-    background: 'rgba(255,255,255,0.12)',
-    backdropFilter: 'blur(10px)',
-    border: '1px solid rgba(255,255,255,0.3)',
-    borderRadius: '16px',
-    padding: '24px',
-    maxWidth: '900px',
-    margin: '24px auto 0',
-    textAlign: 'left',
-  };
+    const runData = await apifyRunRes.json();
+    const runId = runData.data?.id;
 
-  const gridStyle: React.CSSProperties = {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
-    gap: '10px',
-    marginTop: '10px',
-  };
+    let items: any[] = [];
+    for (let i = 0; i < 15; i++) {
+      const detailsRes = await fetch(
+        `https://api.apify.com/v2/actor-runs/${runId}`,
+        { cache: 'no-store' }
+      );
+      const details = await detailsRes.json();
+      const status = details.data?.status;
+      if (status === 'SUCCEEDED') {
+        const itemsRes = await fetch(
+          `https://api.apify.com/v2/datasets/${details.data.defaultDatasetId}/items?clean=true&limit=50`
+        );
+        items = await itemsRes.json();
+        break;
+      }
+      if (status === 'FAILED' || status === 'ABORTED') {
+        return NextResponse.json(
+          { error: 'Property search failed. Please try again.' },
+          { status: 500 }
+        );
+      }
+      await new Promise((r) => setTimeout(r, 3000));
+    }
 
-  const inputStyle: React.CSSProperties = {
-    width: '100%',
-    padding: '10px 12px',
-    borderRadius: '10px',
-    border: 'none',
-    fontSize: '0.9rem',
-    outline: 'none',
-  };
+    if (!items.length) {
+      return NextResponse.json(
+        { homes: [], message: 'No homes found for your filters.' },
+        { status: 200 }
+      );
+    }
 
-  const labelStyle: React.CSSProperties = {
-    display: 'block',
-    fontSize: '0.75rem',
-    fontWeight: 600,
-    color: '#e5e7eb',
-    marginBottom: '4px',
-    textTransform: 'uppercase' as const,
-    letterSpacing: '0.06em',
-  };
+    const simpleListings = items.slice(0, 30).map((item: any) => ({
+      id: item.zpid || item.zillowId || item.id,
+      address: item.address,
+      city: item.city,
+      state: item.state,
+      zip: item.zipcode,
+      price: item.price,
+      beds: item.bedrooms,
+      baths: item.bathrooms,
+      homeType: item.homeType,
+      url: item.url || item.detailUrl,
+    }));
 
-  const btnStyle: React.CSSProperties = {
-    padding: '12px 24px',
-    borderRadius: '999px',
-    border: 'none',
-    background: loading ? '#9ca3af' : '#f59e0b',
-    color: '#fff',
-    fontWeight: 'bold',
-    fontSize: '0.95rem',
-    cursor: loading ? 'not-allowed' : 'pointer',
-    whiteSpace: 'nowrap',
-    display: 'inline-flex',
-    alignItems: 'center',
-    gap: '8px',
-    marginTop: '14px',
-  };
+    const systemPrompt =
+      language === 'es'
+        ? 'Eres un asesor inmobiliario bilingüe que ayuda a familias Latinas en Georgia a elegir casas seguras y familiares.'
+        : 'You are a bilingual real estate advisor helping Latino families in Georgia choose safe, family-friendly homes.';
 
-  const cardStyle: React.CSSProperties = {
-    background: '#fff',
-    borderRadius: '12px',
-    padding: '14px',
-    boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-    color: '#1a202c',
-  };
+    const userPrompt =
+      language === 'es'
+        ? `El usuario busca casa en ${location} con presupuesto entre ${
+            priceMin || 'cualquiera'
+          } y ${priceMax || 'cualquiera'} dólares, mínimo ${
+            bedsMin || 'cualquier'
+          } recámaras y ${bathsMin || 'cualquier'} baños.`
+        : `The user is searching in ${location} with budget between ${
+            priceMin || 'any'
+          } and ${priceMax || 'any'} dollars, at least ${
+            bedsMin || 'any'
+          } bedrooms and ${bathsMin || 'any'} bathrooms.`;
 
-  return (
-    <div style={containerStyle}>
-      <div style={{ marginBottom: '12px' }}>
-        <span style={{ fontSize: '1.3rem' }}>&#x2728;</span>
-        <span
-          style={{
-            color: '#fff',
-            fontWeight: 700,
-            fontSize: '1.1rem',
-            marginLeft: '8px',
-          }}
-        >
-          {isEnglish ? 'AI Home Finder' : 'Buscador de Casas con IA'}
-        </span>
-        <span
-          style={{
-            marginLeft: '10px',
-            background: '#f59e0b',
-            color: '#fff',
-            borderRadius: '20px',
-            padding: '2px 10px',
-            fontSize: '0.7rem',
-            fontWeight: 700,
-            verticalAlign: 'middle',
-          }}
-        >
-          Gemini + Zillow
-        </span>
-      </div>
-      <p
-        style={{
-          color: 'rgba(255,255,255,0.85)',
-          fontSize: '0.85rem',
-          marginBottom: '8px',
-        }}
-      >
-        {isEnglish
-          ? 'Narrow down homes in Georgia Latino communities by budget, county, city, bedrooms and bathrooms.'
-          : 'Filtra casas en comunidades Latinas de Georgia por presupuesto, condado, ciudad, recámaras y baños.'}
-      </p>
+    const geminiRes = await fetch(
+      'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=' +
+        GEMINI_API_KEY,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contents: [
+            {
+              role: 'user',
+              parts: [
+                {
+                  text: `${systemPrompt}\n\nUser request:\n${userPrompt}\n\nHere is a JSON array of candidate homes. Return a JSON array where each item has: id, address, city, state, zip, price, beds, baths, url, short_reason (max 2 sentences, in ${
+                    language === 'es' ? 'Spanish' : 'English'
+                  }). Do not invent homes. Only use ids from the input.\n\nCandidate homes:\n${JSON.stringify(
+                    simpleListings
+                  )}`,
+                },
+              ],
+            },
+          ],
+          generationConfig: {
+            responseMimeType: 'application/json',
+          },
+        }),
+      }
+    );
 
-      <form onSubmit={handleSubmit}>
-        <div style={gridStyle}>
-          <div>
-            <label style={labelStyle}>
-              {isEnglish ? 'County' : 'Condado'}
-            </label>
-            <select
-              value={county}
-              onChange={(e) => setCounty(e.target.value)}
-              style={inputStyle}
-              disabled={loading}
-            >
-              {counties.map((c) => (
-                <option key={c} value={c}>
-                  {c} County
-                </option>
-              ))}
-            </select>
-          </div>
+    if (!geminiRes.ok) {
+      const txt = await geminiRes.text();
+      console.error('Gemini error:', txt);
+      return NextResponse.json({ homes: simpleListings }, { status: 200 });
+    }
 
-          <div>
-            <label style={labelStyle}>
-              {isEnglish ? 'City (optional)' : 'Ciudad (opcional)'}
-            </label>
-            <input
-              type="text"
-              value={city}
-              onChange={(e) => setCity(e.target.value)}
-              placeholder={isEnglish ? 'e.g. Norcross' : 'ej. Norcross'}
-              style={inputStyle}
-              disabled={loading}
-            />
-          </div>
+    const geminiJson = await geminiRes.json();
+    let homes = simpleListings;
 
-          <div>
-            <label style={labelStyle}>
-              {isEnglish ? 'Min price ($)' : 'Precio mínimo ($)'}
-            </label>
-            <input
-              type="number"
-              value={priceMin}
-              onChange={(e) => setPriceMin(e.target.value)}
-              style={inputStyle}
-              disabled={loading}
-            />
-          </div>
+    try {
+      const text =
+        geminiJson.candidates?.[0]?.content?.parts?.[0]?.text || '[]';
+      const parsed = JSON.parse(text);
+      if (Array.isArray(parsed) && parsed.length) {
+        homes = parsed;
+      }
+    } catch (e) {
+      console.error('Failed to parse Gemini JSON:', e);
+    }
 
-          <div>
-            <label style={labelStyle}>
-              {isEnglish ? 'Max price ($)' : 'Precio máximo ($)'}
-            </label>
-            <input
-              type="number"
-              value={priceMax}
-              onChange={(e) => setPriceMax(e.target.value)}
-              style={inputStyle}
-              disabled={loading}
-            />
-          </div>
-
-          <div>
-            <label style={labelStyle}>
-              {isEnglish ? 'Min bedrooms' : 'Mínimo recámaras'}
-            </label>
-            <input
-              type="number"
-              value={bedsMin}
-              onChange={(e) => setBedsMin(e.target.value)}
-              style={inputStyle}
-              disabled={loading}
-            />
-          </div>
-
-          <div>
-            <label style={labelStyle}>
-              {isEnglish ? 'Min bathrooms' : 'Mínimo baños'}
-            </label>
-            <input
-              type="number"
-              value={bathsMin}
-              onChange={(e) => setBathsMin(e.target.value)}
-              style={inputStyle}
-              disabled={loading}
-            />
-          </div>
-        </div>
-
-        <button type="submit" style={btnStyle} disabled={loading}>
-          {loading ? (
-            <>
-              <span
-                style={{
-                  display: 'inline-block',
-                  width: '16px',
-                  height: '16px',
-                  border: '2px solid #fff',
-                  borderTopColor: 'transparent',
-                  borderRadius: '50%',
-                  animation: 'spin 0.8s linear infinite',
-                }}
-              />
-              {isEnglish ? 'Searching...' : 'Buscando...'}
-            </>
-          ) : (
-            <>
-              <span>&#x1F50D;</span>
-              {isEnglish ? 'Find homes' : 'Buscar casas'}
-            </>
-          )}
-        </button>
-      </form>
-
-      {error && (
-        <div
-          style={{
-            marginTop: '16px',
-            color: '#fca5a5',
-            fontSize: '0.9rem',
-          }}
-        >
-          {error}
-        </div>
-      )}
-
-      {homes.length > 0 && (
-        <div style={{ marginTop: '20px' }}>
-          <p
-            style={{
-              color: 'rgba(255,255,255,0.85)',
-              fontSize: '0.85rem',
-              marginBottom: '12px',
-              fontWeight: 600,
-            }}
-          >
-            {isEnglish
-              ? `${homes.length} homes found:`
-              : `${homes.length} casas encontradas:`}
-          </p>
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))',
-              gap: '16px',
-            }}
-          >
-            {homes.map((home) => (
-              <a
-                key={home.id}
-                href={home.url}
-                target="_blank'
-                rel="noopener noreferrer"
-                style={cardStyle}
-              >
-                <div>
-                  <h4
-                    style={{
-                      color: '#1e3a8a',
-                      margin: '0 0 6px',
-                      fontSize: '0.95rem',
-                    }}
-                  >
-                    {home.address}
-                  </h4>
-                  <p
-                    style={{
-                      color: '#6b7280',
-                      fontSize: '0.8rem',
-                      margin: '0 0 4px',
-                    }}
-                  >
-                    {[home.city, home.state, home.zip]
-                      .filter(Boolean)
-                      .join(', ')}
-                  </p>
-                  <p
-                    style={{
-                      color: '#16a34a',
-                      fontWeight: 'bold',
-                      margin: '0 0 4px',
-                    }}
-                  >
-                    {home.price
-                      ? home.price.toLocaleString('en-US', {
-                          style: 'currency',
-                          currency: 'USD',
-                          maximumFractionDigits: 0,
-                        })
-                      : isEnglish
-                      ? 'See price'
-                      : 'Ver precio'}
-                  </p>
-                  {(home.beds || home.baths) && (
-                    <p
-                      style={{
-                        color: '#6b7280',
-                        fontSize: '0.8rem',
-                        margin: '0 0 4px',
-                      }}
-                    >
-                      {home.beds &&
-                        `${home.beds} ${
-                          isEnglish ? 'bed' : 'recámaras'
-                        }`}
-                      {home.beds && home.baths && ' · '}
-                      {home.baths &&
-                        `${home.baths} ${
-                          isEnglish ? 'bath' : 'baños'
-                        }`}
-                    </p>
-                  )}
-                  {home.short_reason && (
-                    <p
-                      style={{
-                        color: '#4b5563',
-                        fontSize: '0.8rem',
-                        marginTop: '4px',
-                      }}
-                    >
-                      {home.short_reason}
-                    </p>
-                  )}
-                  <p
-                    style={{
-                      marginTop: '6px',
-                      color: '#1d4ed8',
-                      fontSize: '0.75rem',
-                      textDecoration: 'underline',
-                    }}
-                  >
-                    {isEnglish
-                      ? 'View details on Zillow'
-                      : 'Ver detalles en Zillow'}
-                  </p>
-                </div>
-              </a>
-            ))}
-          </div>
-        </div>
-      )}
-
-      <style>{`
-        @keyframes spin {
-          to { transform: rotate(360deg); }
-        }
-      `}</style>
-    </div>
-  );
+    return NextResponse.json({ homes }, { status: 200 });
+  } catch (err) {
+    console.error('Home search error:', err);
+    return NextResponse.json(
+      { error: 'Unexpected server error.' },
+      { status: 500 }
+    );
+  }
 }
 
 
