@@ -229,5 +229,210 @@ export default function GeminiSearchWidget({ lang = 'es' }: Props) {
               value={priceMin}
               onChange={(e) => setPriceMin(e.target.value)}
               style={inputStyle}
-              disabled={load
+              disabled={loading}
+            />
+          </div>
+
+          <div>
+            <label style={labelStyle}>
+              {isEnglish ? 'Max price ($)' : 'Precio máximo ($)'}
+            </label>
+            <input
+              type="number"
+              value={priceMax}
+              onChange={(e) => setPriceMax(e.target.value)}
+              style={inputStyle}
+              disabled={loading}
+            />
+          </div>
+
+          <div>
+            <label style={labelStyle}>
+              {isEnglish ? 'Min bedrooms' : 'Mínimo recámaras'}
+            </label>
+            <input
+              type="number"
+              value={bedsMin}
+              onChange={(e) => setBedsMin(e.target.value)}
+              style={inputStyle}
+              disabled={loading}
+            />
+          </div>
+
+          <div>
+            <label style={labelStyle}>
+              {isEnglish ? 'Min bathrooms' : 'Mínimo baños'}
+            </label>
+            <input
+              type="number"
+              value={bathsMin}
+              onChange={(e) => setBathsMin(e.target.value)}
+              style={inputStyle}
+              disabled={loading}
+            />
+          </div>
+        </div>
+
+        <button type="submit" style={btnStyle} disabled={loading}>
+          {loading ? (
+            <>
+              <span
+                style={{
+                  display: 'inline-block',
+                  width: '16px',
+                  height: '16px',
+                  border: '2px solid #fff',
+                  borderTopColor: 'transparent',
+                  borderRadius: '50%',
+                  animation: 'spin 0.8s linear infinite',
+                }}
+              />
+              {isEnglish ? 'Searching...' : 'Buscando...'}
+            </>
+          ) : (
+            <>
+              <span>&#x1F50D;</span>
+              {isEnglish ? 'Find homes' : 'Buscar casas'}
+            </>
+          )}
+        </button>
+      </form>
+
+      {error && (
+        <div
+          style={{
+            marginTop: '16px',
+            color: '#fca5a5',
+            fontSize: '0.9rem',
+          }}
+        >
+          {error}
+        </div>
+      )}
+
+      {homes.length > 0 && (
+        <div style={{ marginTop: '20px' }}>
+          <p
+            style={{
+              color: 'rgba(255,255,255,0.85)',
+              fontSize: '0.85rem',
+              marginBottom: '12px',
+              fontWeight: 600,
+            }}
+          >
+            {isEnglish
+              ? `${homes.length} homes found:`
+              : `${homes.length} casas encontradas:`}
+          </p>
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))',
+              gap: '16px',
+            }}
+          >
+            {homes.map((home) => (
+              <a
+                key={home.id}
+                href={home.url}
+                target="_blank'
+                rel="noopener noreferrer"
+                style={cardStyle}
+              >
+                <div>
+                  <h4
+                    style={{
+                      color: '#1e3a8a',
+                      margin: '0 0 6px',
+                      fontSize: '0.95rem',
+                    }}
+                  >
+                    {home.address}
+                  </h4>
+                  <p
+                    style={{
+                      color: '#6b7280',
+                      fontSize: '0.8rem',
+                      margin: '0 0 4px',
+                    }}
+                  >
+                    {[home.city, home.state, home.zip]
+                      .filter(Boolean)
+                      .join(', ')}
+                  </p>
+                  <p
+                    style={{
+                      color: '#16a34a',
+                      fontWeight: 'bold',
+                      margin: '0 0 4px',
+                    }}
+                  >
+                    {home.price
+                      ? home.price.toLocaleString('en-US', {
+                          style: 'currency',
+                          currency: 'USD',
+                          maximumFractionDigits: 0,
+                        })
+                      : isEnglish
+                      ? 'See price'
+                      : 'Ver precio'}
+                  </p>
+                  {(home.beds || home.baths) && (
+                    <p
+                      style={{
+                        color: '#6b7280',
+                        fontSize: '0.8rem',
+                        margin: '0 0 4px',
+                      }}
+                    >
+                      {home.beds &&
+                        `${home.beds} ${
+                          isEnglish ? 'bed' : 'recámaras'
+                        }`}
+                      {home.beds && home.baths && ' · '}
+                      {home.baths &&
+                        `${home.baths} ${
+                          isEnglish ? 'bath' : 'baños'
+                        }`}
+                    </p>
+                  )}
+                  {home.short_reason && (
+                    <p
+                      style={{
+                        color: '#4b5563',
+                        fontSize: '0.8rem',
+                        marginTop: '4px',
+                      }}
+                    >
+                      {home.short_reason}
+                    </p>
+                  )}
+                  <p
+                    style={{
+                      marginTop: '6px',
+                      color: '#1d4ed8',
+                      fontSize: '0.75rem',
+                      textDecoration: 'underline',
+                    }}
+                  >
+                    {isEnglish
+                      ? 'View details on Zillow'
+                      : 'Ver detalles en Zillow'}
+                  </p>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
+
+      <style>{`
+        @keyframes spin {
+          to { transform: rotate(360deg); }
+        }
+      `}</style>
+    </div>
+  );
+}
+
 
