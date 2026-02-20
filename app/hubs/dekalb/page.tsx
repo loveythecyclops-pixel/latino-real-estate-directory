@@ -6,7 +6,7 @@ import Link from 'next/link';
 export default function DekalbPage() {
   const [language, setLanguage] = useState<'es' | 'en'>('es');
   const isEnglish = language === 'en';
-  const color = '#7c3aed'; // Deep Purple for DeKalb
+  const color = '#7c3aed';
 
   const neighborhoods = [
     { 
@@ -37,8 +37,7 @@ export default function DekalbPage() {
 
   return (
     <div style={{ fontFamily: 'system-ui, sans-serif' }}>
-      {/* Language toggle, hero section, neighborhoods, schools, stats, CTA */}
-      {/* Keep all other JSX as before, unchanged */}
+      {/* Hero Section, language toggle, neighborhoods, schools, stats, CTA */}
     </div>
   );
 }
