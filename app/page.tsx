@@ -46,9 +46,7 @@ export default async function Home({
         <p style={{ fontSize: '1.1rem', marginBottom: '1.5rem', opacity: 0.9 }}>
           {isEnglish ? 'Connecting Georgia with bilingual experts.' : 'Conectando Georgia con expertos bilingües.'}
         </p>
-        {/* --- GEMINI AI SEARCH WIDGET --- */}
-        <GeminiSearchWidget lang={language} />
-        {/* --- CLASSIC SEARCH BAR --- */}
+             {/* --- CLASSIC SEARCH BAR --- */}
         <form action="/" method="GET" style={{ marginTop: '24px', marginBottom: '20px' }}>
           <input type="hidden" name="lang" value={language} />
           <input 
