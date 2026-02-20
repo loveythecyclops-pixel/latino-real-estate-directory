@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter, usePathname, useSearchParams } from 'next/navigation';
-import { useDebouncedCallback } from 'use-debounce'; // Optional: npm i use-debounce
+import { useCallback, useRef } from 'react';
 
 export default function SearchInput() {
   const searchParams = useSearchParams();
