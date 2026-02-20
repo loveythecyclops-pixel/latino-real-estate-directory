@@ -87,7 +87,7 @@ export default async function Home({
             {listings.map((house) => (
               <div key={house.id} style={cardStyle}>
                 <img 
-                  src={house.images || 'https://via.placeholder.com/400x250'} 
+                src={'https://via.placeholder.com/400x250'}
                   style={{ width: '100%', height: '200px', objectFit: 'cover', borderRadius: '8px', marginBottom: '16px' }}
                 />
                 <h3 style={{ color: '#1e3a8a', margin: '10px 0' }}>{isEnglish ? house.title_en : house.title_es}</h3>
