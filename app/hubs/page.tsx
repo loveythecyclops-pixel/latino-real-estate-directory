@@ -1,10 +1,5 @@
 'use client';
-<<<<<<< HEAD
 import { useState } from 'react';
-=======
-
-import { useState } from 'react'; 
->>>>>>> ba6232ff24ffc3c343ab9d99c7d3e91e3b872e6f
 import Link from 'next/link';
 
 const hubs = [
@@ -12,10 +7,10 @@ const hubs = [
     slug: 'gwinnett',
     name: 'Gwinnett County',
     region: { en: 'Metro Atlanta', es: 'Metro Atlanta' },
-    emoji: '🏘️',
+    emoji: '🏙️',
     pop: '220,000+',
     latinoPct: '23-25%',
-    tagline: { en: 'The largest Latino hub in Georgia', es: 'El centro latino más grande de Georgia' },
+    tagline: { en: 'The largest Latino hub in Georgia', es: 'El centro latino m\u00e1s grande de Georgia' },
     color: '#2563eb',
     realtorUrl: 'https://www.realtor.com/realestateandhomes-search/Gwinnett-County_GA',
   },
@@ -23,7 +18,7 @@ const hubs = [
     slug: 'cobb',
     name: 'Cobb County',
     region: { en: 'Metro Atlanta', es: 'Metro Atlanta' },
-    emoji: '🏡',
+    emoji: '🌆',
     pop: '111,000+',
     latinoPct: '13-15%',
     tagline: { en: 'Growing communities in Smyrna, Marietta & Austell', es: 'Comunidades en crecimiento en Smyrna, Marietta y Austell' },
@@ -34,22 +29,22 @@ const hubs = [
     slug: 'dekalb',
     name: 'DeKalb County',
     region: { en: 'Metro Atlanta', es: 'Metro Atlanta' },
-    emoji: '🏙',
-    pop: 'Buford Hwy Corridor',
-    latinoPct: 'Up to 56% in Doraville',
-    tagline: { en: 'Home to the famous Buford Highway Latino corridor', es: 'Hogar del famoso corredor latino de Buford Highway' },
-    color: '#7c3aed',
+    emoji: '🏡',
+    pop: '80,000+',
+    latinoPct: '11-13%',
+    tagline: { en: 'Diverse urban neighborhoods near Atlanta', es: 'Barrios urbanos diversos cerca de Atlanta' },
+    color: '#dc2626',
     realtorUrl: 'https://www.realtor.com/realestateandhomes-search/DeKalb-County_GA',
   },
   {
     slug: 'hall',
     name: 'Hall County',
     region: { en: 'North Georgia', es: 'Norte de Georgia' },
-    emoji: '🕋',
-    pop: 'Gainesville Hub',
-    latinoPct: '28-33%',
-    tagline: { en: 'Major residential center outside Metro Atlanta', es: 'Centro residencial importante fuera de Metro Atlanta' },
-    color: '#dc2626',
+    emoji: '🌲',
+    pop: '50,000+',
+    latinoPct: '20-22%',
+    tagline: { en: 'Gainesville - the poultry capital with deep Latino roots', es: 'Gainesville - la capital avicola con ra\u00edces latinas profundas' },
+    color: '#7c3aed',
     realtorUrl: 'https://www.realtor.com/realestateandhomes-search/Hall-County_GA',
   },
   {
@@ -57,130 +52,111 @@ const hubs = [
     name: 'Whitfield County',
     region: { en: 'North Georgia', es: 'Norte de Georgia' },
     emoji: '🏭',
-    pop: 'Dalton Hub',
-    latinoPct: '35-39%',
-    tagline: { en: 'Highest Latino concentration in Georgia', es: 'La mayor concentración latina en Georgia' },
-    color: '#d97706',
+    pop: '25,000+',
+    latinoPct: '30-35%',
+    tagline: { en: 'Dalton - the carpet capital with a thriving Latino workforce', es: 'Dalton - la capital de la alfombra con una floreciente fuerza laboral latina' },
+    color: '#b45309',
     realtorUrl: 'https://www.realtor.com/realestateandhomes-search/Whitfield-County_GA',
   },
   {
     slug: 'clayton',
     name: 'Clayton County',
-    region: { en: 'South Metro', es: 'Sur del Metro' },
-    emoji: '🌱',
-    pop: 'Growing Hub',
-    latinoPct: '~15%',
-    tagline: { en: 'Rapidly growing community in Forest Park & Morrow', es: 'Comunidad de rápido crecimiento en Forest Park y Morrow' },
+    region: { en: 'Metro Atlanta', es: 'Metro Atlanta' },
+    emoji: '✈️',
+    pop: '45,000+',
+    latinoPct: '15-18%',
+    tagline: { en: 'Diverse south metro with affordable housing near the airport', es: 'Sur metropolitano diverso con viviendas asequibles cerca del aeropuerto' },
     color: '#0891b2',
     realtorUrl: 'https://www.realtor.com/realestateandhomes-search/Clayton-County_GA',
   },
 ];
 
 export default function HubsPage() {
-<<<<<<< HEAD
-  const [language, setLanguage] = useState('es');
-  const isEnglish = language === 'en';
-  const toggleButton = (
-    <button onClick={() => setLanguage(language === 'en' ? 'es' : 'en')} style={{position:'fixed', top:'20px', right:'20px', zIndex:9999, padding:'8px 16px', borderRadius:'20px', cursor:'pointer', backgroundColor:'#1e3a8a', color:'white', border:'none', fontWeight:'bold'}}>
-      {language === 'en' ? '???? Espa�ol' : '???? English'}
-    </button>
-  );
-=======
-  // Use local state so we don't need the missing LanguageContext file
-  const [language, setLanguage] = useState<'en' | 'es'>('es');
-  const isEnglish = language === 'en';
+  const [lang, setLang] = useState<'en' | 'es'>('en');
 
->>>>>>> ba6232ff24ffc3c343ab9d99c7d3e91e3b872e6f
   return (
-    <div style={{ minHeight: '100vh', backgroundColor: '#f8fafc', fontFamily: 'system-ui, sans-serif' }}>
-
-      {/* Hero */}
-      <div style={{ backgroundColor: '#1e3a5f', color: 'white', padding: '40px 20px', position: 'relative' }}>
-        <div style={{ maxWidth: '900px', margin: '0 auto' }}>
-          
-          {/* Language Toggle Button */}
-          <button
-            onClick={() => setLanguage(isEnglish ? 'es' : 'en')}
-            style={{
-              position: 'absolute',
-              top: '20px',
-              right: '20px',
-              background: 'transparent',
-              color: '#fff',
-              border: '1px solid #fff',
-              padding: '8px 16px',
-              borderRadius: '20px',
-              cursor: 'pointer',
-              fontSize: '0.8rem'
-            }}
-          >
-            {isEnglish ? '🇲🇽 Ver en Español' : '🇺🇸 View in English'}
-          </button>
-
-          <Link href="/" style={{ color: '#93c5fd', textDecoration: 'none', fontSize: '0.9rem' }}>
-            {isEnglish ? '← Back to Home' : '← Volver al Inicio'}
-          </Link>
-          
-          <h1 style={{ fontSize: '2.5rem', fontWeight: '800', margin: '16px 0 8px' }}>
-            {isEnglish ? 'Latino Hubs in Georgia' : 'Centros Latinos en Georgia'}
-          </h1>
-          <p style={{ color: '#bfdbfe', fontSize: '1.1rem', margin: 0 }}>
-            {isEnglish 
-              ? "Explore the six key counties where Georgia's Latino community thrives." 
-              : "Explore los seis condados clave donde prospera la comunidad latina de Georgia."}
-          </p>
+    <main className="min-h-screen bg-gray-50">
+      {/* Header */}
+      <div className="bg-white border-b border-gray-200 px-4 py-6">
+        <div className="max-w-6xl mx-auto flex items-center justify-between">
+          <div>
+            <h1 className="text-3xl font-bold text-gray-900">
+              {lang === 'en' ? 'Latino Real Estate Hubs' : 'Centros Inmobiliarios Latinos'}
+            </h1>
+            <p className="mt-1 text-gray-500">
+              {lang === 'en'
+                ? 'Explore top Latino communities across Georgia'
+                : 'Explora las principales comunidades latinas en Georgia'}
+            </p>
+          </div>
+          <div className="flex gap-2">
+            <button
+              onClick={() => setLang('en')}
+              className={`px-4 py-2 rounded-lg font-medium transition ${
+                lang === 'en' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+              }`}
+            >
+              EN
+            </button>
+            <button
+              onClick={() => setLang('es')}
+              className={`px-4 py-2 rounded-lg font-medium transition ${
+                lang === 'es' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+              }`}
+            >
+              ES
+            </button>
+          </div>
         </div>
       </div>
 
       {/* Hub Cards */}
-      <div style={{ maxWidth: '900px', margin: '0 auto', padding: '40px 20px', display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(380px, 1fr))', gap: '24px' }}>
-        {hubs.map((hub) => (
-          <div key={hub.slug} style={{ backgroundColor: 'white', borderRadius: '16px', boxShadow: '0 4px 20px rgba(0,0,0,0.08)', border: `3px solid ${hub.color}`, overflow: 'hidden' }}>
-            <div style={{ padding: '28px' }}>
-              <div style={{ fontSize: '2.5rem', marginBottom: '8px' }}>{hub.emoji}</div>
-              <div style={{ fontSize: '0.75rem', fontWeight: '700', color: hub.color, letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '4px' }}>
-                {isEnglish ? hub.region.en : hub.region.es}
-              </div>
-              <h2 style={{ fontSize: '1.4rem', fontWeight: '800', color: '#1e293b', margin: '0 0 8px' }}>{hub.name}</h2>
-              <p style={{ color: '#64748b', marginBottom: '16px', fontSize: '0.95rem' }}>
-                {isEnglish ? hub.tagline.en : hub.tagline.es}
-              </p>
-              
-              <div style={{ display: 'flex', gap: '16px', marginBottom: '20px' }}>
-                <div>
-                  <div style={{ fontSize: '1rem', fontWeight: '700', color: hub.color }}>{hub.latinoPct}</div>
-                  <div style={{ fontSize: '0.75rem', color: '#94a3b8' }}>
-                    {isEnglish ? 'Latino Population' : 'Población Latina'}
-                  </div>
+      <div className="max-w-6xl mx-auto px-4 py-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {hubs.map((hub) => (
+            <Link
+              key={hub.slug}
+              href={`/hubs/${hub.slug}`}
+              className="group block bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-lg transition-shadow"
+            >
+              <div
+                className="h-2"
+                style={{ backgroundColor: hub.color }}
+              />
+              <div className="p-6">
+                <div className="text-4xl mb-3">{hub.emoji}</div>
+                <h2 className="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
+                  {hub.name}
+                </h2>
+                <p className="text-sm text-gray-500 mt-1">
+                  {lang === 'en' ? hub.region.en : hub.region.es}
+                </p>
+                <p className="mt-3 text-gray-700 text-sm">
+                  {lang === 'en' ? hub.tagline.en : hub.tagline.es}
+                </p>
+                <div className="mt-4 flex gap-4 text-sm">
+                  <span className="text-gray-600">
+                    <span className="font-semibold">{hub.pop}</span>{' '}
+                    {lang === 'en' ? 'Latinos' : 'Latinos'}
+                  </span>
+                  <span className="text-gray-600">
+                    <span className="font-semibold">{hub.latinoPct}</span>{' '}
+                    {lang === 'en' ? 'of population' : 'de la poblaci\u00f3n'}
+                  </span>
                 </div>
-                <div>
-                  <div style={{ fontSize: '1rem', fontWeight: '700', color: hub.color }}>{hub.pop}</div>
-                  <div style={{ fontSize: '0.75rem', color: '#94a3b8' }}>
-                    {isEnglish ? 'Latino Residents' : 'Residentes Latinos'}
-                  </div>
+                <div className="mt-4">
+                  <span
+                    className="inline-block text-xs font-semibold px-3 py-1 rounded-full"
+                    style={{ backgroundColor: hub.color + '20', color: hub.color }}
+                  >
+                    {lang === 'en' ? 'View Hub' : 'Ver Centro'}
+                  </span>
                 </div>
               </div>
-
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                <Link
-                  href={`/hubs/${hub.slug}`}
-                  style={{ display: 'block', backgroundColor: hub.color, color: 'white', padding: '10px 20px', borderRadius: '8px', textDecoration: 'none', fontWeight: '600', fontSize: '0.9rem', textAlign: 'center' }}
-                >
-                  {isEnglish ? `Explore ${hub.name}` : `Explorar ${hub.name}`} →
-                </Link>
-                <a
-                  href={hub.realtorUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{ display: 'block', backgroundColor: 'white', color: hub.color, padding: '10px 20px', borderRadius: '8px', textDecoration: 'none', fontWeight: '600', fontSize: '0.9rem', textAlign: 'center', border: `2px solid ${hub.color}` }}
-                >
-                  🏠 {isEnglish ? 'Find Homes' : 'Buscar Casas'} →
-                </a>
-              </div>
-            </div>
-          </div>
-        ))}
+            </Link>
+          ))}
+        </div>
       </div>
-    </div>
+    </main>
   );
 }
