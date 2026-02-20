@@ -1,9 +1,6 @@
 'use client';
-<<<<<<< HEAD
-=======
 
 import { useState } from 'react';
->>>>>>> ba6232ff24ffc3c343ab9d99c7d3e91e3b872e6f
 import Link from 'next/link';
 
 export default function CobbPage() {
@@ -37,7 +34,6 @@ export default function CobbPage() {
       highlight: { en: 'Suburban', es: 'Suburbano' } 
     },
   ];
-
   return (
     <div style={{ fontFamily: 'system-ui, sans-serif', position: 'relative' }}>
       
@@ -53,7 +49,6 @@ export default function CobbPage() {
       >
         {isEnglish ? '🇲🇽 Ver en Español' : '🇺🇸 View in English'}
       </button>
-
       {/* Hero */}
       <div style={{ background: 'linear-gradient(135deg, #047857 0%, #059669 100%)', color: 'white', padding: '60px 20px', textAlign: 'center' }}>
         <Link href="/hubs" style={{ color: 'rgba(255,255,255,0.75)', textDecoration: 'none', fontSize: '0.9rem' }}>
@@ -71,12 +66,8 @@ export default function CobbPage() {
           <div><div style={{ fontSize: '1.4rem', fontWeight: '800' }}>15%</div><div style={{ fontSize: '0.8rem', opacity: 0.8 }}>{isEnglish ? 'Population' : 'De la Población'}</div></div>
         </div>
       </div>
-
       <div style={{ maxWidth: '1000px', margin: '0 auto', padding: '50px 20px' }}>
         
-        {/* Market Map Trigger */}
-        
-
         {/* Neighborhoods */}
         <section style={{ marginBottom: '48px' }}>
           <h2 style={{ fontSize: '1.6rem', fontWeight: '700', color, marginBottom: '20px', borderBottom: `3px solid ${color}`, paddingBottom: '8px' }}>
@@ -98,7 +89,6 @@ export default function CobbPage() {
             ))}
           </div>
         </section>
-
         {/* Real Estate Facts 2026 */}
         <section style={{ marginBottom: '48px' }}>
           <h2 style={{ fontSize: '1.6rem', fontWeight: '700', color, marginBottom: '20px', borderBottom: `3px solid ${color}`, paddingBottom: '8px' }}>
@@ -119,7 +109,6 @@ export default function CobbPage() {
             ))}
           </div>
         </section>
-
         {/* CTA */}
         <div style={{ backgroundColor: color, borderRadius: '16px', padding: '40px', textAlign: 'center', color: 'white' }}>
           <h3 style={{ fontSize: '1.5rem', fontWeight: '800', marginBottom: '12px' }}>
