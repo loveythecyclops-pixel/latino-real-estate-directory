@@ -1,9 +1,5 @@
 'use client';
-<<<<<<< HEAD
-=======
-
 import { useState } from 'react';
->>>>>>> ba6232ff24ffc3c343ab9d99c7d3e91e3b872e6f
 import Link from 'next/link';
 
 export default function HallPage() {
