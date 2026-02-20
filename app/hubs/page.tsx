@@ -1,3 +1,5 @@
+'use client';
+import { useState } from 'react';
 import Link from 'next/link';
 
 const hubs = [
@@ -70,6 +72,13 @@ const hubs = [
 ];
 
 export default function HubsPage() {
+  const [language, setLanguage] = useState('es');
+  const isEnglish = language === 'en';
+  const toggleButton = (
+    <button onClick={() => setLanguage(language === 'en' ? 'es' : 'en')} style={{position:'fixed', top:'20px', right:'20px', zIndex:9999, padding:'8px 16px', borderRadius:'20px', cursor:'pointer', backgroundColor:'#1e3a8a', color:'white', border:'none', fontWeight:'bold'}}>
+      {language === 'en' ? '???? Español' : '???? English'}
+    </button>
+  );
   return (
     <div style={{ minHeight: '100vh', backgroundColor: '#f8fafc', fontFamily: 'system-ui, sans-serif' }}>
 

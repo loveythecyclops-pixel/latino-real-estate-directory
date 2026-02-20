@@ -1,3 +1,4 @@
+'use client';
 import Link from 'next/link';
 
 const cityData: Record<string, { name: string; description: string }> = {
