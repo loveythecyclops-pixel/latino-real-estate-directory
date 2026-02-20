@@ -1,8 +1,4 @@
 'use client';
-<<<<<<< HEAD
-=======
-
->>>>>>> ba6232ff24ffc3c343ab9d99c7d3e91e3b872e6f
 import { useState } from 'react';
 import Link from 'next/link';
 
@@ -12,11 +8,11 @@ const lenders = [
     type: { en: 'Trade Association & Member Directory', es: 'Asociación Comercial y Directorio de Miembros' },
     description: {
       en: 'The leading trade association for Hispanic real estate and mortgage professionals in Atlanta.',
-      es: 'La asociación comercial líder para profesionales hispanos de bienes raíces e hipotecas en Atlanta.'
+      es: 'La asociación comercial líder para profesionales hispanos de bienes raíces e hipotecas en Atlanta.',
     },
     services: {
       en: ['ITIN mortgage referrals', 'Bilingual originators', 'Community education'],
-      es: ['Referencias de hipotecas ITIN', 'Originadores bilingües', 'Educación comunitaria']
+      es: ['Referencias de hipotecas ITIN', 'Originadores bilingües', 'Educación comunitaria'],
     },
     website: 'https://nahrep.org',
     badge: 'Top Resource',
@@ -27,138 +23,121 @@ const lenders = [
     type: { en: 'Wholesale ITIN Mortgage Lender', es: 'Prestamista Hipotecario ITIN al por Mayor' },
     description: {
       en: 'A wholesale lender active in Georgia that partners with local brokers for ITIN solutions.',
-      es: 'Un prestamista al por mayor activo en Georgia que se asocia con corredores locales para soluciones ITIN.'
+      es: 'Un prestamista al por mayor activo en Georgia que se asocia con corredores locales para soluciones ITIN.',
     },
     services: {
-      en: ['ITIN-based home loans', 'No SSN required', 'Available statewide in GA'],
-      es: ['Préstamos basados en ITIN', 'No requiere Seguro Social', 'Disponible en toda Georgia']
+      en: ['ITIN purchase loans', 'ITIN refinance', 'Non-QM products'],
+      es: ['Préstamos ITIN para compra', 'Refinanciamiento ITIN', 'Productos No-QM'],
     },
     website: 'https://nqmfunding.com',
     badge: 'ITIN Specialist',
+    badgeColor: '#059669',
+  },
+  {
+    name: 'Acra Lending',
+    type: { en: 'Non-QM & ITIN Lender', es: 'Prestamista No-QM e ITIN' },
+    description: {
+      en: 'Specializes in non-traditional mortgage products including ITIN loans for Georgia homebuyers.',
+      es: 'Se especializa en productos hipotecarios no tradicionales incluyendo préstamos ITIN para compradores en Georgia.',
+    },
+    services: {
+      en: ['ITIN home loans', 'Foreign national loans', 'Bank statement loans'],
+      es: ['Préstamos ITIN para vivienda', 'Préstamos para extranjeros', 'Préstamos con estados de cuenta'],
+    },
+    website: 'https://acralending.com',
+    badge: 'Non-QM Expert',
     badgeColor: '#7c3aed',
   },
 ];
 
-const steps = [
-  { num: '1', title: { en: 'Get Your ITIN', es: 'Obtenga su ITIN' }, desc: { en: 'Apply through the IRS if you do not have a Social Security Number.', es: 'Solicítelo a través del IRS si no tiene un número de Seguro Social.' } },
-  { num: '2', title: { en: 'Build Credit', es: 'Construya Crédito' }, desc: { en: 'Open a secured card or use family accounts. 12+ months helps.', es: 'Abra una tarjeta asegurada o use cuentas familiares. Más de 12 meses ayuda.' } },
-  { num: '3', title: { en: 'Save Down Payment', es: 'Ahorre para el Enganche' }, desc: { en: 'Most ITIN loans require 10–25% down.', es: 'La mayoría de los préstamos ITIN requieren entre un 10 y 25% de enganche.' } },
-  { num: '4', title: { en: 'Get Pre-Approved', es: 'Obtenga Pre-Aprobación' }, desc: { en: 'A letter shows sellers you are a serious buyer.', es: 'Una carta les muestra a los vendedores que usted es un comprador serio.' } },
-];
+export default function ItinMortgagesPage() {
+  const [lang, setLang] = useState<'en' | 'es'>('en');
 
-export default function ITINMortgagesPage() {
-<<<<<<< HEAD
-  const [language, setLanguage] = useState('es');
-  const isEnglish = language === 'en';
-  const toggleButton = (
-    <button onClick={() => setLanguage(language === 'en' ? 'es' : 'en')} style={{position:'fixed', top:'20px', right:'20px', zIndex:9999, padding:'8px 16px', borderRadius:'20px', cursor:'pointer', backgroundColor:'#1e3a8a', color:'white', border:'none', fontWeight:'bold'}}>
-      {language === 'en' ? '???? Espa�ol' : '???? English'}
-    </button>
-  );
-=======
-  const [language, setLanguage] = useState<'es' | 'en'>('es');
-  const isEnglish = language === 'en';
-
->>>>>>> ba6232ff24ffc3c343ab9d99c7d3e91e3b872e6f
   return (
-    <div style={{ fontFamily: 'sans-serif', position: 'relative' }}>
-      
-      {/* Floating Language Button */}
-      <button
-        onClick={() => setLanguage(isEnglish ? 'es' : 'en')}
-        style={{
-          position: 'fixed', top: '20px', right: '20px', zIndex: 9999,
-          padding: '10px 20px', borderRadius: '30px', backgroundColor: '#1e3a8a',
-          color: 'white', border: 'none', fontWeight: 'bold', cursor: 'pointer',
-          boxShadow: '0 4px 12px rgba(0,0,0,0.2)'
-        }}
-      >
-        {isEnglish ? '🇲🇽 Ver en Español' : '🇺🇸 View in English'}
-      </button>
-
-      {/* Hero */}
-      <div style={{ backgroundColor: '#2563eb', color: 'white', textAlign: 'center', padding: '60px 20px' }}>
-        <h1 style={{ fontSize: '2.4rem', marginBottom: '14px', fontWeight: '800' }}>
-          {isEnglish ? 'ITIN Mortgages in Georgia' : 'Hipotecas con ITIN en Georgia'}
+    <main style={{ minHeight: '100vh', backgroundColor: '#f9fafb', fontFamily: 'sans-serif' }}>
+      {/* Header */}
+      <div style={{ backgroundColor: '#1e3a8a', color: '#fff', padding: '40px 24px', textAlign: 'center' }}>
+        <Link href="/" style={{ color: '#93c5fd', textDecoration: 'none', fontSize: '0.875rem' }}>
+          &larr; {lang === 'en' ? 'Back to Home' : 'Volver al Inicio'}
+        </Link>
+        <h1 style={{ fontSize: '2rem', fontWeight: 'bold', marginTop: '16px', marginBottom: '8px' }}>
+          {lang === 'en' ? 'ITIN Mortgage Lenders' : 'Prestamistas Hipotecarios ITIN'}
         </h1>
-        <p style={{ fontSize: '1.15rem', maxWidth: '700px', margin: '0 auto', opacity: 0.92 }}>
-          {isEnglish 
-            ? 'Buy a home in Georgia without a Social Security Number. Connect with specialists.' 
-            : 'Compre una casa en Georgia sin un número de Seguro Social. Conéctese con especialistas.'}
+        <p style={{ opacity: 0.9 }}>
+          {lang === 'en'
+            ? 'Find lenders who offer mortgages for borrowers without Social Security Numbers'
+            : 'Encuentre prestamistas que ofrecen hipotecas para prestatarios sin Número de Seguro Social'}
         </p>
-      </div>
-
-      {/* Features Grid */}
-      <div style={{ backgroundColor: '#eff6ff', padding: '50px 20px', textAlign: 'center' }}>
-        <h2 style={{ color: '#1e40af', fontSize: '1.7rem', marginBottom: '25px' }}>
-          {isEnglish ? 'What is an ITIN Mortgage?' : '¿Qué es una Hipoteca con ITIN?'}
-        </h2>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '16px', maxWidth: '900px', margin: '0 auto' }}>
-          {[
-            isEnglish ? '✅ No SSN Required' : '✅ Sin Seguro Social',
-            isEnglish ? '✅ 10% Down Payment' : '✅ 10% de Enganche',
-            isEnglish ? '✅ Statewide in GA' : '✅ En toda Georgia',
-            isEnglish ? '✅ Bilingual Support' : '✅ Soporte Bilingüe',
-          ].map((item) => (
-            <div key={item} style={{ backgroundColor: 'white', padding: '15px', borderRadius: '10px', boxShadow: '0 2px 5px rgba(0,0,0,0.05)' }}>
-              {item}
-            </div>
-          ))}
+        <div style={{ marginTop: '16px', display: 'flex', gap: '8px', justifyContent: 'center' }}>
+          <button
+            onClick={() => setLang('en')}
+            style={{ padding: '8px 20px', borderRadius: '20px', border: 'none', cursor: 'pointer', backgroundColor: lang === 'en' ? '#fff' : 'transparent', color: lang === 'en' ? '#1e3a8a' : '#fff', fontWeight: 'bold' }}
+          >
+            English
+          </button>
+          <button
+            onClick={() => setLang('es')}
+            style={{ padding: '8px 20px', borderRadius: '20px', border: 'none', cursor: 'pointer', backgroundColor: lang === 'es' ? '#fff' : 'transparent', color: lang === 'es' ? '#1e3a8a' : '#fff', fontWeight: 'bold' }}
+          >
+            Español
+          </button>
         </div>
       </div>
 
-      {/* Lenders List */}
-      <div style={{ padding: '60px 20px', maxWidth: '1100px', margin: '0 auto' }}>
-        <h2 style={{ textAlign: 'center', color: '#1e40af', marginBottom: '40px' }}>
-          {isEnglish ? 'Key ITIN Resources' : 'Recursos Clave de ITIN'}
-        </h2>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '28px' }}>
-          {lenders.map((l) => (
-            <div key={l.name} style={{ border: '1px solid #e5e7eb', borderRadius: '14px', padding: '28px', boxShadow: '0 2px 10px rgba(0,0,0,0.06)' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <h3 style={{ color: '#2563eb', margin: 0 }}>{l.name}</h3>
-                <span style={{ backgroundColor: l.badgeColor, color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '0.7rem' }}>{l.badge}</span>
+      {/* Info Box */}
+      <div style={{ maxWidth: '900px', margin: '32px auto 0', padding: '0 20px' }}>
+        <div style={{ backgroundColor: '#eff6ff', border: '1px solid #bfdbfe', borderRadius: '12px', padding: '20px' }}>
+          <h2 style={{ color: '#1e3a8a', marginBottom: '8px' }}>
+            {lang === 'en' ? 'What is an ITIN Mortgage?' : '¿Qué es una Hipoteca ITIN?'}
+          </h2>
+          <p style={{ color: '#374151', lineHeight: 1.6 }}>
+            {lang === 'en'
+              ? 'An ITIN (Individual Taxpayer Identification Number) mortgage allows immigrants and non-citizens to purchase a home in the U.S. without a Social Security Number. These loans require an ITIN, 2 years of tax returns, and a valid government ID.'
+              : 'Una hipoteca ITIN (Número de Identificación Personal del Contribuyente) permite a inmigrantes y no ciudadanos comprar una casa en los EE.UU. sin Número de Seguro Social. Estos préstamos requieren un ITIN, 2 años de declaraciones de impuestos y una identificación gubernamental válida.'}
+          </p>
+        </div>
+      </div>
+
+      {/* Lender Cards */}
+      <div style={{ maxWidth: '900px', margin: '32px auto', padding: '0 20px' }}>
+        <div style={{ display: 'grid', gap: '24px' }}>
+          {lenders.map((lender, idx) => (
+            <div
+              key={idx}
+              style={{ backgroundColor: '#fff', borderRadius: '12px', padding: '24px', boxShadow: '0 4px 6px rgba(0,0,0,0.07)', borderTop: `4px solid ${lender.badgeColor}` }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '8px' }}>
+                <h2 style={{ color: '#1e3a8a', fontSize: '1.3rem' }}>{lender.name}</h2>
+                <span style={{ backgroundColor: lender.badgeColor + '20', color: lender.badgeColor, padding: '4px 10px', borderRadius: '20px', fontSize: '0.75rem', fontWeight: 'bold' }}>
+                  {lender.badge}
+                </span>
               </div>
-              <p style={{ fontSize: '0.85rem', color: '#6b7280' }}>{isEnglish ? l.type.en : l.type.es}</p>
-              <p style={{ fontSize: '0.9rem' }}>{isEnglish ? l.description.en : l.description.es}</p>
-              <ul style={{ fontSize: '0.85rem' }}>
-                {(isEnglish ? l.services.en : l.services.es).map(s => <li key={s}>{s}</li>)}
-              </ul>
-              <a href={l.website} target="_blank" style={{ display: 'inline-block', marginTop: '10px', color: '#2563eb', fontWeight: 'bold' }}>
-                {isEnglish ? 'Visit Website →' : 'Visitar Sitio Web →'}
-              </a>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Step Guide */}
-      <div style={{ backgroundColor: '#f8fafc', padding: '60px 20px' }}>
-        <h2 style={{ textAlign: 'center', color: '#1e40af', marginBottom: '40px' }}>
-          {isEnglish ? 'How to Qualify' : 'Cómo Calificar'}
-        </h2>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '20px', maxWidth: '1000px', margin: '0 auto' }}>
-          {steps.map((step) => (
-            <div key={step.num} style={{ backgroundColor: 'white', padding: '20px', borderRadius: '12px', display: 'flex', gap: '15px' }}>
-              <div style={{ backgroundColor: '#2563eb', color: 'white', width: '30px', height: '30px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>{step.num}</div>
-              <div>
-                <h4 style={{ margin: '0 0 5px' }}>{isEnglish ? step.title.en : step.title.es}</h4>
-                <p style={{ fontSize: '0.85rem', margin: 0 }}>{isEnglish ? step.desc.en : step.desc.es}</p>
+              <p style={{ color: '#059669', fontWeight: '600', marginBottom: '8px' }}>
+                {lang === 'en' ? lender.type.en : lender.type.es}
+              </p>
+              <p style={{ color: '#374151', lineHeight: 1.6, marginBottom: '12px' }}>
+                {lang === 'en' ? lender.description.en : lender.description.es}
+              </p>
+              <div style={{ marginBottom: '16px' }}>
+                <strong style={{ color: '#6b7280', fontSize: '0.85rem' }}>
+                  {lang === 'en' ? 'Services:' : 'Servicios:'}
+                </strong>
+                <ul style={{ marginTop: '6px', paddingLeft: '20px' }}>
+                  {(lang === 'en' ? lender.services.en : lender.services.es).map((s, i) => (
+                    <li key={i} style={{ color: '#374151', fontSize: '0.9rem' }}>{s}</li>
+                  ))}
+                </ul>
               </div>
+              {lender.website && (
+                <a href={lender.website} target="_blank" rel="noopener noreferrer"
+                  style={{ color: '#1e3a8a', textDecoration: 'none', fontWeight: '600' }}>
+                  🌐 {lang === 'en' ? 'Visit Website' : 'Visitar Sitio Web'}
+                </a>
+              )}
             </div>
           ))}
         </div>
       </div>
-
-      {/* CTA Footer */}
-      <div style={{ backgroundColor: '#1e3a8a', color: 'white', textAlign: 'center', padding: '50px 20px' }}>
-        <Link href="/legal-support" style={{ backgroundColor: 'white', color: '#1e3a8a', padding: '12px 28px', borderRadius: '8px', fontWeight: '700', textDecoration: 'none', marginRight: '10px' }}>
-          {isEnglish ? 'Legal Support' : 'Soporte Legal'}
-        </Link>
-        <Link href="/" style={{ border: '2px solid white', color: 'white', padding: '12px 28px', borderRadius: '8px', fontWeight: '700', textDecoration: 'none' }}>
-          {isEnglish ? 'Home' : 'Inicio'}
-        </Link>
-      </div>
-    </div>
+    </main>
   );
 }
