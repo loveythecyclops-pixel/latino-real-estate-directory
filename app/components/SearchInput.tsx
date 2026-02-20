@@ -12,7 +12,7 @@ export default function SearchInput() {
   const handleSearch = useCallback((term: string) => {
     if (timerRef.current) clearTimeout(timerRef.current);
     timerRef.current = setTimeout(() => {
-      const params = new URLSearchParams(searchParams);
+      const params = new URLSearchParams(searchParams?.toString() ?? '');
       if (term) {
         params.set('query', term);
       } else {
