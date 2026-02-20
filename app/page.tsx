@@ -15,15 +15,14 @@ export default async function Home({
   const query = resolvedParams.query || '';
   // 2. Fetch listings with Filtering
   const listings = await prisma.listing.findMany({
-    where: {
-      OR: [
-        { title_en: { contains: query, mode: 'insensitive' } },
-        { title_es: { contains: query, mode: 'insensitive' } },
-        { description_en: { contains: query, mode: 'insensitive' } },
-        { description_es: { contains: query, mode: 'insensitive' } },
-        { county: { contains: query, mode: 'insensitive' } },
-      ],
-    },
+   where: {
+  OR: [
+    { title_en: { contains: query } },
+    { title_es: { contains: query } },
+    { description_en: { contains: query } },
+    { description_es: { contains: query } },
+  ],
+},
     orderBy: { createdAt: 'desc' }
   });
   // --- Styles ---
