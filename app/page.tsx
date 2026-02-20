@@ -1,6 +1,5 @@
 import { prisma } from '../lib/prisma';
 import Link from 'next/link';
-import GeminiSearchWidget from './components/GeminiSearchWidget';
 
 export const dynamic = 'force-dynamic';
 
