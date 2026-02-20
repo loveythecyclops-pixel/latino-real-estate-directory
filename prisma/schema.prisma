@@ -1,6 +1,5 @@
 generator client {
-  provider = "prisma-client"
-  output   = "../generated/prisma"
+  provider = "prisma-client-js"
 }
 
 datasource db {
@@ -20,9 +19,9 @@ model Listing {
   sqft           Int
   county         String
   address        String
-  
+
   images         Image[]
-  
+
   itinFriendly   Boolean  @default(true)
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
