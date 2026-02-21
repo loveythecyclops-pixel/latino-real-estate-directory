@@ -32,21 +32,13 @@ export default function GeminiSearchWidget({ lang = 'es' }: Props) {
   const [homes, setHomes] = useState<HomeResult[]>([]);
   const [error, setError] = useState('');
 
-  const counties = [
-    'Gwinnett',
-    'Cobb',
-    'Whitfield',
-    'Hall',
-    'DeKalb',
-    'Clayton',
-  ];
+  const counties = ['Gwinnett', 'Cobb', 'Whitfield', 'Hall', 'DeKalb', 'Clayton'];
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError('');
     setHomes([]);
-
     try {
       const res = await fetch('/api/home-search', {
         method: 'POST',
@@ -61,24 +53,14 @@ export default function GeminiSearchWidget({ lang = 'es' }: Props) {
           language: isEnglish ? 'en' : 'es',
         }),
       });
-
       const data = await res.json();
       if (!res.ok) {
-        setError(
-          data.error ||
-            (isEnglish
-              ? 'Search failed. Please try again.'
-              : 'Búsqueda fallida. Inténtalo de nuevo.')
-        );
+        setError(data.error || (isEnglish ? 'Search failed. Please try again.' : 'Busqueda fallida. Intentalo de nuevo.'));
       } else {
         setHomes(data.homes || []);
       }
     } catch {
-      setError(
-        isEnglish
-          ? 'Network error. Please try again.'
-          : 'Error de red. Inténtalo de nuevo.'
-      );
+      setError(isEnglish ? 'Network error. Please try again.' : 'Error de red. Intentalo de nuevo.');
     } finally {
       setLoading(false);
     }
@@ -143,73 +125,40 @@ export default function GeminiSearchWidget({ lang = 'es' }: Props) {
     padding: '14px',
     boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
     color: '#1a202c',
+    textDecoration: 'none',
+    display: 'block',
   };
 
   return (
     <div style={containerStyle}>
       <div style={{ marginBottom: '12px' }}>
         <span style={{ fontSize: '1.3rem' }}>&#x2728;</span>
-        <span
-          style={{
-            color: '#fff',
-            fontWeight: 700,
-            fontSize: '1.1rem',
-            marginLeft: '8px',
-          }}
-        >
+        <span style={{ color: '#fff', fontWeight: 700, fontSize: '1.1rem', marginLeft: '8px' }}>
           {isEnglish ? 'AI Home Finder' : 'Buscador de Casas con IA'}
         </span>
-        <span
-          style={{
-            marginLeft: '10px',
-            background: '#f59e0b',
-            color: '#fff',
-            borderRadius: '20px',
-            padding: '2px 10px',
-            fontSize: '0.7rem',
-            fontWeight: 700,
-            verticalAlign: 'middle',
-          }}
-        >
+        <span style={{ marginLeft: '10px', background: '#f59e0b', color: '#fff', borderRadius: '20px', padding: '2px 10px', fontSize: '0.7rem', fontWeight: 700, verticalAlign: 'middle' }}>
           Gemini + Zillow
         </span>
       </div>
-      <p
-        style={{
-          color: 'rgba(255,255,255,0.85)',
-          fontSize: '0.85rem',
-          marginBottom: '8px',
-        }}
-      >
+
+      <p style={{ color: 'rgba(255,255,255,0.85)', fontSize: '0.85rem', marginBottom: '8px' }}>
         {isEnglish
           ? 'Narrow down homes in Georgia Latino communities by budget, county, city, bedrooms and bathrooms.'
-          : 'Filtra casas en comunidades Latinas de Georgia por presupuesto, condado, ciudad, recámaras y baños.'}
+          : 'Filtra casas en comunidades Latinas de Georgia por presupuesto, condado, ciudad, recamaras y banos.'}
       </p>
 
       <form onSubmit={handleSubmit}>
         <div style={gridStyle}>
           <div>
-            <label style={labelStyle}>
-              {isEnglish ? 'County' : 'Condado'}
-            </label>
-            <select
-              value={county}
-              onChange={(e) => setCounty(e.target.value)}
-              style={inputStyle}
-              disabled={loading}
-            >
+            <label style={labelStyle}>{isEnglish ? 'County' : 'Condado'}</label>
+            <select value={county} onChange={(e) => setCounty(e.target.value)} style={inputStyle} disabled={loading}>
               {counties.map((c) => (
-                <option key={c} value={c}>
-                  {c} County
-                </option>
+                <option key={c} value={c}>{c} County</option>
               ))}
             </select>
           </div>
-
           <div>
-            <label style={labelStyle}>
-              {isEnglish ? 'City (optional)' : 'Ciudad (opcional)'}
-            </label>
+            <label style={labelStyle}>{isEnglish ? 'City (optional)' : 'Ciudad (opcional)'}</label>
             <input
               type="text"
               value={city}
@@ -219,11 +168,8 @@ export default function GeminiSearchWidget({ lang = 'es' }: Props) {
               disabled={loading}
             />
           </div>
-
           <div>
-            <label style={labelStyle}>
-              {isEnglish ? 'Min price ($)' : 'Precio mínimo ($)'}
-            </label>
+            <label style={labelStyle}>{isEnglish ? 'Min price ($)' : 'Precio minimo ($)'}</label>
             <input
               type="number"
               value={priceMin}
@@ -232,11 +178,8 @@ export default function GeminiSearchWidget({ lang = 'es' }: Props) {
               disabled={loading}
             />
           </div>
-
           <div>
-            <label style={labelStyle}>
-              {isEnglish ? 'Max price ($)' : 'Precio máximo ($)'}
-            </label>
+            <label style={labelStyle}>{isEnglish ? 'Max price ($)' : 'Precio maximo ($)'}</label>
             <input
               type="number"
               value={priceMax}
@@ -245,11 +188,8 @@ export default function GeminiSearchWidget({ lang = 'es' }: Props) {
               disabled={loading}
             />
           </div>
-
           <div>
-            <label style={labelStyle}>
-              {isEnglish ? 'Min bedrooms' : 'Mínimo recámaras'}
-            </label>
+            <label style={labelStyle}>{isEnglish ? 'Min bedrooms' : 'Minimo recamaras'}</label>
             <input
               type="number"
               value={bedsMin}
@@ -258,11 +198,8 @@ export default function GeminiSearchWidget({ lang = 'es' }: Props) {
               disabled={loading}
             />
           </div>
-
           <div>
-            <label style={labelStyle}>
-              {isEnglish ? 'Min bathrooms' : 'Mínimo baños'}
-            </label>
+            <label style={labelStyle}>{isEnglish ? 'Min bathrooms' : 'Minimo banos'}</label>
             <input
               type="number"
               value={bathsMin}
@@ -276,17 +213,7 @@ export default function GeminiSearchWidget({ lang = 'es' }: Props) {
         <button type="submit" style={btnStyle} disabled={loading}>
           {loading ? (
             <>
-              <span
-                style={{
-                  display: 'inline-block',
-                  width: '16px',
-                  height: '16px',
-                  border: '2px solid #fff',
-                  borderTopColor: 'transparent',
-                  borderRadius: '50%',
-                  animation: 'spin 0.8s linear infinite',
-                }}
-              />
+              <span style={{ display: 'inline-block', width: '16px', height: '16px', border: '2px solid #fff', borderTopColor: 'transparent', borderRadius: '50%', animation: 'spin 0.8s linear infinite' }} />
               {isEnglish ? 'Searching...' : 'Buscando...'}
             </>
           ) : (
@@ -299,127 +226,41 @@ export default function GeminiSearchWidget({ lang = 'es' }: Props) {
       </form>
 
       {error && (
-        <div
-          style={{
-            marginTop: '16px',
-            color: '#fca5a5',
-            fontSize: '0.9rem',
-          }}
-        >
+        <div style={{ marginTop: '16px', color: '#fca5a5', fontSize: '0.9rem' }}>
           {error}
         </div>
       )}
 
       {homes.length > 0 && (
         <div style={{ marginTop: '20px' }}>
-          <p
-            style={{
-              color: 'rgba(255,255,255,0.85)',
-              fontSize: '0.85rem',
-              marginBottom: '12px',
-              fontWeight: 600,
-            }}
-          >
-            {isEnglish
-              ? `${homes.length} homes found:`
-              : `${homes.length} casas encontradas:`}
+          <p style={{ color: 'rgba(255,255,255,0.85)', fontSize: '0.85rem', marginBottom: '12px', fontWeight: 600 }}>
+            {isEnglish ? `${homes.length} homes found:` : `${homes.length} casas encontradas:`}
           </p>
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))',
-              gap: '16px',
-            }}
-          >
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '16px' }}>
             {homes.map((home) => (
-              <a
-                key={home.id}
-                href={home.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={cardStyle}
-              >
-                <div>
-                  <h4
-                    style={{
-                      color: '#1e3a8a',
-                      margin: '0 0 6px',
-                      fontSize: '0.95rem',
-                    }}
-                  >
-                    {home.address}
-                  </h4>
-                  <p
-                    style={{
-                      color: '#6b7280',
-                      fontSize: '0.8rem',
-                      margin: '0 0 4px',
-                    }}
-                  >
-                    {[home.city, home.state, home.zip]
-                      .filter(Boolean)
-                      .join(', ')}
+              <a key={home.id} href={home.url} target="_blank" rel="noopener noreferrer" style={cardStyle}>
+                <h4 style={{ color: '#1e3a8a', margin: '0 0 6px', fontSize: '0.95rem' }}>{home.address}</h4>
+                <p style={{ color: '#6b7280', fontSize: '0.8rem', margin: '0 0 4px' }}>
+                  {[home.city, home.state, home.zip].filter(Boolean).join(', ')}
+                </p>
+                <p style={{ color: '#16a34a', fontWeight: 'bold', margin: '0 0 4px' }}>
+                  {home.price
+                    ? home.price.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 })
+                    : isEnglish ? 'See price' : 'Ver precio'}
+                </p>
+                {(home.beds || home.baths) && (
+                  <p style={{ color: '#6b7280', fontSize: '0.8rem', margin: '0 0 4px' }}>
+                    {home.beds && `${home.beds} ${isEnglish ? 'bed' : 'recamaras'}`}
+                    {home.beds && home.baths && ' - '}
+                    {home.baths && `${home.baths} ${isEnglish ? 'bath' : 'banos'}`}
                   </p>
-                  <p
-                    style={{
-                      color: '#16a34a',
-                      fontWeight: 'bold',
-                      margin: '0 0 4px',
-                    }}
-                  >
-                    {home.price
-                      ? home.price.toLocaleString('en-US', {
-                          style: 'currency',
-                          currency: 'USD',
-                          maximumFractionDigits: 0,
-                        })
-                      : isEnglish
-                      ? 'See price'
-                      : 'Ver precio'}
-                  </p>
-                  {(home.beds || home.baths) && (
-                    <p
-                      style={{
-                        color: '#6b7280',
-                        fontSize: '0.8rem',
-                        margin: '0 0 4px',
-                      }}
-                    >
-                      {home.beds &&
-                        `${home.beds} ${
-                          isEnglish ? 'bed' : 'recámaras'
-                        }`}
-                      {home.beds && home.baths && ' · '}
-                      {home.baths &&
-                        `${home.baths} ${
-                          isEnglish ? 'bath' : 'baños'
-                        }`}
-                    </p>
-                  )}
-                  {home.short_reason && (
-                    <p
-                      style={{
-                        color: '#4b5563',
-                        fontSize: '0.8rem',
-                        marginTop: '4px',
-                      }}
-                    >
-                      {home.short_reason}
-                    </p>
-                  )}
-                  <p
-                    style={{
-                      marginTop: '6px',
-                      color: '#1d4ed8',
-                      fontSize: '0.75rem',
-                      textDecoration: 'underline',
-                    }}
-                  >
-                    {isEnglish
-                      ? 'View details on Zillow'
-                      : 'Ver detalles en Zillow'}
-                  </p>
-                </div>
+                )}
+                {home.short_reason && (
+                  <p style={{ color: '#4b5563', fontSize: '0.8rem', marginTop: '4px' }}>{home.short_reason}</p>
+                )}
+                <p style={{ marginTop: '6px', color: '#1d4ed8', fontSize: '0.75rem', textDecoration: 'underline' }}>
+                  {isEnglish ? 'View details on Zillow' : 'Ver detalles en Zillow'}
+                </p>
               </a>
             ))}
           </div>
@@ -434,4 +275,3 @@ export default function GeminiSearchWidget({ lang = 'es' }: Props) {
     </div>
   );
 }
-
