@@ -4,18 +4,13 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body style={{ margin: 0, padding: 0 }}>
+    <html lang="en" className="overflow-x-hidden">
+      <body className="w-full max-w-full min-h-screen m-0 p-0 overflow-x-hidden antialiased">
         {children}
-        <script dangerouslySetInnerHTML={{ __html: `
-          (function() {
-            var iframe = document.createElement('iframe');
-            iframe.src = 'https://comfort-home-ai.lovable.app/widget';
-            iframe.style.cssText = 'position:fixed;bottom:0;right:0;width:420px;height:100vh;border:none;z-index:9999;pointer-events:none;background:transparent;';
-            iframe.onload = function() { iframe.style.pointerEvents = 'auto'; };
-            document.body.appendChild(iframe);
-          })();
-        `}} />
+        {/* Temporary debug outline to find overflow issues - remove when done */}
+        <style>{`
+          * { outline: 1px solid red !important; }
+        `}</style>
       </body>
     </html>
   )
