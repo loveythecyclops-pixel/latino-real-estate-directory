@@ -54,34 +54,34 @@ Each listing must be a JSON object with these exact fields:
 }
 
 Respond ONLY with a valid JSON array. No markdown, no explanation.`
-      : `Eres un asistente de bienes raíces para comunidades latinas en Georgia, EE.UU.
+      : `Eres un asistente de bienes raices para comunidades latinas en Georgia, EE.UU.
 Genera un array JSON de 6 propiedades realistas que coincidan con estos filtros:
 - Condado: ${county || 'Gwinnett'} County, Georgia
 - Ciudad: ${city || 'cualquier ciudad en ese condado'}
-- Precio mínimo: ${priceMin ? '$' + priceMin : 'sin mínimo'}
-- Precio máximo: ${priceMax ? '$' + priceMax : 'sin máximo'}
-- Mínimo de recámaras: ${bedsMin ?? 3}
-- Mínimo de baños: ${bathsMin ?? 2}
+- Precio minimo: ${priceMin ? '$' + priceMin : 'sin minimo'}
+- Precio maximo: ${priceMax ? '$' + priceMax : 'sin maximo'}
+- Minimo de recamaras: ${bedsMin ?? 3}
+- Minimo de banos: ${bathsMin ?? 2}
 
 Cada propiedad debe ser un objeto JSON con estos campos exactos:
 {
-  "id": "id único como hw-1",
-  "address": "dirección",
+  "id": "id unico como hw-1",
+  "address": "direccion",
   "city": "nombre de ciudad",
   "state": "GA",
-  "zip": "código postal",
-  "price": precio numérico (sin comas),
-  "beds": número de recámaras,
-  "baths": número de baños,
+  "zip": "codigo postal",
+  "price": precio numerico (sin comas),
+  "beds": numero de recamaras,
+  "baths": numero de banos,
   "homeType": "Single Family" o "Townhouse" o "Condo",
   "url": "https://www.zillow.com/homes/${county || 'gwinnett'}-county-ga/",
-  "short_reason": "1 oración explicando por qué esta propiedad es una buena opción"
+  "short_reason": "1 oracion explicando por que esta propiedad es una buena opcion"
 }
 
-Responde SOLO con un array JSON válido. Sin markdown, sin explicaciones.`;
+Responde SOLO con un array JSON valido. Sin markdown, sin explicaciones.`;
 
     const genAI = new GoogleGenerativeAI(apiKey);
-    const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+    const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
     const result = await model.generateContent(prompt);
     const responseText = result.response.text().trim();
 
