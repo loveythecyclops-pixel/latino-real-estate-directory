@@ -59,7 +59,7 @@ Aqui estan las propiedades disponibles:\n${listingContext}\n\nInstrucciones:
   - "suggestions": Un array de 2-3 preguntas de seguimiento para refinar la busqueda.
 - Responde SOLO con JSON valido. Sin markdown, sin bloques de codigo.`;
     const genAI = new GoogleGenerativeAI(apiKey);
-    const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
+    const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash-lite' });
     const result = await model.generateContent([
       { text: systemPrompt },
       { text: isEnglish ? `User query: ${query}` : `Consulta del usuario: ${query}` },
