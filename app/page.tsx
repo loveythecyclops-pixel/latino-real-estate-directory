@@ -107,7 +107,6 @@ const listings = await prisma.listing.findMany({
             ? '🇺🇸 Ver en Español'
             : '🇬🇧 View in English'}
         </Link>
-
         <h1
           style={{
             fontSize: '2.5rem',
@@ -119,7 +118,6 @@ const listings = await prisma.listing.findMany({
             ? 'Latino Real Estate Directory'
             : 'Directorio Latino de Bienes Raíces'}
         </h1>
-
         <p
           style={{
             fontSize: '1.1rem',
@@ -211,7 +209,6 @@ const listings = await prisma.listing.findMany({
             ? 'Featured Listings'
             : 'Propiedades Destacadas'}
         </h2>
-
         {listings.length === 0 ? (
           <p style={{ textAlign: 'center', color: '#6b7280' }}>
             {isEnglish
@@ -309,25 +306,21 @@ const listings = await prisma.listing.findMany({
                 : 'Opciones de financiamiento usando ITIN.',
             },
             {
-              href: isEnglish
-                ? '/en/services/regular-loans'
-                : '/services/regular-loans',
+              href: isEnglish ? '/en/regular-loans' : '/regular-loans',
               title: isEnglish ? 'Regular Loans' : 'Préstamos Regulares',
               desc: isEnglish
                 ? 'Conventional, FHA and VA options.'
                 : 'Opciones de préstamos convencionales, FHA y VA.',
             },
             {
-              href: isEnglish ? '/en/services/lenders' : '/services/lenders',
+              href: isEnglish ? '/en/regular-loans' : '/regular-loans',
               title: isEnglish ? 'Lenders in Georgia' : 'Prestamistas en Georgia',
               desc: isEnglish
                 ? 'Top local lenders for every budget.'
                 : 'Principales prestamistas locales para cada presupuesto.',
             },
             {
-              href: isEnglish
-                ? '/en/services/inspections'
-                : '/services/inspections',
+              href: isEnglish ? '/en/home-inspection' : '/home-inspection',
               title: isEnglish ? 'Inspections' : 'Inspecciones',
               desc: isEnglish
                 ? 'Trusted companies to verify your home.'
@@ -348,7 +341,7 @@ const listings = await prisma.listing.findMany({
                 : 'Propiedades con financiamiento directo del vendedor.',
             },
           ].map((item) => (
-            <Link key={item.href} href={item.href} style={cardStyle}>
+            <Link key={item.href + item.title} href={item.href} style={cardStyle}>
               <h3
                 style={{
                   color: '#1e3a8a',
