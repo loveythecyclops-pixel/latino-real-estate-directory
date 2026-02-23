@@ -1,22 +1,17 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '../../../lib/prisma';
-
 export const runtime = 'nodejs';
-
 export async function POST(req: NextRequest) {
   try {
     const { query, lang } = await req.json();
-
     if (!query || typeof query !== 'string') {
       return NextResponse.json({ error: 'Query is required' }, { status: 400 });
     }
-
     const apiKey = process.env.GEMINI_API_KEY;
     if (!apiKey) {
       return NextResponse.json({ error: 'Gemini API key not configured' }, { status: 500 });
     }
-
     // Fetch all listings from DB to give context to Gemini
     const listings = await prisma.listing.findMany({
       select: {
@@ -35,9 +30,7 @@ export async function POST(req: NextRequest) {
       orderBy: { createdAt: 'desc' },
       take: 50,
     });
-
     const isEnglish = lang === 'en';
-
     // Build listing context for Gemini
     const listingContext = listings.map((l, i) =>
       `[${i + 1}] ID:${l.id} | ${
@@ -46,7 +39,6 @@ export async function POST(req: NextRequest) {
         l.itinFriendly ? 'Yes' : 'No'
       } | ${isEnglish ? l.description_en : l.description_es}`
     ).join('\n');
-
     const systemPrompt = isEnglish
       ? `You are a bilingual real estate assistant for Latinos in Georgia, USA. 
 You help users find homes based on their natural language descriptions.
@@ -57,26 +49,22 @@ Here are the available listings:\n${listingContext}\n\nInstructions:
   - "matchedIds": An array of listing IDs that best match (up to 5), ordered by relevance. Use empty array if none match.
   - "suggestions": An array of 2-3 follow-up questions to refine the search.
 - Respond ONLY with valid JSON. No markdown, no code blocks.`
-      : `Eres un asistente bilingüe de bienes raíces para latinos en Georgia, EE.UU.
-Ayudas a los usuarios a encontrar casas basándose en sus descripciones en lenguaje natural.
-Aquí están las propiedades disponibles:\n${listingContext}\n\nInstrucciones:
-- Analiza la consulta del usuario y encuentra las propiedades más relevantes de la lista anterior.
+      : `Eres un asistente bilingue de bienes raices para latinos en Georgia, EE.UU.
+Ayudas a los usuarios a encontrar casas basandose en sus descripciones en lenguaje natural.
+Aqui estan las propiedades disponibles:\n${listingContext}\n\nInstrucciones:
+- Analiza la consulta del usuario y encuentra las propiedades mas relevantes de la lista anterior.
 - Devuelve un objeto JSON con:
-  - "summary": Una respuesta amigable de 1-2 oraciones que aborde sus necesidades (en español).
-  - "matchedIds": Un array de IDs de propiedades que mejor coincidan (hasta 5), ordenados por relevancia. Usa array vacío si ninguna coincide.
-  - "suggestions": Un array de 2-3 preguntas de seguimiento para refinar la búsqueda.
-- Responde SOLO con JSON válido. Sin markdown, sin bloques de código.`;
-
+  - "summary": Una respuesta amigable de 1-2 oraciones que aborde sus necesidades (en espanol).
+  - "matchedIds": Un array de IDs de propiedades que mejor coincidan (hasta 5), ordenados por relevancia. Usa array vacio si ninguna coincide.
+  - "suggestions": Un array de 2-3 preguntas de seguimiento para refinar la busqueda.
+- Responde SOLO con JSON valido. Sin markdown, sin bloques de codigo.`;
     const genAI = new GoogleGenerativeAI(apiKey);
-    const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
-
+    const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
     const result = await model.generateContent([
       { text: systemPrompt },
       { text: isEnglish ? `User query: ${query}` : `Consulta del usuario: ${query}` },
     ]);
-
     const responseText = result.response.text().trim();
-
     // Parse Gemini JSON response
     let parsed: { summary: string; matchedIds: string[]; suggestions: string[] };
     try {
@@ -91,12 +79,10 @@ Aquí están las propiedades disponibles:\n${listingContext}\n\nInstrucciones:
         listings: [],
       });
     }
-
     // Filter listings by matched IDs
     const matchedListings = (parsed.matchedIds || []).length > 0
       ? listings.filter((l) => parsed.matchedIds.includes(l.id))
       : [];
-
     return NextResponse.json({
       summary: parsed.summary || '',
       suggestions: parsed.suggestions || [],
